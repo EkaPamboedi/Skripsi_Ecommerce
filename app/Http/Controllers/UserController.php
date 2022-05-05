@@ -11,8 +11,11 @@ class UserController extends Controller
     public function index()
     {
       $Users = User::
-      where('id','=','3')->get();
-      // orderBy('name', 'desc')->
+      where('id','>' ,'2')->get();
+      // $Users = User::orderBy('id')->get();
+      // $Users = User::get();
+      // all()->pluck('name', 'id','email' ,'qr_code');
+
 // dd($Users);
         return view('admin.user.index',compact('Users'));
     }

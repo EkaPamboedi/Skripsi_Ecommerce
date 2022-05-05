@@ -16,14 +16,12 @@
             <div class="box-body table-responsive">
                 <table class="table table-stiped table-bordered table-penjualan">
                     <thead>
+                      <!-- Ini buat tabel Order yang sudah ada -->
                         <th width="5%">No</th>
                         <th>Tanggal</th>
-                        <th>Kode Member</th>
-                        <th>Total Item</th>
+                        <th>Nama Pemesan</th>
+                        <th>Jenis Pembayaran</th>
                         <th>Total Harga</th>
-                        <th>Diskon</th>
-                        <th>Total Bayar</th>
-                        <th>Kasir</th>
                         <th width="15%"><i class="fa fa-cog"></i></th>
                     </thead>
                 </table>
@@ -49,12 +47,9 @@
             columns: [
                 {data: 'DT_RowIndex', searchable: false, sortable: false},
                 {data: 'tanggal'},
-                {data: 'kode_member'},
-                {data: 'total_item'},
+                {data: 'nama_pemesan'},
+                {data: 'jenis_pembayaran'},
                 {data: 'total_harga'},
-                {data: 'diskon'},
-                {data: 'bayar'},
-                {data: 'kasir'},
                 {data: 'aksi', searchable: false, sortable: false},
             ]
         });
@@ -68,8 +63,11 @@
                 {data: 'kode_produk'},
                 {data: 'nama_produk'},
                 {data: 'harga_jual'},
+                {data: 'diskon'},
                 {data: 'jumlah'},
                 {data: 'subtotal'},
+                // {data: 'bayar'},
+                // {data: 'diterima'},
             ]
         })
     });

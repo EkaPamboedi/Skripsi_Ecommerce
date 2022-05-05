@@ -23,10 +23,10 @@ class Order_Produk extends Model
 
     public function Produk()
     {
-        return $this->belongsTo(Produk::class, 'id_produk');
+        return $this->hasMany(Produk::class, 'id_produk');
     }
-    public function Ratings()
-    {
-        return $this->belongsTo(Ratings::class, 'id');
-    }
+      // public function Ratings()
+      // {
+      //     return $this->belongsTo(Ratings::class, 'id');
+      // }
 }

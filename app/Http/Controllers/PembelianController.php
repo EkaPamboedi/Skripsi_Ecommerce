@@ -67,7 +67,7 @@ class PembelianController extends Controller
         session(['id_pembelian' => $pembelian->id_pembelian]);
         session(['id_supplier' => $pembelian->id_supplier]);
 
-        return redirect()->route('pembelian_detail.index');
+        return redirect()->route('admin.pembelian_detail.index');
     }
 
     public function store(Request $request)

@@ -15,10 +15,6 @@ class BuatOrderProdukTable extends Migration
     {
         Schema::create('order_produk', function (Blueprint $table) {
             $table->increments('id_order_produk');
-            // $table->integer('id_order');
-            // $table->integer('id_produk');
-            // $table->integer('qty');
-            // $table->decimal('subtotal',10,2);
             $table->integer('id_order')->unsigned()
                             ->references('id_order')
                             ->on('order')

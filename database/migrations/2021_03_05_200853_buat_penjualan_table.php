@@ -15,13 +15,18 @@ class BuatPenjualanTable extends Migration
     {
         Schema::create('penjualan', function (Blueprint $table) {
             $table->increments('id_penjualan');
-            $table->integer('id_member');
-            $table->integer('total_item');
-            $table->integer('total_harga');
-            $table->tinyInteger('diskon')->default(0);
+            $table->string('code_order')->unique();
+            // $table->integer('qty');
+            $table->integer('total_price');
+            $table->string('first_name');
+            $table->string('last_name')->nullable();
+            $table->string('customer_phone')->nullable();
+            $table->string('customer_email')->nullable();
+            // $table->tinyInteger('diskon')->default(0);
+            $table->string('notes')->nullable();
             $table->integer('bayar')->default(0);
             $table->integer('diterima')->default(0);
-            $table->integer('id_user');
+            $table->string('jenis_pembayaran')->default("di_tempat");
             $table->timestamps();
         });
     }

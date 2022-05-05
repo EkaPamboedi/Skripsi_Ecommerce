@@ -47,7 +47,7 @@ public function __construct()
           $kategori = Kategori::count();
           $produk = Produk::count();
           $supplier = Supplier::count();
-          $member = Member::count();
+          // $member = Member::count();
 
           $tanggal_awal = date('Y-m-01');
           $tanggal_akhir = date('Y-m-d');
@@ -66,9 +66,15 @@ public function __construct()
               $data_pendapatan[] += $pendapatan;
               $tanggal_awal = date('Y-m-d', strtotime("+1 day", strtotime($tanggal_awal)));
           }
-
+// Original
+          // if (auth()->user()->level == 1) {
+          //     return view('admin.home.dashboard', compact('kategori', 'produk', 'supplier', 'member', 'tanggal_awal', 'tanggal_akhir', 'data_tanggal', 'data_pendapatan'));
+          // } else {
+          //     return view('kenalkopi.produk.index');
+          // }
+// Menghapus member
           if (auth()->user()->level == 1) {
-              return view('admin.home.dashboard', compact('kategori', 'produk', 'supplier', 'member', 'tanggal_awal', 'tanggal_akhir', 'data_tanggal', 'data_pendapatan'));
+              return view('admin.home.dashboard', compact('kategori', 'produk', 'supplier', 'tanggal_awal', 'tanggal_akhir', 'data_tanggal', 'data_pendapatan'));
           } else {
               return view('kenalkopi.produk.index');
           }

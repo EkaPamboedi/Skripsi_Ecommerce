@@ -15,12 +15,18 @@ class BuatPenjualanDetailTable extends Migration
     {
         Schema::create('penjualan_detail', function (Blueprint $table) {
             $table->increments('id_penjualan_detail');
-            $table->integer('id_penjualan');
-            $table->integer('id_produk');
-            $table->integer('harga_jual');
-            $table->integer('jumlah');
-            $table->tinyInteger('diskon')->default(0);
-            $table->integer('subtotal');
+            $table->integer('id_penjualan')->unsigned()
+                            ->references('id_penjualan')
+                            ->on('penjualan')
+                            ->onUpdate('cascade')
+                            ->onDelete('cascade');
+            $table->integer('id_produk')->unsigned()
+                            ->references('id_produk')
+                            ->on('penjualan')
+                            ->onUpdate('cascade')
+                            ->onDelete('cascade');
+            $table->integer('qty');
+            $table->decimal('subtotal',10,2);
             $table->timestamps();
         });
     }

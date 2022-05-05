@@ -25,6 +25,7 @@ class ProdukController extends Controller
 
     public function data()
     {
+      // Route::/penjualan/data'
         $produk = Produk::leftJoin('kategori', 'kategori.id_kategori', 'produk.id_kategori')
             ->select('produk.*', 'nama_kategori')
             ->orderBy('kode_produk', 'asc')

@@ -27,24 +27,24 @@ public const UNPAID = 'unpaid';
 
   public function Order_Produk()
     {
-        return $this->belongsTo(Order_Produk::class, 'id_order_produk');
+        return $this->hasMany(Order_Produk::class, 'id_order_produk');
     }
-    public function Produk()
-      {
-          return $this->belongsTo(Produk::class,'id_produk');
-      }
-      public function Ratings()
-        {
-            return $this->belongsTo(Ratings::class,'id');
-        }
-        public function Payments()
-          {
-              return $this->belongsTo(Payments::class,'code');
-          }
+  public function Produk()
+    {
+        return $this->hasMany(Produk::class,'id_produk');
+    }
+      // public function Ratings()
+      //   {
+      //       return $this->belongsTo(Ratings::class,'id');
+      //   }
+  public function Payments()
+    {
+        return $this->hasMany(Payments::class,'code');
+    }
 
   public function user()
   {
-      return $this->belongsTo(User::class);
+      return $this->hasMany(User::class);
   }
 
   public function confirm()
