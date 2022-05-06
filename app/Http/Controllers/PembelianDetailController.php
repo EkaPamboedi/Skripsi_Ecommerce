@@ -25,6 +25,7 @@ class PembelianDetailController extends Controller
     }
 
     public function data($id)
+    // data buat di kasir
     {
         $detail = PembelianDetail::with('produk')
             ->where('id_pembelian', $id)
@@ -48,6 +49,7 @@ class PembelianDetailController extends Controller
             $total += $item->harga_beli * $item->jumlah;
             $total_item += $item->jumlah;
         }
+        // data buat input ke kasir
         $data[] = [
             'kode_produk' => '
                 <div class="total hide">'. $total .'</div>

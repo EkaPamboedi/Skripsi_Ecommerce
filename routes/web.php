@@ -126,6 +126,11 @@ Route::group(['middleware' => 'auth'], function () {
       Route::resource('/pembelian', PembelianController::class)
           ->except('create');
 
+      Route::get('/pembelian_detail/{id}/data', [PembelianDetailController::class, 'data'])->name('pembelian_detail.data');
+      Route::get('/pembelian_detail/loadform/{diskon}/{total}', [PembelianDetailController::class, 'loadForm'])->name('pembelian_detail.load_form');
+      Route::resource('/pembelian_detail', PembelianDetailController::class)
+          ->except('create', 'show', 'edit');
+
       // Daftar  PENJUALAN
       // Dafrat Order Manual
       // ini root nya
@@ -175,7 +180,7 @@ Route::group(['middleware' => 'auth'], function () {
   // Route::group(['middleware' => 'level:1,2'], function () {
       // Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
       Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
-      Route::post('/profile', [UserController::class, 'updateProfile'])->name('user.update_profile');
+      Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('user.update_profile');
       // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     });
 });

@@ -46,14 +46,14 @@
         <!-- small box -->
         <div class="small-box bg-yellow">
             <div class="inner">
-                <h3>{{-- $member --}}</h3>
+                <h3>{{ $order }}</h3>
 
-                <p>Total Member</p>
+                <p>Total Order</p>
             </div>
             <div class="icon">
-                <i class="fa fa-id-card"></i>
+                <i class="fa fa-cart-arrow-down"></i>
             </div>
-            <a href="{{ route('member.index') }}" class="small-box-footer">Lihat <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('penjualan.index') }}" class="small-box-footer">Lihat <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->

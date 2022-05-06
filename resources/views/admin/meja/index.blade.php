@@ -21,10 +21,8 @@
                 <table class="table table-stiped table-bordered">
                     <thead>
                         <th width="5%">No</th>
-                        <th>QR Code</th>
-                        <th>Nama</th>
-                        <th>Email</th>
                         <th>No.Meja</th>
+                        <th>QR Code</th>
                         <th width="15%"><i class="fa fa-cog"></i></th>
                     </thead>
                     @php($i=1)
@@ -56,5 +54,6 @@
         </div>
     </div>
 </div>
+@includeIf('admin.meja.form')
 
 @endsection

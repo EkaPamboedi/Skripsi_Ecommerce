@@ -172,7 +172,7 @@ class PenjualanController extends Controller
     }
 
     public function notaKecil()
-    {
+    {   $i = 1;
         $setting = Setting::first();
         $penjualan = Penjualan::find(session('id_penjualan'));
         if (! $penjualan) {
@@ -182,7 +182,7 @@ class PenjualanController extends Controller
             ->where('id_penjualan', session('id_penjualan'))
             ->get();
 
-        return view('admin.penjualan.nota_kecil', compact('setting', 'penjualan', 'detail'));
+        return view('admin.penjualan.nota_kecil', compact('setting', 'penjualan','i', 'detail'));
     }
 
     public function notaBesar()

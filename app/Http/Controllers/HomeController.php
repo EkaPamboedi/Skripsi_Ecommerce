@@ -15,6 +15,7 @@ use App\Models\ProductSimilarity;
 use App\Models\Produk;
 use App\Models\Order_Produk;
 use App\Models\Order;
+use App\Models\Setting;
 
 class HomeController extends Controller
 {

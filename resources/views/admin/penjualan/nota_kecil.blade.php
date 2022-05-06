@@ -30,11 +30,11 @@
         @media print {
             @page {
                 margin: 0;
-                size: 75mm 
+                size: 75mm
     ';
     ?>
-    <?php 
-    $style .= 
+    <?php
+    $style .=
         ! empty($_COOKIE['innerHeight'])
             ? $_COOKIE['innerHeight'] .'mm; }'
             : '}';
@@ -57,62 +57,71 @@
 <body onload="window.print()">
     <button class="btn-print" style="position: absolute; right: 1rem; top: rem;" onclick="window.print()">Print</button>
     <div class="text-center">
-        <h3 style="margin-bottom: 5px;">{{ strtoupper($setting->nama_perusahaan) }}</h3>
-        <p>{{ strtoupper($setting->alamat) }}</p>
+        <h3 style="border: 0; margin:0 20% 5px 20%;">{{-- strtoupper($setting->nama_perusahaan) --}} KenalKopi</h3>
+        <p>{{-- strtoupper($setting->alamat) --}} jl.Pondok Kopi</p>
     </div>
     <br>
-    <div>
-        <p style="float: left;">{{ date('d-m-Y') }}</p>
-        <p style="float: right">{{ strtoupper(auth()->user()->name) }}</p>
-    </div>
+    <div class="text-center">
+        <p>{{ strtoupper(auth()->user()->name) }}</p>
+        <div class="clear-both" style="clear: both;"></div>
+        <p>Tgl:{{ date('d-m-Y') }}</p>
     <div class="clear-both" style="clear: both;"></div>
-    <p>No: {{ tambah_nol_didepan($penjualan->id_penjualan, 10) }}</p>
-    <p class="text-center">===================================</p>
-    
+    <p>No  : {{ $penjualan->code_order }}</p>
+    <p style="margin: 0 20% 0 20%;float: left;">=================================================</p>
+  </div>
     <br>
-    <table width="100%" style="border: 0;">
+    <div class="text-center">
+    <table width="60%" style="border: 0; margin:0 20% 0 20%;" class="text-center">
+      <thead>
+      <th>No</th>
+      <th>Produk</th>
+      <th>Harga</th>
+      <th>Diskon</th>
+      <th>Jumlah</th>
+      <th>Subtotal</th>
+    </thead>
+
         @foreach ($detail as $item)
-            <tr>
-                <td colspan="3">{{ $item->produk->nama_produk }}</td>
-            </tr>
-            <tr>
-                <td>{{ $item->jumlah }} x {{ format_uang($item->harga_jual) }}</td>
-                <td></td>
-                <td class="text-right">{{ format_uang($item->jumlah * $item->harga_jual) }}</td>
-            </tr>
+        <tr>
+          <td>{{$i++}}</td>
+          <td>{{ $item->produk->nama_produk }}</td>
+          <td>{{ $item->produk->harga_jual }}</td>
+          <td>{{ $item->produk->diskon}}%</td>
+          <td>{{ $item->qty}}</td>
+          @if($item->produk->diskon == 0)
+          <td>{{ $item->produk->harga_jual * $item->qty}}</td>
+          @else
+          <td>{{ ($item->produk->harga_jual - (($item->produk->harga_jual * $item->produk->diskon)/100)) * $item->qty}}</td>
+          @endif
+        </tr>
         @endforeach
     </table>
-    <p class="text-center">-----------------------------------</p>
+    <p class="text-center" style="border: 0; margin:0 20% 0 20%;">-----------------------------------</p>
 
-    <table width="100%" style="border: 0;">
+    <table width="56%" style="border: 0;margin:0 20% 0 20%;">
         <tr>
-            <td>Total Harga:</td>
-            <td class="text-right">{{ format_uang($penjualan->total_harga) }}</td>
+            <td style="float: left;">Total Harga:</td>
+            <td style="float: right;">{{ format_uang($penjualan->total_price) }}</td>
         </tr>
         <tr>
-            <td>Total Item:</td>
-            <td class="text-right">{{ format_uang($penjualan->total_item) }}</td>
+        <tr>
+            <td style="float: left;">Total Bayar:</td>
+            <td style="float: right;">{{ format_uang($penjualan->diterima) }}</td>
         </tr>
         <tr>
-            <td>Diskon:</td>
-            <td class="text-right">{{ format_uang($penjualan->diskon) }}</td>
+            <td style="float: left;">Diterima:</td>
+            <td style="float: right;">{{ format_uang($penjualan->dikembalikan) }}</td>
         </tr>
         <tr>
-            <td>Total Bayar:</td>
-            <td class="text-right">{{ format_uang($penjualan->bayar) }}</td>
-        </tr>
-        <tr>
-            <td>Diterima:</td>
-            <td class="text-right">{{ format_uang($penjualan->diterima) }}</td>
-        </tr>
-        <tr>
-            <td>Kembali:</td>
-            <td class="text-right">{{ format_uang($penjualan->diterima - $penjualan->bayar) }}</td>
+            <td style="float: left;">Kembali:</td>
+            <td style="float: right;">{{ format_uang($penjualan->diterima - $penjualan->bayar) }}</td>
         </tr>
     </table>
 
-    <p class="text-center">===================================</p>
-    <p class="text-center">-- TERIMA KASIH --</p>
+    <p style="margin: 0 20% 0 20%;float: left;">=================================================</p>
+    <div class="clear-both" style="clear: both;"></div>
+    <p class="text-center" style="margin-top:5%;">-- TERIMA KASIH --</p>
+  </div>
 
     <script>
         let body = document.body;

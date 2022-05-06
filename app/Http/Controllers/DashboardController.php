@@ -12,6 +12,8 @@ use App\Models\Pembelian;
 use App\Models\Pengeluaran;
 use App\Models\Penjualan;
 use App\Models\Produk;
+use App\Models\Order;
+use App\Models\Setting;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 
@@ -47,7 +49,11 @@ public function __construct()
           $kategori = Kategori::count();
           $produk = Produk::count();
           $supplier = Supplier::count();
-          // $member = Member::count();
+          // $setting = Setting::get();
+          $order = Order::count() + Penjualan::count();
+          // $order1 = Penjualan::count();
+          // $order2 = Order::count();
+          // dd($order2);
 
           $tanggal_awal = date('Y-m-01');
           $tanggal_akhir = date('Y-m-d');
@@ -58,7 +64,7 @@ public function __construct()
           while (strtotime($tanggal_awal) <= strtotime($tanggal_akhir)) {
               $data_tanggal[] = (int) substr($tanggal_awal, 8, 2);
 
-              $total_penjualan = Penjualan::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('bayar');
+              $total_penjualan = Penjualan::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('diterima');
               $total_pembelian = Pembelian::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('bayar');
               $total_pengeluaran = Pengeluaran::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('nominal');
 
@@ -74,7 +80,7 @@ public function __construct()
           // }
 // Menghapus member
           if (auth()->user()->level == 1) {
-              return view('admin.home.dashboard', compact('kategori', 'produk', 'supplier', 'tanggal_awal', 'tanggal_akhir', 'data_tanggal', 'data_pendapatan'));
+              return view('admin.home.dashboard', compact('order','kategori', 'produk', 'supplier', 'tanggal_awal', 'tanggal_akhir', 'data_tanggal', 'data_pendapatan'));
           } else {
               return view('kenalkopi.produk.index');
           }

@@ -5,7 +5,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ url(auth()->user()->foto ?? '') }}" class="img-circle img-profil" alt="User Image">
+                <img style="width:50px; height:45px;" src="{{ url(auth()->user()->foto ?? '') }}" class="img-circle img-profil" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>{{ auth()->user()->name}}</p>
@@ -23,7 +23,7 @@
             </li>
 
           <!-- if (auth()->user()->level == 1) -->
-            <li class="header">Admin Only</li>
+            <li class="header">ADMIN ONLY</li>
             <li>
                 <a href="{{ route('kategori.index') }}">
                     <i class="fa fa-cube"></i> <span>Kategori</span>
@@ -34,32 +34,14 @@
                     <i class="fa fa-cubes"></i> <span>Produk</span>
                 </a>
             </li>
-
-            <li>
-                <a href="{{-- route('member.index') --}}">
-                    <i class="fa fa-id-card"></i> <span>Pegawai</span>
-                </a>
-            </li>
             <li>
                 <a href="{{ route('supplier.index') }}">
                     <i class="fa fa-truck"></i> <span>Supplier</span>
                 </a>
             </li>
 
-            <li class="header">ORDER</li>
-            <li>
-                <a href="{{ route('order.index') }}">
-                    <i class="fa fa-money"></i> <span>List Order</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('confirmAdmin') }}">
-                    <i class="fa fa-money"></i> <span>Konfirmasi</span>
-                </a>
-            </li>
-            <li>
 
-            <li class="header">DAFTAR TRANSAKSI</li>
+            <li class="header">TRANSAKSI</li>
             <li>
               <!-- Optional -->
                 <a href="{{ route('pengeluaran.index') }}">
@@ -70,21 +52,13 @@
             <!-- Pembelian produk, bahan baku dll. -->
             <li>
                 <a href="{{ route('pembelian.index') }}">
-                    <i class="fa fa-download"></i> <span>Belanja Bahan</span>
+                    <i class="fa fa-download"></i> <span>Belanja Stok</span>
                 </a>
             </li>
             <!-- Penjualan produk, bahan baku dll. -->
             <li>
-                <a href="{{ route('penjualan.index') }}">
-                    <i class="fa fa-upload"></i> <span>Order Manual</span>
-                </a>
-            </li>
-
-            <li class="header">TRANSAKSI Manual</li>
-
-            <li>
                 <a href="{{ route('transaksi.baru') }}">
-                    <i class="fa fa-cart-arrow-down"></i> <span>Transaksi Kasir</span>
+                    <i class="fa fa-cart-arrow-down"></i> <span>Kasir</span>
                 </a>
             </li>
             <!-- <li>
@@ -104,6 +78,16 @@
             </li> -->
             <li class="header">REPORT</li>
             <li>
+                <a href="{{ route('order.index') }}">
+                    <i class="fa fa-money"></i> <span>List Order</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('penjualan.index') }}">
+                    <i class="fa fa-upload"></i> <span>Order Manual</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('laporan.index') }}">
                     <i class="fa fa-file-pdf-o"></i> <span>Laporan</span>
                 </a>
@@ -112,8 +96,8 @@
 
             <li class="header">SYSTEM</li>
             <li>
-                <a href="{{ route('user.index') }}">
-                    <i class="fa fa-users"></i> <span>User</span>
+                <a href="{{-- route('dashboard.index') --}}">
+                    <i class="fa fa-users"></i> <span>Pengaturan</span>
                 </a>
             </li>
             <li><a href="{{ route('meja.index') }}">

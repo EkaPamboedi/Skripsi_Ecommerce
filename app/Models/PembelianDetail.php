@@ -15,10 +15,10 @@ class PembelianDetail extends Model
 
     public function produk()
     {
-        return $this->hasMany(Produk::class, 'id_produk', 'id_produk');
+        return $this->hasOne(Produk::class, 'id_produk', 'id_produk');
     }
-    public function pembelian()
-    {
-        return $this->belongsTo(Pembelian::class, 'id_pembelian');
-    }
+    // public function pembelian()
+    // {
+    //     return $this->belongsTo(Pembelian::class, 'id_pembelian');
+    // }
 }

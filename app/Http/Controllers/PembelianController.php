@@ -24,23 +24,23 @@ class PembelianController extends Controller
         return datatables()
             ->of($pembelian)
             ->addIndexColumn()
+            ->addColumn('tanggal', function ($pembelian) {
+              return tanggal_indonesia($pembelian->created_at, false);
+            })
+            ->addColumn('supplier', function ($pembelian) {
+              return $pembelian->supplier->nama;
+            })
             ->addColumn('total_item', function ($pembelian) {
                 return format_uang($pembelian->total_item);
             })
             ->addColumn('total_harga', function ($pembelian) {
                 return 'Rp. '. format_uang($pembelian->total_harga);
             })
-            ->addColumn('bayar', function ($pembelian) {
-                return 'Rp. '. format_uang($pembelian->bayar);
-            })
-            ->addColumn('tanggal', function ($pembelian) {
-                return tanggal_indonesia($pembelian->created_at, false);
-            })
-            ->addColumn('supplier', function ($pembelian) {
-                return $pembelian->supplier->nama;
-            })
-            ->editColumn('diskon', function ($pembelian) {
+            ->addColumn('diskon', function ($pembelian) {
                 return $pembelian->diskon . '%';
+            })
+            ->addColumn('bayar', function ($pembelian) {
+              return 'Rp. '. format_uang($pembelian->bayar);
             })
             ->addColumn('aksi', function ($pembelian) {
                 return '
@@ -67,7 +67,7 @@ class PembelianController extends Controller
         session(['id_pembelian' => $pembelian->id_pembelian]);
         session(['id_supplier' => $pembelian->id_supplier]);
 
-        return redirect()->route('admin.pembelian_detail.index');
+        return redirect()->route('pembelian_detail.index');
     }
 
     public function store(Request $request)
@@ -120,6 +120,11 @@ class PembelianController extends Controller
         $pembelian = Pembelian::find($id);
         $detail    = PembelianDetail::where('id_pembelian', $pembelian->id_pembelian)->get();
         foreach ($detail as $item) {
+            $produk = Produk::find($item->id_produk);
+            if ($produk) {
+                $produk->stok -= $item->jumlah;
+                $produk->update();
+            }
             $item->delete();
         }
 

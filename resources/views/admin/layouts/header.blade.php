@@ -27,29 +27,19 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ url(auth()->user()->foto ?? '') }}" class="user-image img-profil"
                             alt="User Image">
-                        <span class="hidden-xs">{{-- auth()->user()->name --}}</span>
+                        <span class="hidden-xs">{{ auth()->user()->name }}</span>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" style="width:50px;">
                         <!-- User image -->
-                        <li class="user-header">
-                            <img src="{{ url(auth()->user()->foto ?? '') }}" class="img-circle img-profil"
-                                alt="User Image">
-
-                            <p>
-                                {{-- auth()->user()->name --}} - {{-- auth()->user()->email --}}
-                            </p>
+                        <li class="">
+                          <a  href="{{ route('user.profile') }}" class="btn btn-white ">Profile</a>
                         </li>
-                        <!-- Menu Footer-->
-                        <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="{{ route('user.profile') }}" class="btn btn-default btn-flat">Profile</a>
-                            </div>
-                            <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat"
-                                    onclick="$('#logout-form').submit()">Keluar</a>
-                            </div>
+                        <li class="">
+                          <a  href="#" class="btn btn-white "
+                              onclick="$('#logout-form').submit()">Keluar</a>
                         </li>
                     </ul>
+
                 </li>
             </ul>
         </div>
