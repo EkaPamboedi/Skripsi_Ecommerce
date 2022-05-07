@@ -181,6 +181,7 @@ Route::group(['middleware' => 'auth'], function () {
   // Route::group(['middleware' => 'level:1,2'], function () {
       // Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
       Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+      Route::get('/print/Qr/{id}', [UserController::class, 'printQR'])->name('print.Qr');
       Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('user.update_profile');
       // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     });

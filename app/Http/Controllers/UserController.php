@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use PDF;
+use DB;
 
 class UserController extends Controller
 {
@@ -12,6 +14,10 @@ class UserController extends Controller
     {
       $Users = User::
       where('id','>' ,'2')->get();
+      // $Users = DB::table('users')->latest()->first();
+      // $Users1 = User::all()->last()->email;
+      // $Users = User::all()->last()->name;
+      // dd($Users);
       // $Users = User::orderBy('id')->get();
       // $Users = User::get();
       // all()->pluck('name', 'id','email' ,'qr_code');
@@ -57,18 +63,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+      $name = User::all()->last()->name;
+      $email = User::all()->last()->email;
+
         $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
+        $user->name = $name= $name.+1;
+        $user->email = $email = $email.+1;
+        $user->password = $password = (bcrypt(123456));
         $user->no_meja = $request->no_meja;
         $user->level = 2;
-        $user->qr_code = $request->email.','.$request->password;
+        $user->qr_code = $email.','.$password;
         // $user->qr_code = $request->email.$request->password.$request->no_meja;
         $user->foto = '/img/user.jpg';
         $user->save();
 
-        return response()->json('Data berhasil disimpan', 200);
+        // return response()->json('Data berhasil disimpan', 200);
+        return response()->json(['message' => 'Yup. This request succeeded.'], 200);
+
     }
 
     /**
@@ -164,5 +175,22 @@ class UserController extends Controller
         $user->update();
 
         return response()->json($user, 200);
+    }
+    public function printQR($id)
+    {
+        // $Users = User::find($id);
+        // $Users = User::where('id',$id)->find();
+        $Users = User::select('qr_code')->find($id);
+
+        // dd($Users);
+        // $penjualan = Penjualan::find(session('id_penjualan'));
+        // if (! $penjualan) {
+        //     abort(404);
+        // }
+        // $detail = PenjualanDetail::with('produk')
+        //     ->where('id_penjualan', session('id_penjualan'))
+        //     ->get();
+
+        return view('admin.user.printQR', compact('Users'));
     }
 }

@@ -33,7 +33,7 @@
     // tambahkan untuk delete cookie innerHeight terlebih dahulu
     document.cookie = "innerHeight=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
-    function notaKecil(url, title) {
+    function printQR(url, title) {
         popupCenter(url, title, 625, 500);
     }
 

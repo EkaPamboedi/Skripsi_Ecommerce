@@ -100,6 +100,11 @@
                     <i class="fa fa-users"></i> <span>Pengaturan</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('user.index') }}">
+                    <i class="fa fa-users"></i> <span>Pengaturan</span>
+                </a>
+
             <li><a href="{{ route('meja.index') }}">
                     <i class="fa fa-tables"></i> <span>Pengaturan Meja</span>
                 </a>
