@@ -32,9 +32,14 @@ class OrderController extends Controller
     {
       // Dibutuhin nanti buat bedain pesenan setiap user
       // $user_id = Auth::user()->id;
-        $Details = Order_Produk::where('id_order',$id)->get();
+      $Details = Order_Produk::leftJoin('produk', 'produk.id_produk', 'order_produk.id_produk')
+      ->select('order_produk.*', 'produk.*')
+      ->where('id_order',$id)->get();
+      $Orders = Order::where('id_order',$id)->select('status','total_price')->get();
 
-        return view('admin.order.detail',compact('Details'));
+        // $Details = Order_Produk::where('id_order',$id)->get();
+
+        return view('admin.order.detail',compact('Details','Orders'));
     }
 
       public function data(){
@@ -77,5 +82,5 @@ class OrderController extends Controller
               ->rawColumns(['aksi','kode_produk','deskripsi_produk','status','gambar_produk' , 'select_all'])
               ->make(true);
       }
-  
+
 }

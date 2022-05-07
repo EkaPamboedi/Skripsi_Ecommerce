@@ -46,9 +46,12 @@ class InvoiceController extends Controller
 
       // Dibutuhin nanti buat bedain pesenan setiap user
       // $user_id = Auth::user()->id;
-      $Details = Order_Produk::where('id_order',$id)->get();
+      // $Details = Order_Produk::where('id_order',$id)->get();
+      $Details = Order_Produk::leftJoin('produk', 'produk.id_produk', 'order_produk.id_produk')
+      ->select('order_produk.*', 'produk.*')
+      ->where('id_order',$id)->get();
       // $Orders = Order::where('id_order',$id)->get();
-      $Orders = Order::where('id_order',$id)->get('status','total_price');
+      $Orders = Order::where('id_order',$id)->get();
       // dd($Orders);
       $SnapToken = DB::table('order')->where('id_order',$id)->pluck('payment_token');
       $PaymentUrl = DB::table('order')->where('id_order',$id)->pluck('payment_url');
@@ -61,29 +64,27 @@ class InvoiceController extends Controller
       return view('kenalkopi.order.detail_order',compact('Details','Orders','SnapToken','PaymentUrl'));
     }
 
-    public function Rating(Request $request){
-
-
-      $Ratings = new Ratings();
-      $Ratings->user_id = $request->user_id;
-      $Ratings->id_order_produk = $request->id_order_produk;
-      $Ratings->id_produk = $request->id_produk;
-      $Ratings->ratings = $request->ratings;
-      $Ratings->save();
-
-      // $Stat_rating = Order_Produk::findOrFail($id);
-      // $Stat_rating->id_order_produk = $request->id_order_produk;
-      // $Stat_rating->status_rating = 'sudah';
-      // $Stat_rating->update();
-
-        $Status_rating = DB::table('order_produk')
-                   ->where('id_order_produk', $request->id_order_produk)
-                   ->update(['status_rating'=>'sudah']);
-      //
-      return redirect()->back();
-      //
-
-    }
+    // public function Rating(Request $request){
+    //
+    //
+    //   $Ratings = new Ratings();
+    //   $Ratings->user_id = $request->user_id;
+    //   $Ratings->id_order_produk = $request->id_order_produk;
+    //   $Ratings->id_produk = $request->id_produk;
+    //   $Ratings->ratings = $request->ratings;
+    //   $Ratings->save();
+    //
+    //   // $Stat_rating = Order_Produk::findOrFail($id);
+    //   // $Stat_rating->id_order_produk = $request->id_order_produk;
+    //   // $Stat_rating->status_rating = 'sudah';
+    //   // $Stat_rating->update();
+    //
+    //     $Status_rating = DB::table('order_produk')
+    //                ->where('id_order_produk', $request->id_order_produk)
+    //                ->update(['status_rating'=>'sudah']);
+    //   //
+    //   return redirect()->back();
+    // }
 
 
 

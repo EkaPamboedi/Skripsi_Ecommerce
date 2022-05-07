@@ -22,10 +22,11 @@
                     <table class="table table-bordered table-hover">
                         <tr style="font-size: large;" class="btn-success" >
                           <th width="2%">No</th>
-                            <th width="5%">Image Product</th>
-                            <th width="10%">Name Product</th>
-                            <th width="3%">Qty</th>
-                            <th width="30%">Subtotal</th>
+                          <th width="15%">Gambar</th>
+                          <th width="10%">Nama Produk</th>
+                          <th width="3%">Jumlah</th>
+                          <th width="10%">Subtotal</th>
+                          <th width="10%">Status</th>
                         </tr>
                         <!--ini buat inisiasi nomer-->
                         @php($i=1)
@@ -39,9 +40,10 @@
                             {{--dd($detail)--}}
                             <tr>
                               <td class="center">{{$i++}}</td>
-                                <td align="center" ><img src="{{asset($detail->produk->gambar_produk) }}" width="100px" height="100px" ></td>
-                                <td align="center" style="font-size: medium">{{ $detail->produk->nama_produk }}</td>
+                                <td align="center" ><img src="{{asset($detail->gambar_produk) }}" width="100px" height="100px" ></td>
+                                <td align="center" style="font-size: medium">{{ $detail->nama_produk }}</td>
                                 <td align="center" style="font-size: medium">{{ $detail->qty }}</td>
+                                <td align="center" style="font-size: medium">{{ $Orders[0]->status }}</td>
                                 <td align="center" style="font-size: medium">
                                     Rp. {{ number_format($detail->subtotal,0) }}
                                 </td>
@@ -50,8 +52,8 @@
                             @endif
 
                         <tr class="btn-success">
-                            <td colspan="4" align="center" style="font-size: medium">Total</td>
-                            <td align="center" style="font-size: medium">Rp. {{ number_format($detail->order->total_price,0) }}</td>
+                            <td colspan="5" align="center" style="font-size: medium">Total</td>
+                            <td align="center" style="font-size: medium">Rp. {{ number_format($Orders[0]->total_price,0) }}</td>
                         </tr>
                     </table>
                 </div>

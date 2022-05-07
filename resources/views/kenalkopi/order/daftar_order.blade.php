@@ -25,7 +25,7 @@
                             <th>No Meja</th>
                             <th>Total Bayar</th>
                             <th>Tanggal</th>
-                            <th>Kode Pesanan/Id order for now</th>
+                            <th>Kode Pesanan</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -37,11 +37,11 @@
                             <tbody>
                             <tr>
                               <td class="invert">{{$i++}}</td>
-                              <td class="penerima" order-id="{{ $order->id_order }}" style="cursor: pointer; color: #00caff;">{{ $order->atas_nama }}</td>
+                              <td>{{ $order->first_name." ".$order->last_name }}</td>
                                 <td>{{ $order->no_meja }}</td>
                                 <td>Rp. {{ number_format($order->total_price,0) }}</td>
-                                <td>{{ $order->date }}</td>
-                                <td align="center">{{ $order->id_order }}</td>
+                                <td>{{ $order->order_date }}</td>
+                                <td align="center">{{ $order->code_order }}</td>
                                 <td>
                                     @if($order->status == 'belum bayar')
                                         <button type="button" class="btn bg-maroon">{{ ucwords($order->status) }}</button>
@@ -56,9 +56,9 @@
                                 <td>
                                     <a href="{{ route('detail_order', ['id' => $order->id_order]) }}" class="btn btn-info">Detail</a>
 
-                                    @if($order->status == 'belum bayar')
-                                        <a href="{{route('user_confirm', ['id' => $order->id_order]) }}" class="btn btn-bitbucket">Konfirmasi Pembayaran</a>
-                                    @endif
+                                    <!-- @ if($order->status == 'belum bayar')
+                                        <a href="{{--route('user_confirm', ['id' => $order->id_order]) --}}" class="btn btn-bitbucket">Konfirmasi Pembayaran</a>
+                                    @ endif -->
                                 </td>
                             </tr>
                             </tbody>

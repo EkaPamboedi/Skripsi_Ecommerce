@@ -49,25 +49,25 @@
                       <tbody>
                       <tr>
                           <td>{{ $i++ }}</td>
-                        <td>{{$order->first_name."@".$order->last_name}}</td>
+                        <td>{{$order->first_name." ".$order->last_name}}</td>
                           <td>{{ $order->no_meja }}</td>
-                          <td><b>Rp. {{ number_format($order->total_price,0) }}</b></td>
+                          <td>Rp. {{ number_format($order->total_price,0) }}</td>
                           <td>
                               @if($order->status == 'belum bayar')
-                                  <button type="button" class="btn bg-maroon">{{ ucwords($order->status) }}</button>
+                                  <button type="button" class="btn btn-sm bg-maroon" disabled>{{ ucwords($order->status) }}</button>
                               @elseif($order->status == 'menunggu verifikasi')
-                                  <button type="button" class="btn bg-orange">{{ ucwords($order->status) }}</button>
+                                  <button type="button" class="btn btn-sm bg-orange" disabled>{{ ucwords($order->status) }}</button>
                               @elseif($order->status == 'dibayar')
                                   <button type="button" class="btn btn-success">{{ ucwords($order->status) }}</button>
                               @else
-                                  <button type="button" class="btn bg-danger">{{ ucwords($order->status) }}</button>
+                                  <button type="button" class="btn btn-sm bg-danger" disabled>{{ ucwords($order->status) }}</button>
                               @endif
                           </td>
-                          <td><b>{{ $order->date }}</b></td>
+                          <td>{{ $order->order_date }}</td>
                           <!-- <td><a href="{{-- url('/upload/confirm/'.$order->confirm->image) --}}" download="" class="btn btn-info">Download Attachment</a></td> -->
                           <td>
 
-                              <a class="btn btn-info" href="{{ route('Admin.Orders', ['id' => $order->id_order]) }}">Detail</a>
+                              <a class="btn btn-info btn-sm" href="{{ route('Admin.Orders', ['id' => $order->id_order]) }}">Detail</a>
                           </td>
                       </tr>
                       @endforeach
