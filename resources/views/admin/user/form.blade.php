@@ -47,7 +47,7 @@
                     <div class="form-group row">
                         <label for="no_meja" class="col-sm-3 col-sm-offset-1 control-label">No Meja</label>
                         <div class="col-sm-6">
-                          <input type="number" min="1" name="no_meja" value="no_meja">
+                          <input type="number" min="1" name="no_meja" value="">
                           <!-- <select id="no_meja" name="no_meja" class="form-control">
                                   <option value="1">1</option>
                                   <option value="2">2</option>

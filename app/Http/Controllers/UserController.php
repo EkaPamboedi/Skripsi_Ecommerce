@@ -26,24 +26,24 @@ class UserController extends Controller
         return view('admin.user.index',compact('Users'));
     }
 
-    // public function data()
-    // {
-    //     $user = User::orderBy('id', 'desc')->get();
-    //
-    //     return datatables()
-    //         ->of($user)
-    //         ->addIndexColumn()
-    //         ->addColumn('aksi', function ($user) {
-    //             return '
-    //             <div class="btn-group">
-    //                 <button type="button" onclick="editForm(`'. route('user.update', $user->id) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
-    //                 <button type="button" onclick="deleteData(`'. route('user.destroy', $user->id) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
-    //             </div>
-    //             ';
-    //         })
-    //         ->rawColumns(['aksi'])
-    //         ->make(true);
-    // }
+    public function data()
+    {
+        $user = User::orderBy('id', 'desc')->get();
+
+        return datatables()
+            ->of($user)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($user) {
+                return '
+                <div class="btn-group">
+                    <button type="button" onclick="editForm(`'. route('user.update', $user->id) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
+                    <button type="button" onclick="deleteData(`'. route('user.destroy', $user->id) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                </div>
+                ';
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -77,8 +77,9 @@ class UserController extends Controller
         $user->foto = '/img/user.jpg';
         $user->save();
 
+        return redirect()->back();
         // return response()->json('Data berhasil disimpan', 200);
-        return response()->json(['message' => 'Yup. This request succeeded.'], 200);
+        // return response()->;
 
     }
 
@@ -136,7 +137,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id)->delete();
+        $user = User::find($id);
+        $user->delete();
+
 
         return response(null, 204);
     }

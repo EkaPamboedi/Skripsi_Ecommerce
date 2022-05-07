@@ -50,11 +50,6 @@
                 <h1>
                     @yield('title')
                 </h1>
-                <ol class="breadcrumb">
-                    @section('breadcrumb')
-                        <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-                    @show
-                </ol>
             </section>
 
             <!-- Main content -->

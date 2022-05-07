@@ -29,13 +29,13 @@
                             alt="User Image">
                         <span class="hidden-xs">{{ auth()->user()->name }}</span>
                     </a>
-                    <ul class="dropdown-menu" style="width:50px;">
+                    <ul class="dropdown-menu list-group" style="width:20px;">
                         <!-- User image -->
-                        <li class="">
-                          <a  href="{{ route('user.profile') }}" class="btn btn-white ">Profile</a>
+                        <li class="list-group-item list-group-item-action">
+                          <a  href="{{ route('user.profile') }}" class="btn btn-outline-secondary">Profile</a>
                         </li>
-                        <li class="">
-                          <a  href="#" class="btn btn-white "
+                        <li class="list-group-item list-group-item-action">
+                          <a  href="#" class="btn btn-outline-secondary"
                               onclick="$('#logout-form').submit()">Keluar</a>
                         </li>
                     </ul>

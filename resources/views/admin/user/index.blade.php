@@ -1,12 +1,12 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    Daftar User
+    Daftar Meja
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active">Daftar User</li>
+    <li class="active">Daftar Meja</li>
 @endsection
 
 @section('content')
@@ -43,9 +43,7 @@
                         <!-- <th>{{--$user->email--}}</th> -->
                         <th width="15%">
                           <div class="btn-group">
-                            
-                            <button type="button" onclick="editForm(`'. route('user.update', $user->id) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
-                            <button type="button" onclick="deleteData(`'. route('user.destroy', $user->id) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                            <button type="button" onclick="deleteData('{{route('user.destroy', $user->id)}}')" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
                         </div>
                       </th>
                     </tbody>
@@ -91,5 +89,22 @@
 
         if (window.focus) newWindow.focus();
     }
+
+    function deleteData(url) {
+        if (confirm('Yakin ingin menghapus data terpilih?')) {
+            $.post(url, {
+                    '_token': $('[name=csrf-token]').attr('content'),
+                    '_method': 'delete'
+                })
+                .done((response) => {
+                  alert('Berhasil menghapus data');
+                  location.reload();
+                })
+                .fail((errors) => {
+                    alert('Tidak dapat menghapus data');
+                    return;
+                });
+        }
+      }
 </script>
 @endpush

@@ -132,6 +132,7 @@ class CartController extends Controller
           $order->no_meja = $user_table;
           $order->first_name = $request->first_name;
           $order->last_name = $request->last_name;
+          $order->notes = $request->notes;
           // $order->customer_phone = $request->customer_phone;
           // $order->customer_email = $request->customer_email;
           $order->total_price = $total_bayar;

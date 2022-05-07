@@ -15,17 +15,15 @@
 		<div class="login-form-grids">
       <form class="" action="{{route('payment')}}" method="post">
         @csrf
-      <h5>Kode Order</h5>
-    		<strong>
-          <!-- <input type="text" name="code" value="{{--$code_order--}}" disabled> -->
           <input type="hidden" name="user_id" value="{{$user_id}}" hidden>
-        </strong>
         <h6>Nomer Meja</h6>
         <input type="text" id="user_table" name="user_table" value="{{$user_table}}" disabled>
         <h6>First Name</h6>
         <input type="text" id="first_name" name="first_name" value="" placeholder="First Name" required>
         <h6>Last Name</h6>
         <input type="text" id="last_name" name="last_name" value="" placeholder="Last Name" required>
+        <h6>Catatan</h6>
+        <textarea type="text" id="notes" name="notes" value="" placeholder="Catatans"></textarea>
         <!-- <h6>Number Phone</h6>
         <input type="text" id="number_phone" name="customer_phone" value="" placeholder="Number Phone" required>
         <h6>Email</h6>
