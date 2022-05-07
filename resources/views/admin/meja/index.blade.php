@@ -14,8 +14,7 @@
     <div class="col-lg-12">
         <div class="box">
             <div class="box-header with-border">
-                <button data-toggle="modal" data-target="#DetailItem"  class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah</button>
-
+                <button data-toggle="modal" data-target="#form-meja"  class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah</button>
             </div>
             <div class="box-body table-responsive">
                 <table class="table table-stiped table-bordered">
@@ -26,7 +25,7 @@
                         <th width="15%"><i class="fa fa-cog"></i></th>
                     </thead>
                     @php($i=1)
-                    @foreach($Users as $user)
+                    @foreach($tables as $table)
 
                     <tbody>
                         <th width="5%">{{$i++}}</th>

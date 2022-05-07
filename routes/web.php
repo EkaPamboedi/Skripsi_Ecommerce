@@ -169,7 +169,8 @@ Route::group(['middleware' => 'auth'], function () {
       Route::get('/user/data', [UserController::class, 'data'])->name('user.data');
       Route::resource('/user', UserController::class);
 
-      Route::get('/meja/data', [MejaController::class, 'data'])->name('meja.data');
+      Route::get('/meja/store', [MejaController::class, 'store'])->name('tables.store');
+      Route::get('qrcode/{id}', [DataController::class, 'generate'])->name('tables.generate');
       Route::resource('/meja', MejaController::class);
 
       Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
