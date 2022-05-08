@@ -16,8 +16,9 @@ class PenjualanController extends Controller
 {
     public function index()
     {
+      $penjualan = Penjualan::select('id_penjualan','notes')->get();
       // ini buat nampilin daftar order
-        return view('admin.penjualan.index');
+        return view('admin.penjualan.index', compact('penjualan'));
     }
 
     //ini untuk data pada table untuk dafar order
@@ -31,7 +32,7 @@ class PenjualanController extends Controller
               return tanggal_indonesia($penjualan->created_at, false);
             })
             ->addColumn('nama_pemesan', function ($penjualan) {
-                return $penjualan->first_name;
+                return $penjualan->first_name." ".$penjualan->last_name;
             })
             ->addColumn('jenis_pembayaran', function ($penjualan) {
                 return $penjualan->jenis_pembayaran;
@@ -40,15 +41,28 @@ class PenjualanController extends Controller
                 return 'Rp. '. format_uang($penjualan->total_price);
             })
             ->addColumn('aksi', function ($penjualan) {
+              if (!$penjualan->notes) {
                 return '
                 <div class="btn-group">
-                    <button onclick="showDetail(`'. route('penjualan.show', $penjualan->id_penjualan) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
-                    <button onclick="deleteData(`'. route('penjualan.destroy', $penjualan->id_penjualan) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                    <button style="margin-right: 5px; padding:5px;" data-toggle="tooltip" data-placement="top" title="Detail Order" onclick="showDetail(`'. route('penjualan.show', $penjualan->id_penjualan) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
+                    <button style="margin-right: 5px; padding:5px;" data-toggle="tooltip" data-placement="top" title="Hapus!" onclick="deleteData(`'. route('penjualan.destroy', $penjualan->id_penjualan) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
                 </div>
                 ';
+              }else {
+                return '
+                <div class="btn-group">
+                    <button style="margin-right: 5px;" data-placement="top" title="Lihat Notes" data-toggle="modal"
+                    data-target="#modal-notes'.$penjualan->id_penjualan.'" class="btn btn-xs btn-info btn-flat">
+                    <svg style="margin-top:5px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16"><path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/></svg></button>
+                    <button style="margin-right: 5px; padding:5px;" data-toggle="tooltip" data-placement="top" title="Detail Order" onclick="showDetail(`'. route('penjualan.show', $penjualan->id_penjualan) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
+                    <button style="margin-right: 5px; padding:5px;" data-toggle="tooltip" data-placement="top" title="Hapus!" onclick="deleteData(`'. route('penjualan.destroy', $penjualan->id_penjualan) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                </div>
+                ';
+              }
             })
             ->rawColumns(['aksi', 'kode_member'])
             ->make(true);
+            // ->compact('penjualan');
     }
 
     public function create()

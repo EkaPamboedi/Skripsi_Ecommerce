@@ -20,7 +20,7 @@
                         <th width="5%">No</th>
                         <th>Tanggal</th>
                         <th>Nama Pemesan</th>
-                        <th>Jenis Pembayaran</th>
+                        <!-- <th>Jenis Pembayaran</th> -->
                         <th>Total Harga</th>
                         <th width="15%"><i class="fa fa-cog"></i></th>
                     </thead>
@@ -29,7 +29,9 @@
         </div>
     </div>
 </div>
-
+@foreach ($penjualan as $item)
+@includeIf('admin.penjualan.notes')
+@endforeach
 @includeIf('admin.penjualan.detail')
 @endsection
 
@@ -48,8 +50,9 @@
                 {data: 'DT_RowIndex', searchable: false, sortable: false},
                 {data: 'tanggal'},
                 {data: 'nama_pemesan'},
-                {data: 'jenis_pembayaran'},
+                // {data: 'jenis_pembayaran'},
                 {data: 'total_harga'},
+                // {data: 'notes'},
                 {data: 'aksi', searchable: false, sortable: false},
             ]
         });
@@ -71,6 +74,16 @@
             ]
         })
     });
+
+    // function showNotes() {
+    //     $('#modal-notes').modal('show');
+    //
+    //     // table1.ajax.url($id);
+    //     // table1.ajax.reload();
+    // }
+    // $(document).ready(function(){
+    // $("#modal-notes").modal();
+    // });
 
     function showDetail(url) {
         $('#modal-detail').modal('show');
