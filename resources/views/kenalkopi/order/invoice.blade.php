@@ -16,12 +16,15 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table class="table table-bordered">
+                    <table class="table table-sm table-bordered">
+                      <thead class="bg-primary">
+
                         <tr>
                             <th width="30%">Name Product</th>
                             <th width="20%">Qty</th>
                             <th width="30%">Subtotal</th>
-                        </tr>
+                          </tr>
+                        </thead>
                         @php($sum=0)
                         @foreach($CartProduk as $produk)
                             <tr>
@@ -37,18 +40,11 @@
                             </tr>
                         @endforeach
 
-                        <tr class="btn-success">
-                            <td colspan="2">Total</td>
-                            <td>{{ $sum }}</td>
+                        <tr class="btn-primary">
+                            <td colspan="2" class="btn-primary">Total</td>
+                            <td class="btn-info">{{ $sum }}</td>
                         </tr>
 
-                        <tr class="btn-info">
-                            <td colspan="3">
-                                Silahkan anda transfer ke BRI :<br>
-                                Atas Nama<b><i>Satria Badja Hitam</i></b></br>
-                                No.Rekening<b><i>12345678</i></b>
-                            </td>
-                        </tr>
                     </table>
                 </div>
                 <!-- /.box-body -->
