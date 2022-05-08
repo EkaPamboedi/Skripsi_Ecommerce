@@ -39,7 +39,7 @@
 
                 <!-- box-header -->
                 <div class="box-body">
-                    <table class="table table-bordered table-hover">
+                    <table class="table">
                         <tr style="font-size: large;" class="btn-success">
                           <th width="2%">No</th>
                             <th width="15%">Gambar</th>

@@ -35,7 +35,7 @@ class OrderController extends Controller
       $Details = Order_Produk::leftJoin('produk', 'produk.id_produk', 'order_produk.id_produk')
       ->select('order_produk.*', 'produk.*')
       ->where('id_order',$id)->get();
-      $Orders = Order::where('id_order',$id)->select('status','total_price')->get();
+      $Orders = Order::where('id_order',$id)->get();
 
         // $Details = Order_Produk::where('id_order',$id)->get();
 
