@@ -114,7 +114,7 @@
 
             <!-- <li>Nama Produk<i> - </i> <span>Rp Total Harga</span></li> -->
 
-            <li>Total (inc. 10k Ongkir)<i> - </i> <span>Rp Total Harga</span></li>
+            <!-- <li>Total (inc. 10k Ongkir)<i> - </i> <span>Rp Total Harga</span></li> -->
           </ul>
         </div>
 

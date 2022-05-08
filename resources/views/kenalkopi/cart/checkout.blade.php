@@ -23,7 +23,7 @@
         <h6>Last Name</h6>
         <input type="text" id="last_name" name="last_name" value="" placeholder="Last Name" required>
         <h6>Catatan</h6>
-        <textarea type="text" id="notes" name="notes" value="" placeholder="Catatans"></textarea>
+        <textarea style="width:26em; padding:5px; color:grey;" type="text" id="notes" name="notes" value="" placeholder="Catatans"></textarea>
         <!-- <h6>Number Phone</h6>
         <input type="text" id="number_phone" name="customer_phone" value="" placeholder="Number Phone" required>
         <h6>Email</h6>
