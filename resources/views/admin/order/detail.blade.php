@@ -32,17 +32,23 @@
                         <br>
                       </span>
                       </li>
-                      @endif
-                      <li class="list-group-item">Status<span style="margin-left:70px;">:</span><button class="btn btn-danger" style="margin-left:15px;" disabled>{{$order->status}}</button></li>
-                      @includeIf('admin.order.notes')
+                      @endif  @if($order->status == 'belum bayar')
+                        <li class="list-group-item">Status<span style="margin-left:70px;">:</span><button style="background-color:grey; color:white; margin-left:15px" class="btn btn-secondary" disabled>{{$order->status}}</button></li>
+                        @elseif($order->status == 'menunggu verifikasi')
+                        <li class="list-group-item">Status<span style="margin-left:70px;">:</span><button class="btn btn-warning" style="margin-left:15px;" disabled>{{$order->status}}</button></li>
+                        @elseif($order->status == 'dibayar')
+                        <li class="list-group-item">Status<span style="margin-left:70px;">:</span><button class="btn btn-success" style="margin-left:15px;" disabled>{{$order->status}}</button></li>
+                        @else
+                        <li class="list-group-item">Status<span style="margin-left:70px;">:</span><button class="btn btn-danger" style="margin-left:15px;" disabled>{{$order->status}}</button></li>
+                        @endif
                       @endforeach
                     </ul>
                   </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table class="table table-sm">
+                    <table class="table table-sm table-bordered" >
                        <thead class="bg-primary">
-                        <tr >
+                        <tr style="border-color:black;">
                           <th width="2%">No</th>
                           <th width="15%">Gambar</th>
                           <th width="10%">Nama Produk</th>

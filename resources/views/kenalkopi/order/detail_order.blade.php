@@ -26,29 +26,49 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Order Details</h3><br>
-                  <h4 class="box-title">Kode Order : {{$Orders[0]->code_order}}</h4>
-                  <h4 class="box-title">Nama pemesan : {{$Orders[0]->first_name." ".$Orders[0]->last_name}}</h4>
-                  <h4 class="box-title">No meja : {{$Orders[0]->no_meja}}</h4>
-                <br></div>
-                <!-- csrf
-                method('post') -->
-                 <!-- <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                   <a href="" class="btn bg-red-active">Submit</a>
-                </form> -->
-
+                  @foreach($Orders as $order)
+                  {{--dd($order->notes)--}}
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Kode Order <span style="margin-left:36px;">:</span><span style="margin-left:15px;">{{$order->code_order}}</span></li>
+                  <li class="list-group-item">Tanggal<span style="margin-left:60px;">:</span><span style="margin-left:15px;">{{$order->order_date}}</span></li>
+                  <li class="list-group-item">Nama Pemesan<span style="margin-left:15px;">:</span><span style="margin-left:15px;">{{$order->first_name." ".$order->last_name}}</span></li>
+                  <li class="list-group-item">No Meja<span style="margin-left:59px;">:</span><span style="margin-left:15px;">{{$order->no_meja}}</span></li>
+                  @if($order->notes === null )
+                  <li class="list-group-item">Notes<span style="margin-left:70px;">:</span><textarea style="margin-left:15px;"> - </textarea></li>
+                  @else
+                  <li class="list-group-item" style="text-align:;">Notes<span style="margin-left:70px;">:
+                    <textarea disabled style="margin:0 0 0 15px;"> {{$order->notes}}
+                    </textarea>
+                    <br>
+                  </span>
+                  </li>
+                  @endif
+                  @if($order->status == 'belum bayar')
+                  <li class="list-group-item">Status<span style="margin-left:70px;">:</span><button style="background-color:grey; color:white; margin-left:15px" class="btn btn-secondary" disabled>{{$order->status}}</button></li>
+                  @elseif($order->status == 'menunggu verifikasi')
+                  <li class="list-group-item">Status<span style="margin-left:70px;">:</span><button class="btn btn-warning" style="margin-left:15px;" disabled>{{$order->status}}</button></li>
+                  @elseif($order->status == 'dibayar')
+                  <li class="list-group-item">Status<span style="margin-left:70px;">:</span><button class="btn btn-success" style="margin-left:15px;" disabled>{{$order->status}}</button></li>
+                  @else
+                  <li class="list-group-item">Status<span style="margin-left:70px;">:</span><button class="btn btn-danger" style="margin-left:15px;" disabled>{{$order->status}}</button></li>
+                  @endif
+                  @endforeach
+                </ul>
+              </div>
                 <!-- box-header -->
                 <div class="box-body">
-                    <table class="table">
-                        <tr style="font-size: large;" class="btn-success">
-                          <th width="2%">No</th>
+                    <table class="table table-sm table-bordered bg-white">
+                      <thead class="bg-primary">
+                        <tr class="table-dark">
+                            <th width="1%">No</th>
                             <th width="15%">Gambar</th>
                             <th width="10%">Nama Produk</th>
                             <th width="3%">Jumlah</th>
                             <th width="10%">Subtotal</th>
-                            <th width="10%">Status</th>
+                            <!-- <th width="10%">Status</th> -->
                             <!-- <th width="10%">Option</th> -->
                         </tr>
+                      </thead>
                         <!--ini buat inisiasi nomer-->
                         @php($i=1)
                         <!-- Buat hitung jumlah item, krna klo pake method aga tricky itugn diskonnya  -->
@@ -62,36 +82,36 @@
                             {{--dd($detail)--}}
                             <tr>
                               <!-- No -->
-                              <td class="center">{{$i++}}</td>
+                              <td align="center">{{$i++}}</td>
                               <!-- Gambar -->
-                                <td align="center" ><img src="{{asset($detail->gambar_produk) }}" width="100px" height="75px" ></td>
+                                <td ><img src="{{asset($detail->gambar_produk) }}" width="100px" height="75px" ></td>
                                 <!-- Nama Produk -->
-                                <td align="center" style="font-size: medium;">{{ $detail->nama_produk }}</td>
+                                <td>{{ $detail->nama_produk }}</td>
                                 <!-- Jumlah item -->
-                                <td align="center" style="font-size: medium;">{{ $detail->qty }}</td>
+                                <td align="center">{{ $detail->qty }}</td>
                                 <!-- Subtotal -->
-                                <td align="center" style="font-size: medium">
+                                <td>
                                     Rp. {{ number_format($detail->subtotal,0) }}
                                 </td>
                                 <!-- Status order di detail -->
                                 {{--dd($Orders)--}}
-                                @if($Orders[0]->status == 'belum bayar')
-                                <td align="center" >
-                                <button  type="button" class="btn btn-secondary" disabled>{{ $detail->order->status }}</button>
+                                <!-- @ if($Orders[0]->status == 'belum bayar')
+                                <td >
+                                <button style="background-color:grey; color:white;" type="button" class="btn btn-secondary disabled">{{ $detail->order->status }}</button>
                                 </td>
-                                @elseif($Orders[0]->status == 'menunggu verifikasi')
-                                <td align="center">
+                                @ elseif($Orders[0]->status == 'menunggu verifikasi')
+                                <td>
                                   <button  type="button" class="btn btn-warning" disabled>{{ $detail->order->status }}
                                   </button></td>
-                                @elseif($Orders[0]->status == 'dibayar')
-                                <td align="center">
+                                @ elseif($Orders[0]->status == 'dibayar')
+                                <td>
                                   <button  type="button" class="btn btn-success" disabled>{{ $detail->order->status }}
                                   </button></td>
-                                @else
-                                <td align="center">
+                                @ else
+                                <td>
                                   <button  type="button" class="btn btn-danger" disabled>{{ $detail->order->status }}
                                   </button></td>
-                                @endif
+                                @ endif -->
 
                                 <!-- Rating -->
                                 <!-- @ if($detail->status_rating == 'belum' and $detail->order->status == 'dibayar')
@@ -122,16 +142,20 @@
                         <!-- Looping buat cart -->
                         @endif
                         <!-- checking isi cart -->
+                        <tr>
+                            <td class="bg-primary" colspan="4" align="center" style="font-size: medium">Total</td>
+                            <td align="center" class="bg-info" style="font-size: medium">Rp. {{ number_format($Orders[0]->total_price,0) }}</td>
+                        </tr>
                     </table>
                 </div>
                 <!-- /.box-body -->
                 <div class="checkout-left">
 
-                <div class="checkout-left-basket">
-                  <h4>Total Harga : Rp {{$Orders[0]->total_price}}</h4>
-              </div>
+                <!-- <div class="checkout-left-basket">
+                  <h4>Total Harga : Rp {{--$Orders[0]->total_price--}}</h4>
+              </div> -->
                 <div class="checkout-right-basket">
-                  @if($Orders['status'] = 'belum dibayar')
+                  @if($Orders[0]->status == 'belum bayar')
                   <a href="{{ $PaymentUrl[0]}}">Proceed to payment</a>
                   @endif
               <!-- <button class="btn btn-primary" id="pay-button">Bayar Sekarang</button> -->

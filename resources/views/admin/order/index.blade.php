@@ -54,11 +54,11 @@
                           <td>Rp. {{ number_format($order->total_price,0) }}</td>
                           <td>
                               @if($order->status == 'belum bayar')
-                                  <button type="button" class="btn btn-sm bg-maroon" disabled>{{ ucwords($order->status) }}</button>
+                                  <button style="background-color:grey; color:white;" type="button" class="btn btn-sm bg-secondary" disabled>{{ ucwords($order->status) }}</button>
                               @elseif($order->status == 'menunggu verifikasi')
                                   <button type="button" class="btn btn-sm bg-orange" disabled>{{ ucwords($order->status) }}</button>
                               @elseif($order->status == 'dibayar')
-                                  <button type="button" class="btn btn-success">{{ ucwords($order->status) }}</button>
+                                  <button type="button" class="btn btn-success" disabled>{{ ucwords($order->status) }}</button>
                               @else
                                   <button type="button" class="btn btn-sm bg-danger" disabled>{{ ucwords($order->status) }}</button>
                               @endif
