@@ -27,9 +27,10 @@
             <div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title">Order Details</h3><br>
+                  <h4 class="box-title">Kode Order : {{$Orders[0]->code_order}}</h4>
                   <h4 class="box-title">Nama pemesan : {{$Orders[0]->first_name." ".$Orders[0]->last_name}}</h4>
                   <h4 class="box-title">No meja : {{$Orders[0]->no_meja}}</h4>
-                </div>
+                <br></div>
                 <!-- csrf
                 method('post') -->
                  <!-- <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -39,7 +40,7 @@
                 <!-- box-header -->
                 <div class="box-body">
                     <table class="table table-bordered table-hover">
-                        <tr style="font-size: large;" class="btn-success" >
+                        <tr style="font-size: large;" class="btn-success">
                           <th width="2%">No</th>
                             <th width="15%">Gambar</th>
                             <th width="10%">Nama Produk</th>
