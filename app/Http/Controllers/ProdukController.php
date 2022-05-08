@@ -52,13 +52,16 @@ class ProdukController extends Controller
                 return '<span>'.$produk->deskripsi_produk.'</span>';
             })
             ->addColumn('harga_beli', function ($produk) {
-                return format_uang($produk->harga_beli);
+                return 'Rp.'.format_uang($produk->harga_beli);
             })
             ->addColumn('harga_jual', function ($produk) {
-                return format_uang($produk->harga_jual);
+                return 'Rp.'.format_uang($produk->harga_jual);
+            })
+            ->addColumn('diskon', function ($produk) {
+                return $produk->diskon .'%';
             })
             ->addColumn('stok', function ($produk) {
-                return format_uang($produk->stok);
+                return $produk->stok;
             })
             ->addColumn('gambar_produk', function ($produk) {
                 return '<img src="'. $produk->gambar_produk .'" width="100px">';

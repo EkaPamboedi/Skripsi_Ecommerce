@@ -31,7 +31,7 @@ class PembelianController extends Controller
               return $pembelian->supplier->nama;
             })
             ->addColumn('total_item', function ($pembelian) {
-                return format_uang($pembelian->total_item);
+                return ($pembelian->total_item);
             })
             ->addColumn('total_harga', function ($pembelian) {
                 return 'Rp. '. format_uang($pembelian->total_harga);
@@ -106,7 +106,7 @@ class PembelianController extends Controller
                 return 'Rp. '. format_uang($detail->harga_beli);
             })
             ->addColumn('jumlah', function ($detail) {
-                return format_uang($detail->jumlah);
+                return ($detail->jumlah);
             })
             ->addColumn('subtotal', function ($detail) {
                 return 'Rp. '. format_uang($detail->subtotal);
