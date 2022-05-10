@@ -63,12 +63,39 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-      $name = User::all()->last()->name;
-      $email = User::all()->last()->email;
+      $name_def = User::all()->last()->name;
+      $email_def = User::all()->last()->email;
+      if($name_def == "user" && $email_def == "user@gmail.com"){
 
+          $name  = $name_def. ".". 1;
+          $x_mail = explode("@",$email_def);
+          $mail = $x_mail[0]. "." . + 1;
+          $email = $mail . "@".  $x_mail[1];
+          // $user->save();
+
+        }else {
+          // code...
+
+      // $user = "user.12";
+      // $email = "user.12@gmail.com";
+      //buat nambah index user
+      $a = $name_def;
+      $exp_a = explode("." , $a);
+      $exp_a1 =$exp_a[1]+1;
+      $name = $exp_a[0].".".$exp_a1;
+
+      $b = $email_def;
+      $exp_b = explode("@" , $b);
+      $exp_b1= explode(".",$exp_b[0]);
+      $exp_b2 =$exp_b1[1]+1;
+      //$exp_b2 =$exp_b[0]."."+1;
+      $email = $exp_b1[0].".".$exp_b2."@".$exp_b[1];
+
+    }
+        // echo $name_x."<br>";
         $user = new User();
-        $user->name = $name= $name.+1;
-        $user->email = $email = $email.+1;
+        $user->name = $name;
+        $user->email = $email;
         $user->password = $password = (bcrypt(123456));
         $user->no_meja = $request->no_meja;
         $user->level = 2;

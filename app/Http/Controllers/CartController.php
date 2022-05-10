@@ -93,11 +93,14 @@ class CartController extends Controller
 
           // $this->_generatePaymentToken($order);
           $order = $request->except('_token');
+
+          // ini tidak perlu karna tidak mengguanakan user,
           $user_id = Auth::user()->id;
           // $id_order = Order::get()->id_order;
           // dd($id_order);
 
           // $atas_nama = $request->atas_nama;
+          // ini didapat dari pengiriman session setelah login qr
           $user_table = Auth::user()->no_meja;
           $code_order = mt_rand(1000000000, 9999999999);
           // $span_token = Auth::user()->no_meja
@@ -119,17 +122,15 @@ class CartController extends Controller
                       $total_bayar = $total_bayar + $subTotal;
                     }
                   };
-
-
-
-
             // dd($Produks);
 
           $order = new Order;
+          //ini kita tidak perlu nantinya
           $order->user_id = $user_id;
-          $order->code_order = $code_order;
-          // $order->id_order = $id_order;
           $order->no_meja = $user_table;
+
+          $order->code_order = $code_order;
+          $order->id_order = $id_order;
           $order->first_name = $request->first_name;
           $order->last_name = $request->last_name;
           $order->notes = $request->notes;

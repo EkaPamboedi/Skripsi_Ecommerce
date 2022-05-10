@@ -106,6 +106,7 @@ class LoginController extends Controller
 
     public function attemptQrLogin(Request $request)
     {
+      // ini gua ubah, jadi cuman ngirim data meja controller nya.
       //datanya yg dicek harusnya tabel sih, but letsee
         if ($request->has('data')){
             $data = explode(',',$request->get('data'));
