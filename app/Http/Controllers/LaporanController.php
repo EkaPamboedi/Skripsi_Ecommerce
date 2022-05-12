@@ -76,7 +76,7 @@ class LaporanController extends Controller
     public function exportPDF($awal, $akhir)
     {
         $data = $this->getData($awal, $akhir);
-        $pdf  = PDF::loadView('laporan.pdf', compact('awal', 'akhir', 'data'));
+        $pdf  = PDF::loadView('admin.laporan.pdf', compact('awal', 'akhir', 'data'));
         $pdf->setPaper('a4', 'potrait');
 
         return $pdf->stream('Laporan-pendapatan-'. date('Y-m-d-his') .'.pdf');

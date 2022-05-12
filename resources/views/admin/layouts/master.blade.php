@@ -5,6 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{{-- $setting->nama_perusahaan --}} | @yield('title')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- tulisan buat podjok kiri aatas halaman admin  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Niconne&family=Teko:wght@300&display=swap" rel="stylesheet">
+    <!-- tulisan buat podjok kiri aatas halaman admin  -->
     <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -38,7 +47,6 @@
 </head>
 <body class="hold-transition skin-purple-light sidebar-mini">
     <div class="wrapper">
-
         @includeIf('admin.layouts.header')
 
         @includeIf('admin.layouts.sidebar')

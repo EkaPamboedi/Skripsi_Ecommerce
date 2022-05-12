@@ -37,4 +37,17 @@ class MejaController extends Controller
        // $qrcode = QrCode::size(400)->generate($data->name);
       return redirect()->back();
    }
+   public function destroy($id)
+   {
+       $user = User::find($id);
+       $user->delete();
+
+
+       return response(null, 204);
+   }
+   public function printQR($id)
+   {
+       $Tables = Tables::select('link')->find($id);
+       return view('admin.meja.printQR', compact('Tables'));
+   }
 }
