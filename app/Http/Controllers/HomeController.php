@@ -29,7 +29,7 @@ class HomeController extends Controller
      }
 
     public function index(){
-      // $Produks = Produk::get();
+      if ($token = session('token')) {
         // $products        = json_decode(file_get_contents(storage_path('data/products-data.json')));
       // $products = Produk::leftJoin('ratings', 'produk.id_produk', 'ratings.id_produk')
       //                     ->select('ratings.ratings',
@@ -44,70 +44,57 @@ class HomeController extends Controller
           'kategori.nama_kategori',
           ])->toArray();
 
+          $id_order = Order::where('login_token', '=' , $token ,  'AND' , 'order.status', '=' , 'dibayar')
+          ->orderBy('id_order','DESC')->select('id_order')->first();
+          $order_id = $id_order->id_order;
+          // dd($id_order);
+          //
+          $id_order_produk = Order_Produk::where('id_order', $order_id)->orderBy('qty' , 'DESC')->select('id_order_produk')->first();
+          $id_produk = $id_order_produk->id_order_produk;
+          // dd($id_produk);
 
-        // INPUTAN ID DARI GAMBAR YG DIPILIH
-        $selectedId =
-        // intval(
-        DB::table('order_produk')
-        ->join('order', 'order.id_order', '=', 'order_produk.id_order')
-        // ->select('id_produk')
-          ->where('order.status', '=' ,'dibayar' )
-          // ->where('nama_produk', '=' ,'martabak telor' )
-          // ->take(5)
-          ->get('order_produk.id_produk')
-          // ->pluck('id_produk')
-          // ->value('id_produk')
-          ->first();
-          // ->toArray();
+        // INPUTAN ID DARI PRODUK YG DIORDER
+        $id = Order_Produk::where('id_order_produk', '=', $id_produk)->select('id_produk')
+        ->get()->toArray();
+        // $selectedId = Order_Produk::where('id_order_produk', '=', $id_produk)->select('id_produk')
+        // ->get();
+        $selectedId = $id[0];
+        // dd($id);
         // dd($selectedId);
-        // dd($products);
 
         if (is_null($selectedId)) {
           throw new Exception('Can\'t find product with that ID.');
         }else {
-          // code...
-          $selectedProduct = $products[0];
+          $selectedProduct = $products;
         }
-        // dd($selectedProduct);
 
+          //Iterates over each value in the array passing them to the callback function. If the callback function returns true, the current value from array is returned into the result array.
 
-
-        // foreach ($selectedIds as $selectedId) {
-          // dd($selectedIds);
-          // dd($selectedId/);
-
-          // foreach ($selectedIds as $selectedId) {
+          //jadi kalo dari return nya menemukan id_produk yang sama, maka id_produk itu akan masu ksebagai isi di variable //
+          //$selectedProduct sebagai produk yang ingin di bandingkan nantinya.
           $selectedProduct = array_filter($products, function ($product) use ($selectedId){
-            return $product->id_produk === $selectedId->id_produk;
-
+            return $product->id_produk === $selectedId;
           });
 
-
-        // }
-
-        // dd($selectedProduct);
-          // if ($selectedProduct > 1) {
           if (count($selectedProduct)) {
               $selectedProduct = $selectedProduct[array_keys($selectedProduct)[0]];
           }
-          // Produk yg di cari kemiripannya
-          // dd($selectedProduct);
 
             $productSimilarity = new ProductSimilarity($products);
             $similarityMatrix  = $productSimilarity->calculateSimilarityMatrix();
             $products          = $productSimilarity->getProductsSortedBySimilarity($selectedId, $similarityMatrix);
-        // }
 
         //Kemiripan perproduk dengan semua produk
         // dd($similarityMatrix);
         // dd($productSimilarity);
         // dd($products);
 
-            return view('kenalkopi.home.index', compact('selectedId', 'selectedProduct', 'products'));
+            return view('kenal_kopi.home.index', compact('selectedId', 'selectedProduct', 'products'));
+          }
         //   }
-        // else {
-        //   return view('kenalkopi.home.index', compact('products'));
-        // }
+        else {
+          return redirect('/kenalkopi/login');
+        }
 
   }
 

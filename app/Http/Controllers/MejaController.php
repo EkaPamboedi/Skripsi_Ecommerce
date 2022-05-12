@@ -8,6 +8,8 @@ use App\Models\Tables;
 
 use Illuminate\Support\Facades\Hash;
 
+// protected $redirectTo = '/daftar_produk';
+
 class MejaController extends Controller
 {
   // public function index(){
@@ -15,18 +17,24 @@ class MejaController extends Controller
   //       return view ('welcome', ['data' => $data]);
   public function index()
   {
-    $tables = Tables::all();
+    $tables = Tables::get();
+    // dd($this->redirectTo);
     // $Users = User::orderBy('id')->get();
     // $Users = User::get();
     // all()->pluck('name', 'id','email' ,'qr_code');
-
   // dd($Users);
         return view('admin.meja.index',compact('tables'));
   }
-  public function generate ($id)
+  public function store(request $request)
    {
-       $data = Data::findOrFail($id);
-       $qrcode = QrCode::size(400)->generate($data->name);
-       return view('qrcode',compact('qrcode'));
+       $link = "/kenalkopi/produk";
+       $tables = new Tables;
+       $no_meja = $tables->no_meja = $request->no_meja;
+       $tables->link = $link.",".$no_meja;
+       $tables->level = 2;
+       $tables->save();
+       // $data = Data::findOrFail($id);
+       // $qrcode = QrCode::size(400)->generate($data->name);
+      return redirect()->back();
    }
 }

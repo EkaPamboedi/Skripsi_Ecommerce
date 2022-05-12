@@ -16,31 +16,27 @@ class KenalKopiController extends Controller
 {
   public function index()
   {
-    // buat manggil id kategoriProduk untuk pemanggilan list Kategori di nav bar ??
-    // $kategori_produks = KategoriProduks::where('status_kategori_produk','1')->get();
+    if ($token = session('token')) {
 
-      // $produks = Produk::orderBy('nama_produk','desc')->where('stok','>=','1')->get();
-      $produks = Produk::leftJoin('kategori', 'kategori.id_kategori','produk.id_kategori')
-          ->select('produk.*', 'nama_kategori')
-          ->orderBy('nama_produk','desc')
-          ->where('stok','>=','1')
-          ->get();
-          // dd($produks);
-      // dd($produks);
-      return view('kenalkopi.produk.index',compact('produks'));
+    $produks = Produk::leftJoin('kategori', 'kategori.id_kategori','produk.id_kategori')
+    ->select('produk.*', 'nama_kategori')
+    ->orderBy('nama_produk','desc')
+    ->where('stok','>=','1')
+    ->get();
+
+        return view('kenal_kopi.produk.index',compact('produks'));
+      }else{
+        return redirect('/kenalkopi/login')->with('message', 'You need to scan Qr First!');
+      }
   }
 
   public function insert(Request $request)
   {
-    // $produk = Produk::
-    // where('id_produk', $request->id_produk)->
-    // first();
     $produk = Produk::leftJoin('kategori', 'kategori.id_kategori','produk.id_kategori')
         ->select('produk.*',
                  'kategori.nama_kategori')
         ->where('id_produk', $request->id_produk)
         ->first();
-        // dd($produk);
 
     Cart::add([
       'id' => $request->id_produk,
@@ -55,18 +51,7 @@ class KenalKopiController extends Controller
           'image' => $produk->gambar_produk,
         ],
     ]);
-    // dd($produk);
-
-    // Cart::setDiscount([
-    //   'id' => $request->id_produk,
-    //   'options' =>[
-    //     'diskon' => $produk->diskon,
-    //     ],
-    // ]);
-    // return redirect()->route('tampil_cart')->with('');
-        // Session::flash('status','Product berhasil dimasukkan ke keranjang');
         return redirect()->back();
   }
-
 
 }

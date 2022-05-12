@@ -21,8 +21,8 @@ class VerifyCsrfToken extends Middleware
      protected $except = [
        // 'auth/payments/notification',
        // 'auth/user/payments/notification',
-       '/payments/*',
-       '/payments/notification'
+       '/kenalkopi/payments/*',
+       '/kenalkopi/payments/notification'
       //  '/payments/unfinish',
       // '/payments/failed'
    	];

@@ -16,10 +16,8 @@ class ConfirmUserController extends Controller
   public function index($id)
     {
         $order = Order::findOrFail($id);
-        // $Orders = Order::where('id_order',$id)->get();
 
-        // $SnapToken = DB::table('order')->where('id_order',$id)->pluck('payment_token');
-        return view('kenalkopi.confirm.index', compact('order'));
+        return view('kenal_kopi.confirm.index', compact('order'));
     }
 
     public function confirm_store(Request $request)
@@ -139,7 +137,7 @@ class ConfirmUserController extends Controller
 					if (in_array($payment->status, [$paymentStatus = 'success', $transaction_status = 'settlement'])) {
 						// $order->payment_status = Order::PAID;
 						$order->status = 'dibayar';
-						$order->save();
+						$order->update();
 					}
 				}
 			);
@@ -179,13 +177,13 @@ class ConfirmUserController extends Controller
     $PaymentUrl = DB::table('order')->where('code_order',$code)->pluck('payment_url');
     //
 		if ($order->status == 'belum dibayar') {
-			return redirect('payments/failed?order_id='. $code);
+			return redirect('kenalkopi/payments/failed?order_id='. $code);
 		}
 
 		Session::flash('success', "Thank you for completing the payment process!");
 
 		// return redirect('orders/received/'. $order->id);
-    return view('kenalkopi.order.notification',compact('code','order','Orders','PaymentUrl','Infos'));
+    return view('kenal_kopi.order.notification',compact('code','order','Orders','PaymentUrl','Infos'));
   }
 
   public function unfinish(Request $request)
@@ -212,13 +210,13 @@ class ConfirmUserController extends Controller
     $PaymentUrl = DB::table('order')->where('code_order',$code)->pluck('payment_url');
     //
 		if ($order->status == 'belum dibayar') {
-			return redirect('payments/failed?order_id='. $code);
+			return redirect('kenalkopi/payments/failed?order_id='. $code);
 		}
 
 		Session::flash('success', "Thank you for completing the payment process!");
 
 		// return redirect('orders/received/'. $order->id);
-    return view('kenalkopi.order.notification',compact('code','order','Orders','PaymentUrl','Infos'));
+    return view('kenal_kopi.order.notification',compact('code','order','Orders','PaymentUrl','Infos'));
   }
   public function failed(Request $request)
 	{
@@ -244,12 +242,12 @@ class ConfirmUserController extends Controller
     $PaymentUrl = DB::table('order')->where('code_order',$code)->pluck('payment_url');
     //
 		if ($order->status == 'belum dibayar') {
-			return redirect('payments/failed?order_id='. $code);
+			return redirect('kenalkopi/payments/failed?order_id='. $code);
 		}
 
 		Session::flash('Failed', "Sorry Your Order Can't Processed!");
 
 		// return redirect('orders/received/'. $order->id);
-    return view('kenalkopi.order.notification',compact('code','order','Orders','PaymentUrl','Infos'));
+    return view('kenal_kopi.order.notification',compact('code','order','Orders','PaymentUrl','Infos'));
   }
 }

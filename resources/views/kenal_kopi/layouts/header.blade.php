@@ -39,8 +39,8 @@
 							</div>
 							<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 								<ul class="nav navbar-nav">
-									<li class="active"><a href="{{route('kenalkopi')}}" class="act">Home</a></li>
-									<li><a href="{{ route('daftar_produk') }}">Produk</a></li>
+									<li class="active"><a href="{{route('kenalkopi.home')}}" class="act">Home</a></li>
+									<li><a href="{{ route('kenalkopi.produk') }}">Produk</a></li>
 										<ul class="dropdown-menu multi-column columns-3">
 											<div class="row">
 												<div class="multi-gd-img">

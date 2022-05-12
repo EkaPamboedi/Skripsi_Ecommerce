@@ -9,7 +9,7 @@ $(document).ready(function() {
                  // do something when code is read
                  console.log(data);
                  $.ajax({
-                    url: '/qrlogin',
+                    url: '/kenalkopi/qrlogin',
                     data: {data:data},
                     dataType: 'JSON',
                     method: 'POST',
@@ -60,7 +60,7 @@ $(document).ready(function() {
  */
 $('#login').click(function(){
     $.ajax({
-        url: '/qrlogin',
+        url: '/kenalkopi/qrlogin',
         data: $('#form-login').serialize(),
         dataType: 'JSON',
         method: 'POST',

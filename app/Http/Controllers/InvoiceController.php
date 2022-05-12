@@ -19,39 +19,44 @@ class InvoiceController extends Controller
 {
       public function __construct()
     {
-        $this->middleware('auth');
+      if ($id_penjualan = session('id_penjualan')) {
+          $penjualan = Penjualan::find($id_penjualan);
+    }else {
+      return redirect('/kenalkopi/login');
+    }
     }
 
-    public function index()
-    {
+    public function index() {
+
+      if($token = session('token')) {
         $CartProduk = Cart::content();
         $total = Cart::subtotal();
         Cart::destroy();
-        $user_id = Auth::user()->user_id;
-      return view('kenalkopi.order.invoice', compact('CartProduk','total','user_id'));
+        // $user_id = Auth::user()->user_id;
+        return view('kenal_kopi.order.invoice', compact('CartProduk','total'));
+      }else {
+        return redirect('/kenalkopi/login')->with('message', 'You need to scan Qr First!');
+      }
     }
 
-    public function daftar_order(){
-
-    $user_id = Auth::user()->id;
-    $Orders = Order::where('user_id',$user_id)
-            ->orderBy('user_id','desc')
-            ->get();
-    $SnapToken = Order::where('user_id',$user_id)
-            ->get('payment_token');
-        return view('kenalkopi.order.daftar_order', compact('Orders'));
+    public function daftar_order() {
+      if($token = session('token')) {
+         $Orders = Order::orderBy('id_order','desc')->where('login_token',$token)->get();
+        // $SnapToken = Order::where('user_id',$user_id)
+        //         ->get('payment_token');
+        return view('kenal_kopi.order.daftar_order',compact('Orders'));
+      }else{
+        return redirect('/kenalkopi/login')->with('message', 'You need to scan Qr First!');
+      }
     }
 
-    public function detail_order($id){
-
-      // Dibutuhin nanti buat bedain pesenan setiap user
-      // $user_id = Auth::user()->id;
-      // $Details = Order_Produk::where('id_order',$id)->get();
+    public function detail_order($id) {
+      if($token = session('token')) {
       $Details = Order_Produk::leftJoin('produk', 'produk.id_produk', 'order_produk.id_produk')
       ->select('order_produk.*', 'produk.*')
       ->where('id_order',$id)->get();
       // $Orders = Order::where('id_order',$id)->get();
-      $Orders = Order::where('id_order',$id)->get();
+      $Orders = Order::where('login_token', '=' ,$token, 'AND' ,'id_order', '=' ,$id)->get();
       // dd($Orders);
       $SnapToken = DB::table('order')->where('id_order',$id)->pluck('payment_token');
       $PaymentUrl = DB::table('order')->where('id_order',$id)->pluck('payment_url');
@@ -61,31 +66,11 @@ class InvoiceController extends Controller
       // $Snap = json_encode($SnapToken);
       // dd($SnapToken);
 
-      return view('kenalkopi.order.detail_order',compact('Details','Orders','SnapToken','PaymentUrl'));
-    }
-
-    // public function Rating(Request $request){
-    //
-    //
-    //   $Ratings = new Ratings();
-    //   $Ratings->user_id = $request->user_id;
-    //   $Ratings->id_order_produk = $request->id_order_produk;
-    //   $Ratings->id_produk = $request->id_produk;
-    //   $Ratings->ratings = $request->ratings;
-    //   $Ratings->save();
-    //
-    //   // $Stat_rating = Order_Produk::findOrFail($id);
-    //   // $Stat_rating->id_order_produk = $request->id_order_produk;
-    //   // $Stat_rating->status_rating = 'sudah';
-    //   // $Stat_rating->update();
-    //
-    //     $Status_rating = DB::table('order_produk')
-    //                ->where('id_order_produk', $request->id_order_produk)
-    //                ->update(['status_rating'=>'sudah']);
-    //   //
-    //   return redirect()->back();
-    // }
-
+      return view('kenal_kopi.order.detail_order',compact('Details','Orders','SnapToken','PaymentUrl'));
+    }else{
+      return redirect('/kenalkopi/login')->with('message', 'You need to scan Qr First!');
+     }
+   }
 
 
 }

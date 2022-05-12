@@ -1,4 +1,4 @@
-@extends('kenalkopi.layouts.master_without_banner')
+@extends('kenal_kopi.layouts.master_without_banner')
 
 @section('title')
     home
@@ -72,7 +72,7 @@
 										</div>
 									</div>
 								</div>
-                @includeIf('kenalkopi.produk.form')
+                @includeIf('kenal_kopi.produk.form')
                 @endforeach
 
 								<div class="clearfix"> </div>

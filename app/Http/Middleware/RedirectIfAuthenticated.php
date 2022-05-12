@@ -57,7 +57,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect('/daftar_produk');
+                return redirect('/kenalkopi/produk');
                 // , compact('kategori', 'produk', 'supplier', 'member', 'tanggal_awal', 'tanggal_akhir', 'data_tanggal', 'data_pendapatan'));
                 // return redirect(RouteServiceProvider::KENALKOPI);
                 // return view('admin.home.dashboard');

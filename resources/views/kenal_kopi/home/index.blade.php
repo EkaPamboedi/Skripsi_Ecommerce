@@ -1,4 +1,4 @@
-@extends('kenalkopi.layouts.master')
+@extends('kenal_kopi.layouts.master')
 
 @section('title')
 Kenal Kopi
@@ -19,6 +19,7 @@ Kenal Kopi
 								<div class="agile_top_brands_grids">
 
 	                <!--CHART PRODUK -->
+									<!-- @ if($order) -->
 									@foreach($products as $produk)
 									<div class="col-md-4 top_brand_left">
 										<div class="hover14 column">
@@ -70,7 +71,7 @@ Kenal Kopi
 										</div>
 									</div>
 
-									@includeIf('kenalkopi.home.form')
+									@includeIf('kenal_kopi.home.form')
 
 	                @endforeach
 

@@ -1,4 +1,4 @@
-@extends('kenalkopi.layouts.master_without_banner')
+@extends('kenal_kopi.layouts.master_without_banner')
 
 @section('title')
     Cart

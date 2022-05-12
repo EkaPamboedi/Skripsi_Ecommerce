@@ -15,22 +15,24 @@ class CreatMejaTables extends Migration
     {
       Schema::create('tables', function (Blueprint $table) {
         $table->increments('id');
+        $table->integer('id_order')->unsigned()->nullable();
+        $table->integer('code_order')->unsigned()->nullable();
         // $table->integer('no_meja');
         $table->integer('no_meja')->nullable();
-        $table->string('qr_code')->nullable();
-        $table->string('lavel')->nullable();
+        $table->string('link')->nullable();
+        $table->string('level')->nullable();
         $table->timestamps();
       });
 
-      // Schema::table('users', function (Blueprint $table) {
-      //     $table->integer('id_meja')->after('id');
-      //
-      //     $table->foreign('id_meja')
-      //         ->references('id_meja')
-      //         ->on('users')
-      //         ->onUpdate('cascade')
-      //         ->onDelete('cascade');
-      // });
+      Schema::table('tables', function (Blueprint $table) {
+          // $table->integer('id_meja')->after('id');
+
+          $table->foreign('id_order')
+              ->references('id_order')
+              ->on('order')
+              ->onUpdate('cascade')
+              ->onDelete('cascade');
+      });
     }
 
     /**
@@ -40,6 +42,6 @@ class CreatMejaTables extends Migration
      */
     public function down()
     {
-      Schema::dropIfExists('tables');        
+      Schema::dropIfExists('tables');
     }
 }

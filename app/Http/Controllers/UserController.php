@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -109,6 +110,13 @@ class UserController extends Controller
         // return response()->;
 
     }
+
+    // public function store(request $request)
+    // {
+    //   $code_order = rand();
+    //   $user = new User();
+    //   $user->no_meja = $request->no_meja;
+    // }
 
     /**
      * Display the specified resource.

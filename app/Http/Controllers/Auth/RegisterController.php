@@ -71,7 +71,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             // 'level' => 1,
             // 'qr_code' => Hash::make($data['password']),
-            'qr_code' => $data['name'].','.$data['password'],
+            // 'qr_code' => Hash::make($data['name'].','.$data['password']),
             // 'qrcode' => Hash::make($data['email'].$data['password']),
             // 'no_meja' => Hash::make($data['password']),
         ]);

@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -45,9 +46,11 @@ use App\Http\Controllers\{
 // });
 
 
-Route::get('/', function () {
-    return redirect('/qr_login');
-});
+Route::get('/kenalkopi', function () {
+    return redirect('/kenalkopi/login');
+    // return view('kenal_kopi.index');
+
+  });
 
 
 
@@ -65,14 +68,20 @@ Auth::routes();
 // });
 
 Route::get('/welcome', [App\Http\Controllers\Auth\LoginController::class, 'index'])->name('welcome');
-Route::get('/qr_login', [App\Http\Controllers\Auth\LoginController::class, 'qrCodeLogin'])->name('qr_login');
-Route::post('/qrlogin', [App\Http\Controllers\Auth\LoginController::class, 'attemptQrLogin'])->name('qrlogin');
+Route::get('/kenalkopi/login', [App\Http\Controllers\Auth\LoginController::class, 'qrCodeLogin'])->name('kenalkopi.index');
+Route::post('/kenalkopi/qrlogin', [App\Http\Controllers\Auth\LoginController::class, 'attemptQrLogin'])->name('qrlogin');
 // Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'attemptQrLogin'])->name('login');
+// Route::get('/welcome', [App\Http\Controllers\Auth\LoginController::class, 'index'])->name('welcome');
+// Route::get('/qr_login', [App\Http\Controllers\Auth\LoginController::class, 'qrCodeLogin'])->name('qr_login');
+// Route::post('/qrlogin', [App\Http\Controllers\Auth\LoginController::class, 'attemptQrLogin'])->name('qrlogin');
+
 
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'attemptLogin'])->name('login');
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 // Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'attemptLogin'])->name('login');
 // Auth::routes();
+
+
 Route::group(['middleware' => 'auth'], function () {
   Route::group(['middleware' => 'admin'], function () {
 
@@ -170,7 +179,7 @@ Route::group(['middleware' => 'auth'], function () {
       Route::resource('/user', UserController::class);
 
       Route::get('/meja/store', [MejaController::class, 'store'])->name('tables.store');
-      Route::get('qrcode/{id}', [DataController::class, 'generate'])->name('tables.generate');
+      // Route::get('qrcode/{id}', [MejaController::class, 'generate'])->name('tables.generate');
       Route::resource('/meja', MejaController::class);
 
       Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
@@ -188,50 +197,54 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-Route::group(['middleware' => 'auth'], function () {
-  Route::group(['middleware' => 'user'], function () {
-    Route::get('/home',[HomeController::class,'index'])->name('kenalkopi');
-
-    /*########-Produk Strat Here-#######*/
-    // ORDER PRODUK AS USER STARTs HERE
-      // memilih produk
-      Route::get('/daftar_produk',[KenalKopiController::class,'index'])->name('daftar_produk');
-      //memasukan ke cart
-      Route::post('/add/cart', [KenalKopiController::class, 'insert'])->name('tambah_item');
-      /*########-Produk Ends Here-#######*/
+/*########-Produk Strat Here-#######*/
+// ORDER PRODUK AS USER STARTs HERE
+  // memilih produk
+  Route::get('/kenalkopi/recomendation',[HomeController::class,'index'])->name('kenalkopi.home');
+  Route::get('/kenalkopi/produk',[KenalKopiController::class,'index'])->name('kenalkopi.produk');
+  //memasukan ke cart
+  Route::post('/add/cart', [KenalKopiController::class, 'insert'])->name('tambah_item');
+  /*########-Produk Ends Here-#######*/
 
 
-      /*########-Cart Start Here-#######*/
-      // menampilkan, menambah, hapus, dan update cart
-      // Route::get('/cart', [CartController::class, 'index'])->name('cart');
-      Route::get('/cart', [CartController::class, 'index'])->name('cart');
-      Route::get('/cart/remove/{rowId}', [CartController::class, 'remove'])->name('remove_item');
-      Route::post('/cart/update', [CartController::class, 'update'])->name('update_cart');
-      // Checkout Cart, cart dilempar ke halaman checkout
-      Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('checkout');
-      // Isi nama sama meja di cart trus bayar
-      Route::post('/cart/payment', [CartController::class, 'payment'])->name('payment');
-      /*########-Cart Ends Here-#######*/
+  /*########-Cart Start Here-#######*/
+  // menampilkan, menambah, hapus, dan update cart
+  // Route::get('/cart', [CartController::class, 'index'])->name('cart');
+  Route::get('/kenalkopi/cart', [CartController::class, 'index'])->name('cart');
+  Route::get('/kenalkopi/cart/remove/{rowId}', [CartController::class, 'remove'])->name('remove_item');
+  Route::post('/kenalkopi/cart/update', [CartController::class, 'update'])->name('update_cart');
+  // Checkout Cart, cart dilempar ke halaman checkout
+  Route::get('/kenalkopi/cart/checkout', [CartController::class, 'checkout'])->name('checkout');
+  // Isi nama sama meja di cart trus bayar
+  Route::post('/kenalkopi/cart/payment', [CartController::class, 'payment'])->name('payment');
+  /*########-Cart Ends Here-#######*/
 
-      /*########-Invoice Starts Here-#######*/
-      //halmaan sudah memesan, pesanan masuk ke list order
-      Route::get('/invoice', [InvoiceController::class, 'index'])->name('invoice');
-      // list order dari invoice
-      Route::get('daftar_order/', [InvoiceController::class, 'daftar_order'])->name('daftar_order');
-      // Detail dari pesanan
-      Route::get('daftar_order/detail/{id}', [InvoiceController::class, 'detail_order'])->name('detail_order');
-      // Rating
-      Route::post('daftar_order/detail/rating/', [InvoiceController::class, 'rating'])->name('rating');
+  /*########-Invoice Starts Here-#######*/
+  //halmaan sudah memesan, pesanan masuk ke list order
+  Route::get('/kenalkopi/invoice', [InvoiceController::class, 'index'])->name('invoice');
+  // list order dari invoice
+  Route::get('/kenalkopi/daftar_order/', [InvoiceController::class, 'daftar_order'])->name('daftar_order');
+  // Detail dari pesanan
+  Route::get('/kenalkopi/daftar_order/detail/{id}', [InvoiceController::class, 'detail_order'])->name('detail_order');
+  // Rating
+  Route::post('/kenalkopi/daftar_order/detail/rating/', [InvoiceController::class, 'rating'])->name('rating');
+// notification for Payments gatewaay with midtrans
+  Route::post('/kenalkopi/payments/notification', [ConfirmUserController::class, 'notification'])->name('notification');
+  Route::get('/kenalkopi/payments/completed', [ConfirmUserController::class, 'completed'])->name('completed');
+  Route::get('/kenalkopi/payments/unfinish', [ConfirmUserController::class, 'unfinish'])->name('unfinish');
+  Route::get('/kenalkopi/payments/failed', [ConfirmUserController::class, 'failed'])->name('failed');
 
-      // Route::post('invoice/detail/rating/status_rating/', [InvoiceController::class, 'Status_rating'])->name('Status');
-      /*########-Invoice Ends Here-#######*/
+  // Route::post('invoice/detail/rating/status_rating/', [InvoiceController::class, 'Status_rating'])->name('Status');
+  /*########-Invoice Ends Here-#######*/
 
-      /*########-Konfirmasi starts Here-#######*/
-      Route::get('/confirm/{id}', [ConfirmUserController::class, 'index'])->name('user_confirm');
-      // Route::get('/confirm/payment', [ConfirmUserController::class, 'payment_midtrans'])->name('payment_midtrans');
+  /*########-Konfirmasi starts Here-#######*/
+  // Route::get('/confirm/{id}', [ConfirmUserController::class, 'index'])->name('user_confirm');
+  // Route::get('/confirm/payment', [ConfirmUserController::class, 'payment_midtrans'])->name('payment_midtrans');
 
-      Route::post('/confirm/store', [ConfirmUserController::class, 'confirm_store'])->name('confirm_store');
-      // ORDER PRODUK AS USER Ends HERE
+  // Route::post('/confirm/store', [ConfirmUserController::class, 'confirm_store'])->name('confirm_store');
+  // ORDER PRODUK AS USER Ends HERE
+
+
 
       // Notif ORDER PRODUK AS USER Start HERE
       // Route::post('/payments/notification', [ConfirmUserController::class, 'notification'])->name('notification');
@@ -239,12 +252,9 @@ Route::group(['middleware' => 'auth'], function () {
       // Route::get('/payments/unfinish', [ConfirmUserController::class, 'unfinish'])->name('unfinish');
       // Route::get('/payments/failed', [ConfirmUserController::class, 'failed'])->name('failed');
       // ORDER PRODUK AS USER Ends HERE
-
+      Route::group(['middleware' => 'auth'], function () {
+        Route::group(['middleware' => 'user'], function () {
 
   });
 
 });
-Route::post('/payments/notification', [ConfirmUserController::class, 'notification'])->name('notification');
-Route::get('/payments/completed', [ConfirmUserController::class, 'completed'])->name('completed');
-Route::get('/payments/unfinish', [ConfirmUserController::class, 'unfinish'])->name('unfinish');
-Route::get('/payments/failed', [ConfirmUserController::class, 'failed'])->name('failed');

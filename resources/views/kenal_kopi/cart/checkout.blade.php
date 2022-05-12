@@ -1,4 +1,4 @@
-@extends('kenalkopi.layouts.master_without_banner')
+@extends('kenal_kopi.layouts.master_without_banner')
 
 @section('title')
     Cart
@@ -15,9 +15,8 @@
 		<div class="login-form-grids">
       <form class="" action="{{route('payment')}}" method="post">
         @csrf
-          <input type="hidden" name="user_id" value="{{$user_id}}" hidden>
         <h6>Nomer Meja</h6>
-        <input type="text" id="user_table" name="user_table" value="{{$user_table}}" disabled>
+        <input type="text" id="no_meja" name="no_meja" value="{{$no_meja}}" disabled>
         <h6>First Name</h6>
         <input type="text" id="first_name" name="first_name" value="" placeholder="First Name" required>
         <h6>Last Name</h6>

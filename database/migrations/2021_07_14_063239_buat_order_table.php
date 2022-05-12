@@ -15,23 +15,19 @@ class BuatOrderTable extends Migration
     {
     Schema::create('order', function (Blueprint $table) {
             $table->increments('id_order');
-            $table->foreignId('user_id')
-                  ->constrained('users')
-                  ->onUpdate('cascade')
-                  ->onDelete('cascade');
-            $table->string('code_order')->unique();
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('code_order');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->string('customer_phone')->nullable();
     				$table->string('customer_email')->nullable();
             $table->text('no_meja');
             $table->integer('total_price');
             $table->string('notes')->nullable();
-    				$table->datetime('order_date');
+    				$table->datetime('order_date')->nullable();
             // $table->datetime('payment_due');
     				// $table->string('payment_status');
     				// $table->text('note')->nullable();
-            $table->enum('status',['belum bayar','menunggu verifikasi','dibayar','ditolak']);
+            $table->enum('status',['belum bayar','menunggu verifikasi','dibayar','ditolak'])->nullable();
             $table->timestamps();
             // $table->foreign('cancelled_by')->references('id')->on('users');
             $table->index('code_order');

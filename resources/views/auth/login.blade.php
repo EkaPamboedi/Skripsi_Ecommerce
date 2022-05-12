@@ -56,7 +56,8 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
-                                <a class="btn btn-link" href="{{ route('qr_login') }}">
+                                <!-- <a class="btn btn-link" href="{{-- route('qr_login') --}}"> -->
+                                <a class="btn btn-link" href="{{ route('kenalkopi.index') }}">
                                         {{ __('Login with QR Code?') }}
                                 </a>
                                 @if (Route::has('password.request'))

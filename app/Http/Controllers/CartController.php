@@ -20,7 +20,7 @@ class CartController extends Controller
 {
   public function __construct()
   {
-      $this->middleware('auth');
+      // $this->middleware('auth');
   }
 
 
@@ -37,18 +37,16 @@ class CartController extends Controller
 }
 
   public function index()
-      {
+    {
+      if($token = session('token')) {
+        $CartProduk = Cart::content();
+        $CartProduks=[];
+        $CartProduks = array_push($CartProduks, $CartProduk);
 
-      $this->middleware('auth');
-      $user_id = Auth::user()->id;
-      $user_table = Auth::user()->no_meja;
-      $CartProduk = Cart::content();
-      // ->toArray();
-
-      $CartProduks=[];
-      $CartProduks = array_push($CartProduks, $CartProduk, $user_table, $user_id);
-
-        return view('kenalkopi.cart.index', compact('CartProduk'));
+          return view('kenal_kopi.cart.index', compact('CartProduk'));
+      }else{
+          return redirect('/kenalkopi/login')->with('message', 'You need to scan Qr First!');
+        }
       }
 
   public function remove($rowId){
@@ -62,17 +60,15 @@ class CartController extends Controller
 
   public function checkout()
     {
-      $this->middleware('level:2');
-      $user_id = Auth::user()->id;
-      $CartProduk = Cart::content();
-      $user_table = Auth::user()->no_meja;
-      // $code_order = mt_rand(1000000000, 9999999999);
-        // dd($CartProduk);
-        // lfp ulti finale
-      // dd($no_meja);
+      if($token = session('token')) {
+        $no_meja = session('no_meja');
 
-      return view('kenalkopi.cart.checkout',compact('CartProduk','user_table','user_id'));
+        $CartProduk = Cart::content();
+      return view('kenal_kopi.cart.checkout',compact('CartProduk','no_meja'));
+  }else{
+      return redirect('/kenalkopi/login')->with('message', 'You need to scan Qr First!');
     }
+  }
 
   public function payment(Request $request)
   {
@@ -85,26 +81,10 @@ class CartController extends Controller
     // Set 3DS transaction for credit card to true
     \Midtrans\Config::$is3ds = true;
 
-    // // Add new notification url(s) alongside the settings on Midtrans Dashboard Portal (MAP)
-    // \Midtrans\Config::$appendNotifUrl = "http://800c-140-213-35-166.ngrok.io/payments/notification";
-    // // Use new notification url(s) disregarding the settings on Midtrans Dashboard Portal (MAP)
-    // \Midtrans\Config::$overrideNotifUrl = "http://800c-140-213-35-166.ngrok.io/payments/notification";
-
-
-          // $this->_generatePaymentToken($order);
-          $order = $request->except('_token');
-
-          // ini tidak perlu karna tidak mengguanakan user,
-          $user_id = Auth::user()->id;
-          // $id_order = Order::get()->id_order;
-          // dd($id_order);
-
-          // $atas_nama = $request->atas_nama;
           // ini didapat dari pengiriman session setelah login qr
-          $user_table = Auth::user()->no_meja;
           $code_order = mt_rand(1000000000, 9999999999);
-          // $span_token = Auth::user()->no_meja
-          // $paymentDue = (new DateTime($orderDate))->modify('+1 our')->format('H:i:s');
+          $no_meja = session('no_meja');
+          $login_token = session('token');
           $total_bayar = 0;
           $total = 0;
           $prod_discount = 0;
@@ -124,15 +104,19 @@ class CartController extends Controller
                   };
             // dd($Produks);
 
-          $order = new Order;
-          //ini kita tidak perlu nantinya
-          $order->user_id = $user_id;
-          $order->no_meja = $user_table;
+          // if ($id_order = session('id_order')) {
+          //   $data_orders = Order::where('id_order',$id_order)
+          //   ->select('id_order','code_order','no_meja')->get();
 
+          // $order = Order::findOrFail($data_orders[0]->id_order);
+          $order = $request->except('_token');
+          $order = new Order;
+          $order->login_token = $login_token;
           $order->code_order = $code_order;
-          $order->id_order = $id_order;
           $order->first_name = $request->first_name;
           $order->last_name = $request->last_name;
+          $order->no_meja = $no_meja;
+          $order->status = "belum bayar";
           $order->notes = $request->notes;
           // $order->customer_phone = $request->customer_phone;
           // $order->customer_email = $request->customer_email;
@@ -223,13 +207,14 @@ class CartController extends Controller
 
             }
           }
-          $user = User::findOrFail($user_id);
+        // }
+          // $user = User::findOrFail($user_id);
 
-          return redirect('invoice')->with('status','Anda berhasil melakukan checkout');
+          return redirect('/kenalkopi/invoice')->with('status','Anda berhasil melakukan checkout');
       }
 
   public function confirm()
     {
-        return view('kenalkopi.cart.konfirmasi');
+        return view('kenal_kopi.cart.konfirmasi');
     }
 }
