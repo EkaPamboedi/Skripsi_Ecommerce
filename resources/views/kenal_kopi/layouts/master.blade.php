@@ -15,19 +15,20 @@
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
-<link href="{{asset('kenal_kopi/css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all" />
+<link href="{{ asset ('kenal_kopi/css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
 <link href="{{asset('kenal_kopi/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
 <!-- font-awesome icons -->
 <link href="{{asset('kenal_kopi/css/font-awesome.css')}}" rel="stylesheet">
 <!-- //font-awesome icons -->
 <!-- js -->
-<script src="{{asset('kenal_kopi/js/jquery-1.11.1.min.js')}}"></script>
+<script src="{{ asset('kenal_kopi/js/jquery-1.11.1.min.js') }}"></script>
 <!-- //js -->
 <link href='//fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="{{asset('kenal_kopi/js/move-top.js')}}'"></script>
-<script type="text/javascript" src="{{asset('kenal_kopi/js/easing.js')}}'"></script>
+<!-- <script src="{{ asset('admin/js/validator.min.js') }}"></script> -->
+<script src="{{ asset('kenal_kopi/js/move-top.js') }}"></script>
+<script src="{{ asset('kenal_kopi/js/easing.js') }}"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){
@@ -44,7 +45,7 @@
 					@includeIf('kenal_kopi.layouts.header')
 					<!-- //top-header-->
 					<!-- top banner-->
-					@includeIf('kenal_kopi.layouts.banner')
+					<!-- @ includeIf('kenal_kopi.layouts.banner') -->
 					<!-- //top banner-->
 					<!-- top-brands -->
 					<!-- HOME = carts -->
@@ -70,7 +71,6 @@
 				scrollSpeed: 4000,
 				easingType: 'linear'
 				};
-
 			$().UItoTop({ easingType: 'easeOutQuart' });
 
 			});
@@ -79,12 +79,11 @@
 
 <!-- main slider-banner -->
 <script src="{{asset('kenal_kopi/js/jquery-1.11.1.min.js')}}"></script>
-<script src="{{asset('kenal_kopi/js/skdslider.min.js')}}"></script>
+<script href="{{asset('kenal_kopi/js/skdslider.min.js')}}"></script>
 <link href="{{asset('kenal_kopi/css/skdslider.css')}}" rel="stylesheet">
 <script type="text/javascript">
 		jQuery(document).ready(function(){
 			jQuery('#demo1').skdslider({'delay':5000, 'animationSpeed': 2000,'showNextPrev':true,'showPlayButton':true,'autoSlide':true,'animationType':'fading'});
-
 			jQuery('#responsive').change(function(){
 			  $('#responsive_wrapper').width(jQuery(this).val());
 			});

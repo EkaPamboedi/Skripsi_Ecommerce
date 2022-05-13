@@ -79,10 +79,10 @@ Kenal Kopi
 									<div class="clearfix"> </div>
 								</div>
 							</div>
-
-
 			</div>
 		</div>
 	</div>
+</div>
+</div>
 <!-- //top-brands -->
 @endsection

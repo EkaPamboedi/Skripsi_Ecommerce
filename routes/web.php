@@ -67,7 +67,7 @@ Auth::routes();
 // Route::group(['middleware' => 'auth'], function () {
 // });
 
-Route::get('/welcome', [App\Http\Controllers\Auth\LoginController::class, 'index'])->name('welcome');
+Route::get('/kenalkopi/home', [App\Http\Controllers\Auth\LoginController::class, 'index'])->name('welcome');
 Route::get('/kenalkopi/login', [App\Http\Controllers\Auth\LoginController::class, 'qrCodeLogin'])->name('kenalkopi.index');
 Route::post('/kenalkopi/qrlogin', [App\Http\Controllers\Auth\LoginController::class, 'attemptQrLogin'])->name('qrlogin');
 // Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'attemptQrLogin'])->name('login');

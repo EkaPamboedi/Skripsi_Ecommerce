@@ -7,9 +7,8 @@ Penulisan Rupiah.udah.
 Tambah Kalkulator. udah.
 Edit button buat profile dan logout. Udah.
 
-wawancara perhitungan , pembukuan untuk kasir. udah(cek lagi).
-
 User
+
 Catatan. udah.
 Navigasi ke halaman order. udah.
 timer batas transaksi. udah.
@@ -17,9 +16,9 @@ timer batas transaksi. udah.
 DONE LAH Rapihin invoice admin sama user, make it cooler. udah.
 
 DONEngerubah sistem barcode:
-jadi nanti get data dari scanning barcode cuma buat ngirim
-data meja yg dipilih dan gk perlu login pake session.
+//jadi nanti get data dari scanning barcode cuma buat ngirim
+//data meja yg dipilih dan gk perlu login pake session.
+//berarti ngerubah function attemptarlogin di login controller.
 
-berarti ngerubah function attemptarlogin di login controller.
-
+wawancara perhitungan , pembukuan untuk kasir. udah(cek lagi).
 URL Admin jadi ke /Admin/

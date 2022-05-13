@@ -6,17 +6,17 @@
 					<h3>Hubungi Kami</h3>
 
 					<ul class="address">
-						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Richard's Lab, DKI Jakarta.</li>
-						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@email">info@email</a></li>
+						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>KenalKopi, DKI Jakarta.</li>
+						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@email">Kenalkopi@email</a></li>
 						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+62 8113 2322</li>
 					</ul>
 				</div>
 				<div class="col-md-3 w3_footer_grid">
 					<h3>Tentang Kami</h3>
 					<ul class="info">
-						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="about.html">About Us</a></li>
-						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="about.html">How To</a></li>
-						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="about.html">FAQ</a></li>
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="#">About Us</a></li>
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="#">How To</a></li>
+						<li><i class="fa fa-arrow-right" aria-hidden="true"></i><a href="#">FAQ</a></li>
 					</ul>
 				</div>
 				<div class="clearfix"> </div>
@@ -41,9 +41,24 @@
 					</ul>
 				</div>
 				<div class="payment-w3ls">
-					<img src="images/card.png" alt=" " class="img-responsive">
+					<img src="{{asset('kenal_kopi/images/card.png')}}" alt=" " class="img-responsive">
 				</div>
 				<div class="clearfix"> </div>
 			</div>
 		</div>
 <!-- //footer -->
+<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 4000,
+				easingType: 'linear'
+				};
+			$().UItoTop({ easingType: 'easeOutQuart' });
+
+			});
+	</script>
+<!-- //here ends scrolling icon -->
