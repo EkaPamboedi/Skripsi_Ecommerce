@@ -63,7 +63,6 @@ class LaporanController extends Controller
 
         return $data;
     }
-
     public function data($awal, $akhir)
     {
         $data = $this->getData($awal, $akhir);

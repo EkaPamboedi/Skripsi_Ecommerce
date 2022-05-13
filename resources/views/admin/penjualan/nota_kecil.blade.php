@@ -99,6 +99,7 @@
     <p class="text-center" style="border: 0; margin:0 20% 0 20%;">-----------------------------------</p>
 
     <table width="56%" style="border: 0;margin:0 20% 0 20%;">
+
         <tr>
             <td style="float: left;">Total Harga:</td>
             <td style="float: right;">{{ format_uang($penjualan->total_price) }}</td>
@@ -120,6 +121,10 @@
 
     <p style="margin: 0 20% 0 20%;float: left;">=================================================</p>
     <div class="clear-both" style="clear: both;"></div>
+    <tr>
+      <td style="margin: 0 0 550px 550px;float: left;">Catatan :</td>
+      <td style="float: right;">{{$penjualan->notes}}.</td>
+    </tr>
     <p class="text-center" style="margin-top:5%;">-- TERIMA KASIH --</p>
   </div>
 
