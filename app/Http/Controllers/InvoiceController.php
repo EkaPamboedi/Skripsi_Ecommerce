@@ -54,9 +54,19 @@ class InvoiceController extends Controller
       if($token = session('token')) {
       $Details = Order_Produk::leftJoin('produk', 'produk.id_produk', 'order_produk.id_produk')
       ->select('order_produk.*', 'produk.*')
-      ->where('id_order',$id)->get();
+      ->where('order_produk.id_order',$id)->get();
+      // $Details = Order_Produk::
+      // join('produk', 'produk.id_produk', 'order_produk.id_produk')
+      // ->join('order', 'order.id_order', 'order_produk.id_order')
+      // ->where('order_produk.id_order',$id)
+      // ->select('order_produk.*',
+      //          'produk.nama_produk',
+      //          'produk.gambar_produk',
+      //          'produk.gambar_produk',
+      //          'order.*')
+      // ->get();
       // $Orders = Order::where('id_order',$id)->get();
-      $Orders = Order::where('login_token', '=' ,$token, 'AND' ,'id_order', '=' ,$id)->get();
+      $Orders = Order::where('id_order', '=' ,$id)->get();
       // dd($Orders);
       $SnapToken = DB::table('order')->where('id_order',$id)->pluck('payment_token');
       $PaymentUrl = DB::table('order')->where('id_order',$id)->pluck('payment_url');

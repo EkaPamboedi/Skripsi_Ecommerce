@@ -115,6 +115,7 @@ class CartController extends Controller
           $order->code_order = $code_order;
           $order->first_name = $request->first_name;
           $order->last_name = $request->last_name;
+          $order->customer_email = $request->customer_email;
           $order->no_meja = $no_meja;
           $order->status = "belum bayar";
           $order->notes = $request->notes;
@@ -157,6 +158,7 @@ class CartController extends Controller
           $customerDetails = [
             'first_name' =>   $order->first_name = $request->first_name,
             'last_name' =>  $order->last_name = $request->last_name,
+            'email' =>  $order->customer_email = $request->customer_email,
           ];
 
           $params = [
