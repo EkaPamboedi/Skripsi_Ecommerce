@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pembelian;
+use App\Models\Order;
 use App\Models\Pengeluaran;
 use App\Models\Penjualan;
 use Illuminate\Http\Request;
@@ -34,16 +35,18 @@ class LaporanController extends Controller
             $tanggal = $awal;
             $awal = date('Y-m-d', strtotime("+1 day", strtotime($awal)));
 
+            $total_penjualan_2 = Order::where('created_at', 'LIKE', "%$tanggal%")->sum('total_price');
             $total_penjualan = Penjualan::where('created_at', 'LIKE', "%$tanggal%")->sum('diterima');
             $total_pembelian = Pembelian::where('created_at', 'LIKE', "%$tanggal%")->sum('bayar');
             $total_pengeluaran = Pengeluaran::where('created_at', 'LIKE', "%$tanggal%")->sum('nominal');
 
-            $pendapatan = $total_penjualan - $total_pembelian - $total_pengeluaran;
+            $pendapatan = $total_penjualan + $total_penjualan_2 - $total_pembelian - $total_pengeluaran;
             $total_pendapatan += $pendapatan;
 
             $row = array();
             $row['DT_RowIndex'] = $no++;
             $row['tanggal'] = tanggal_indonesia($tanggal, false);
+            $row['online'] = 'Rp. '. format_uang($total_penjualan_2);
             $row['penjualan'] = 'Rp. '. format_uang($total_penjualan);
             $row['pembelian'] = 'Rp. '. format_uang($total_pembelian);
             $row['pengeluaran'] = 'Rp. '. format_uang($total_pengeluaran);
@@ -55,6 +58,7 @@ class LaporanController extends Controller
         $data[] = [
             'DT_RowIndex' => '',
             'tanggal' => '',
+            'online' => '',
             'penjualan' => '',
             'pembelian' => '',
             'pengeluaran' => 'Total Pendapatan',
