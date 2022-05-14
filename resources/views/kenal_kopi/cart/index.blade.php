@@ -119,7 +119,7 @@
         </div>
 
 				<div class="checkout-right-basket">
-        <a href="index.php"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Continue Shopping</a>
+        <a href="{{ route('kenalkopi.produk') }}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Continue Shopping</a>
         <a href="{{route('checkout')}}"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>Checkout</a>
       <!-- </form> -->
     </div>
