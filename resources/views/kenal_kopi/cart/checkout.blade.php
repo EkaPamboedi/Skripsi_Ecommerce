@@ -22,7 +22,7 @@
         <h6>Last Name</h6>
         <input type="text" id="last_name" name="last_name" value="" placeholder="Last Name (Optional)">
         <h6>Email</h6>
-        <input type="text" id="customer_email" name="customer_email" value="" placeholder="Email" required>
+        <input type="text" id="customer_email" name="customer_email" value="" placeholder="Email | digunakan untuk mengirim notifikasi pembayaran" required>
         <h6>Catatan</h6>
         <textarea style="width:26em; padding:5px; color:grey;" type="text" id="notes" name="notes" value="" placeholder="Catatans"></textarea>
         <!-- <h6>Number Phone</h6>

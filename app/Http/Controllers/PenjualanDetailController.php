@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member;
-use App\Models\Penjualan;
-use App\Models\PenjualanDetail;
+use App\Models\Order;
+use App\Models\Order_Produk;
 use App\Models\Produk;
 use App\Models\Setting;
 use Illuminate\Http\Request;
@@ -13,18 +13,13 @@ class PenjualanDetailController extends Controller
 {
     public function index()
     {
-        // transaksi aktif index
-        // $produk = Produk::orderBy('nama_produk')->get();
-        // dd($produk);
+
         $produks = Produk::orderBy('nama_produk')->get();
-        // $member = Member::orderBy('nama')->get();
-        // $diskon = Setting::first()->diskon ?? 0;
-
         // Cek apakah ada transaksi yang sedang berjalan
-        if ($id_penjualan = session('id_penjualan')) {
-            $penjualan = Penjualan::find($id_penjualan);
+        if ($id_order = session('id_order')) {
+            $penjualan = Order::find($id_order);
 
-            return view('admin.penjualan_detail.index', compact('produks' ,'penjualan','id_penjualan'));
+            return view('admin.penjualan_detail.index', compact('produks' ,'penjualan','id_order'));
 
         } else {
             if (auth()->user()->level == 1) {
@@ -38,8 +33,8 @@ class PenjualanDetailController extends Controller
     public function data($id)
     {
       // untuk transaksi
-        $detail = PenjualanDetail::with('produk')
-            ->where('id_penjualan', $id)
+        $detail = Order_Produk::with('produk')
+            ->where('id_order', $id)
             ->get();
 
         $data = array();
@@ -54,7 +49,7 @@ class PenjualanDetailController extends Controller
             $row['kode_produk'] = '<span class="label label-success">'. $item->produk['kode_produk'] .'</span';
             $row['nama_produk'] = $item->produk['nama_produk'];
             $row['harga_jual']  = 'Rp. '. format_uang($item->produk['harga_jual']);
-            $row['jumlah']      = '<input type="number" class="form-control input-sm quantity" data-id="'. $item->id_penjualan_detail .'" value="'. $item->qty .'">';
+            $row['jumlah']      = '<input type="number" class="form-control input-sm quantity" data-id="'. $item->id_order_produk .'" value="'. $item->qty .'">';
             $row['diskon']      = $item->produk['diskon'] . '%';
 
             if ($item->produk['diskon'] !== 0 ) {
@@ -67,7 +62,7 @@ class PenjualanDetailController extends Controller
             }
             $row['subtotal']    = 'Rp. '. format_uang($subtotal);
             $row['aksi']        = '<div class="btn-group">
-                                    <button onclick="deleteData(`'. route('transaksi.destroy', $item->id_penjualan_detail) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                                    <button onclick="deleteData(`'. route('transaksi.destroy', $item->id_order_produk) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
                                 </div>';
             $data[] = $row;
 
@@ -104,9 +99,10 @@ class PenjualanDetailController extends Controller
             return response()->json('Data gagal disimpan', 400);
         }
 
-        $detail = new PenjualanDetail();
-        $detail->id_penjualan = $request->id_penjualan;
+        $detail = new Order_Produk();
+        $detail->id_order = $request->id_order;
         $detail->id_produk = $produk->id_produk;
+        $detail->id_kategori = $produk->id_kategori;
         $detail->qty = 1;
         // $detail->diskon = $produk->diskon;
         if ($produk->diskon !== 0 ) {
@@ -128,10 +124,10 @@ class PenjualanDetailController extends Controller
     {
 
 
-        $detail = PenjualanDetail::
+        $detail = Order_Produk::
         // find($id);
         with('produk')
-        ->where('id_penjualan_detail', $id)->find($id);
+        ->where('id_order_produk', $id)->find($id);
         // dd($detail);
         $detail->qty = $request->jumlah;
 
@@ -149,7 +145,7 @@ class PenjualanDetailController extends Controller
 
     public function destroy($id)
     {
-        $detail = PenjualanDetail::find($id);
+        $detail = Order_Produk::find($id);
         $detail->delete();
 
         return response(null, 204);

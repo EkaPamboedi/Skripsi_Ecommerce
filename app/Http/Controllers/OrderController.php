@@ -7,6 +7,7 @@ use App\Exports\OrderExport;
 use App\Exports\OrderExportPaid;
 use App\Models\Order;
 use App\Models\Order_Produk;
+use App\Models\Penjualan;
 use Auth;
 // use PDF;
 
@@ -19,11 +20,12 @@ class OrderController extends Controller
 
     public function index()
     {
-        // $orders = Order::all()->pluck('nama_kategori', 'id_kategori');
-        // $Orders = Order::all()->pluck('nama_kategori', 'id_kategori');
-
-
-        $Orders = Order::orderBy('id_order','desc')->get();
+        // Perlu ditambah
+        // status pemesanan seperti order masuk,on progress,ready dan Selesai
+        //Order perlu penambahan field jenis pembayaran
+        //Penjualan perlu penambahan field no meja
+        $Orders = Order::where('status', '=' , 'dibayar')
+        ->select('code_order','first_name', 'last_name','customer_email', 'no_meja' ,'total_price', 'jenis_pembayaran','notes','status','updated_at')->get();
 
         return view('admin.order.index',compact('Orders'));
     }
@@ -36,17 +38,14 @@ class OrderController extends Controller
       ->select('order_produk.*', 'produk.*')
       ->where('id_order',$id)->get();
       $Orders = Order::where('id_order',$id)->get();
-
+      // dd($Order);
         // $Details = Order_Produk::where('id_order',$id)->get();
 
         return view('admin.order.detail',compact('Details','Orders'));
     }
 
       public function data(){
-          // $orders = Order::leftJoin('kategori', 'kategori.id_kategori', 'produk.id_kategori')
-          //     ->select('produk.*', 'nama_kategori')
-          //     ->orderBy('kode_produk', 'asc')
-          //     ->get();
+          
         $Orders = Order::orderBy('id_order','desc')->get();
 
 

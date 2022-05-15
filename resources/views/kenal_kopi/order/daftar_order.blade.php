@@ -40,7 +40,7 @@
                               <td>{{ $order->first_name." ".$order->last_name }}</td>
                                 <td>{{ $order->no_meja }}</td>
                                 <td>Rp. {{ number_format($order->total_price,0) }}</td>
-                                <td>{{ $order->order_date }}</td>
+                                <td>{{ $order->updated_at }}</td>
                                 <td align="center">{{ $order->code_order }}</td>
                                 <td>
                                     @if($order->status == 'belum bayar')

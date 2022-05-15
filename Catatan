@@ -24,12 +24,21 @@ wawancara perhitungan , pembukuan untuk kasir. udah(cek lagi).
 URL Admin jadi ke /Admin/
 
 14 may
-- continue shoping : benerin fungsi back ke shopping di cart. (DONE)
+- continue shoping : benerin fungsi back ke shopping di cart. (DONE).
 
 - Tampilan daftar order manual pada admin :
 tampilan tidak sesuai fungsi karna terlalu minimalis sehingga admin tidak dapat melihat dengan jelas
 atau buat print nota lagi pada setiap orderan.
 opsi lainnya membuat tampilan bisa melihat detail dan print nota jika dibutuhkan.
+
+buat 3 tabel step pada tampilan order yang masuk dengan kriteria wajib sudah DIBAYAR.
+kemudian tampilan di bedakan dari :
+1. Masuk
+2. Proses
+3. Ready
+4. Selesai
+--> Catatan :
+order manual perlu pake meja gk? 
 
 - status proses pada order baik manual maupun online:
 buat status ongoin dan ready pada proses orderan manual dan online.

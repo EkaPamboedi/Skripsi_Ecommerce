@@ -53,6 +53,8 @@
     ?>
 
     {!! $style !!}
+
+
 </head>
 <body onload="window.print()">
     <button class="btn-print" style="position: absolute; right: 1rem; top: rem;" onclick="window.print()">Print</button>
@@ -67,27 +69,25 @@
         <p>Tgl:{{ date('d-m-Y') }}</p>
     <div class="clear-both" style="clear: both;"></div>
     <p>No  : {{ $penjualan->code_order }}</p>
-    <p style="margin: 0 20% 0 20%;float: left;">=================================================</p>
+    <div class="clear-both" style="clear: both;"></div>
+    <p>=========================</p>
+
   </div>
     <br>
-    <div class="text-center">
-    <table width="60%" style="border: 0; margin:0 20% 0 20%;" class="text-center">
+    <div class="clear-both" style="clear: both;"></div>
+    <table class="table table-sm table-bordered">
       <thead>
-      <th>No</th>
+      <th>Nomor</th>
       <th>Produk</th>
-      <th>Harga</th>
-      <th>Diskon</th>
-      <th>Jumlah</th>
+      <th>qty</th>
       <th>Subtotal</th>
     </thead>
 
         @foreach ($detail as $item)
         <tr>
-          <td>{{$i++}}</td>
+          <td style="text-align:center;">{{$i++}}</td>
           <td>{{ $item->produk->nama_produk }}</td>
-          <td>{{ $item->produk->harga_jual }}</td>
-          <td>{{ $item->produk->diskon}}%</td>
-          <td>{{ $item->qty}}</td>
+          <td style="text-align:center;">{{ $item->qty}}</td>
           @if($item->produk->diskon == 0)
           <td>{{ $item->produk->harga_jual * $item->qty}}</td>
           @else
@@ -95,38 +95,40 @@
           @endif
         </tr>
         @endforeach
+    <!-- </table> -->
+      <tr>
+        <td >Total:</td>
+        <th colspan="row"></th>
+        <th colspan="row"></th>
+        <td>{{ format_uang($penjualan->diterima) }}</td>
+      </tr>
+        <tr>
+          <td >Diterima:</td>
+          <th colspan="row"></th>
+          <th colspan="row"></th>
+          <td>{{ format_uang($penjualan->diterima) }}</td>
+        </tr>
+        <tr>
+          <td >Kembali:</td>
+          <th colspan="row"></th>
+          <th colspan="row"></th>
+          <td>{{ format_uang($penjualan->dikembalikan) }}</td>
+        </tr>
+        <tr>
     </table>
-    <p class="text-center" style="border: 0; margin:0 20% 0 20%;">-----------------------------------</p>
-
-    <table width="56%" style="border: 0;margin:0 20% 0 20%;">
-
-        <tr>
-            <td style="float: left;">Total Harga:</td>
-            <td style="float: right;">{{ format_uang($penjualan->total_price) }}</td>
-        </tr>
-        <tr>
-        <tr>
-            <td style="float: left;">Total Bayar:</td>
-            <td style="float: right;">{{ format_uang($penjualan->diterima) }}</td>
-        </tr>
-        <tr>
-            <td style="float: left;">Diterima:</td>
-            <td style="float: right;">{{ format_uang($penjualan->dikembalikan) }}</td>
-        </tr>
-        <tr>
-            <td style="float: left;">Kembali:</td>
-            <td style="float: right;">{{ format_uang($penjualan->diterima - $penjualan->bayar) }}</td>
-        </tr>
-    </table>
-
-    <p style="margin: 0 20% 0 20%;float: left;">=================================================</p>
+    <!-- <div class="text-center"> -->
+    <p>=========================</p>
     <div class="clear-both" style="clear: both;"></div>
-    <tr>
-      <td style="margin: 0 0 550px 550px;float: left;">Catatan :</td>
-      <td style="float: right;">{{$penjualan->notes}}.</td>
-    </tr>
+    <div style="font-size:13px;" class="box-body">
+       <dl>
+         <dt>Catatan</dt>
+         <dd>{{$penjualan->notes}}.</dd>
+         <!-- <dt>No.meja</dt> -->
+         <dd>{{-- $penjualan->no_meja --}}</dd>
+       </dl>
+     </div>
     <p class="text-center" style="margin-top:5%;">-- TERIMA KASIH --</p>
-  </div>
+  <!-- </div> -->
 
     <script>
         let body = document.body;

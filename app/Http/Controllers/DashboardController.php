@@ -50,7 +50,7 @@ public function __construct()
           $produk = Produk::count();
           $supplier = Supplier::count();
           // $setting = Setting::get();
-          $order = Order::count() + Penjualan::count();
+          $order = Order::count();
           // $order1 = Penjualan::count();
           // $order2 = Order::count();
           // dd($order2);
@@ -64,7 +64,7 @@ public function __construct()
           while (strtotime($tanggal_awal) <= strtotime($tanggal_akhir)) {
               $data_tanggal[] = (int) substr($tanggal_awal, 8, 2);
 
-              $total_penjualan = Penjualan::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('diterima');
+              $total_penjualan = Order::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('diterima');
               $total_pembelian = Pembelian::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('bayar');
               $total_pengeluaran = Pengeluaran::where('created_at', 'LIKE', "%$tanggal_awal%")->sum('nominal');
 

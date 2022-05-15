@@ -59,8 +59,9 @@
                     </div> -->
 
                     <div class="input-group" for="kode_produk">
-                        <input type="hidden" name="id_penjualan" id="id_penjualan" value="{{ $id_penjualan }}">
+                        <input type="hidden" name="id_order" id="id_order" value="{{ $id_order }}">
                         <input type="hidden" name="id_produk" id="id_produk">
+                        <input type="hidden" name="id_kategori" id="id_kategori">
                         <input type="hidden" class="form-control" name="kode_produk" id="kode_produk">
 
                         <span class="input-group-btn">
@@ -92,7 +93,7 @@
                     <div class="col-lg-4">
                         <form action="{{ route('transaksi.simpan') }}" class="form-penjualan" method="post">
                             @csrf
-                            <input type="hidden" name="id_penjualan" value="{{ $id_penjualan }}">
+                            <input type="hidden" name="id_order" value="{{ $id_order }}">
                             <input type="hidden" name="total" id="total">
                             <input type="hidden" name="total_item" id="total_item">
                             <input type="hidden" name="code_order" id="code_order" value="{{ $penjualan->code_order }}">
@@ -110,6 +111,12 @@
                                 <label for="last_name" class="col-lg-2 control-label">Last name</label>
                                 <div class="col-lg-8">
                                     <input type="text" name="last_name" id="last_name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="last_name" class="col-lg-2 control-label">No. Meja</label>
+                                <div class="col-lg-8">
+                                    <input type="number" name="no_meja" id="no_meja" class="form-control" placeholder="Optional">
                                 </div>
                             </div>
 
@@ -168,7 +175,7 @@
             serverSide: true,
             autoWidth: false,
             ajax: {
-                url: '{{ route('transaksi.data', $id_penjualan) }}',
+                url: '{{ route('transaksi.data', $id_order) }}',
             },
             columns: [
                 {data: 'DT_RowIndex', searchable: false, sortable: false},

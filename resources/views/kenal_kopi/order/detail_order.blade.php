@@ -30,7 +30,7 @@
                   {{--dd($order->notes)--}}
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">Kode Order <span style="margin-left:36px;">:</span><span style="margin-left:15px;">{{$order->code_order}}</span></li>
-                  <li class="list-group-item">Tanggal<span style="margin-left:60px;">:</span><span style="margin-left:15px;">{{$order->order_date}}</span></li>
+                  <li class="list-group-item">Tanggal<span style="margin-left:60px;">:</span><span style="margin-left:15px;">{{$order->updated_at}}</span></li>
                   <li class="list-group-item">Nama Pemesan<span style="margin-left:15px;">:</span><span style="margin-left:15px;">{{$order->first_name." ".$order->last_name}}</span></li>
                   <li class="list-group-item">No Meja<span style="margin-left:59px;">:</span><span style="margin-left:15px;">{{$order->no_meja}}</span></li>
                   @if($order->notes === null )

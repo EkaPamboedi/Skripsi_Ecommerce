@@ -19,19 +19,20 @@ class BuatOrderTable extends Migration
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->string('customer_phone')->nullable();
-    				$table->string('customer_email');
-            $table->text('no_meja');
+    				$table->string('customer_email')->nullable();
+            $table->string('no_meja')->nullable();
             $table->integer('total_price');
             $table->string('notes')->nullable();
-    				$table->datetime('order_date');
-            // $table->datetime('payment_due');
-    				// $table->string('payment_status');
-    				// $table->text('note')->nullable();
+    				// $table->datetime('order_date');
+            $table->integer('diterima')->default(0)->nullable();
+            $table->integer('dikembalikan')->default(0)->nullable();
+            $table->enum('stat_pemesanan',['masuk','proses' , 'ready', 'selesai']);
+            $table->enum('jenis_pembayaran',['ditempat' , 'online']);
             $table->enum('status',['belum bayar','menunggu verifikasi','dibayar','ditolak']);
             $table->timestamps();
             // $table->foreign('cancelled_by')->references('id')->on('users');
             $table->index('code_order');
-            $table->index(['code_order', 'order_date']);
+            // $table->index(['code_order', 'order_date']);
 
             // $table->foreignId('user_id')->change();
             // $table->foreignId('user_id')

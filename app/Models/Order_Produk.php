@@ -23,7 +23,7 @@ class Order_Produk extends Model
 
     public function Produk()
     {
-        return $this->hasMany(Produk::class, 'id_produk');
+        return $this->hasOne(Produk::class, 'id_produk', 'id_produk');
     }
       // public function Ratings()
       // {

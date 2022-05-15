@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Penjualan;
-use App\Models\PenjualanDetail;
+use App\Models\Order;
+use App\Models\Order_Produk;
 use App\Models\Produk;
 // use App\Models\Member;
 use App\Models\Setting;
@@ -16,7 +16,7 @@ class PenjualanController extends Controller
 {
     public function index()
     {
-      $penjualan = Penjualan::select('id_penjualan','notes')->get();
+      $penjualan = Order::select('id_order','notes')->get();
       // ini buat nampilin daftar order
         return view('admin.penjualan.index', compact('penjualan'));
     }
@@ -24,7 +24,7 @@ class PenjualanController extends Controller
     //ini untuk data pada table untuk dafar order
     public function data()
     {
-        $penjualan = Penjualan::orderBy('id_penjualan', 'desc')->get();
+        $penjualan = Order::orderBy('id_order', 'desc')->get();
         return datatables()
             ->of($penjualan)
             ->addIndexColumn()
@@ -44,18 +44,18 @@ class PenjualanController extends Controller
               if (!$penjualan->notes) {
                 return '
                 <div class="btn-group">
-                    <button style="margin-right: 5px; padding:5px;" data-toggle="tooltip" data-placement="top" title="Detail Order" onclick="showDetail(`'. route('penjualan.show', $penjualan->id_penjualan) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
-                    <button style="margin-right: 5px; padding:5px;" data-toggle="tooltip" data-placement="top" title="Hapus!" onclick="deleteData(`'. route('penjualan.destroy', $penjualan->id_penjualan) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                    <button style="margin-right: 5px; padding:5px;" data-toggle="tooltip" data-placement="top" title="Detail Order" onclick="showDetail(`'. route('penjualan.show', $penjualan->id_order) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
+                    <button style="margin-right: 5px; padding:5px;" data-toggle="tooltip" data-placement="top" title="Hapus!" onclick="deleteData(`'. route('penjualan.destroy', $penjualan->id_order) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
                 </div>
                 ';
               }else {
                 return '
                 <div class="btn-group">
                     <button style="margin-right: 5px;" data-placement="top" title="Lihat Notes" data-toggle="modal"
-                    data-target="#modal-notes'.$penjualan->id_penjualan.'" class="btn btn-xs btn-info btn-flat">
+                    data-target="#modal-notes'.$penjualan->id_order.'" class="btn btn-xs btn-info btn-flat">
                     <svg style="margin-top:5px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16"><path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/></svg></button>
-                    <button style="margin-right: 5px; padding:5px;" data-toggle="tooltip" data-placement="top" title="Detail Order" onclick="showDetail(`'. route('penjualan.show', $penjualan->id_penjualan) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
-                    <button style="margin-right: 5px; padding:5px;" data-toggle="tooltip" data-placement="top" title="Hapus!" onclick="deleteData(`'. route('penjualan.destroy', $penjualan->id_penjualan) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                    <button style="margin-right: 5px; padding:5px;" data-toggle="tooltip" data-placement="top" title="Detail Order" onclick="showDetail(`'. route('penjualan.show', $penjualan->id_order) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
+                    <button style="margin-right: 5px; padding:5px;" data-toggle="tooltip" data-placement="top" title="Hapus!" onclick="deleteData(`'. route('penjualan.destroy', $penjualan->id_order) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
                 </div>
                 ';
               }
@@ -67,7 +67,7 @@ class PenjualanController extends Controller
 
     public function create()
     {
-      $penjualan = new Penjualan();
+      $penjualan = new Order();
       // $penjualan->id_member = null;
       // $penjualan->total_item = 0;
       $penjualan->code_order = mt_rand(1000000000, 9999999999);
@@ -77,29 +77,33 @@ class PenjualanController extends Controller
       $penjualan->notes = "";
       $penjualan->diterima = 0;
       $penjualan->dikembalikan = 0;
+      $penjualan->status = "belum bayar";
       $penjualan->jenis_pembayaran = "ditempat";
+      $penjualan->stat_pemesanan = "masuk";
       // $penjualan->id_user = auth()->id();
       $penjualan->save();
 
-        session(['id_penjualan' => $penjualan->id_penjualan]);
+        session(['id_order' => $penjualan->id_order]);
         return redirect()->route('transaksi.index');
     }
 
     public function store(Request $request)
     {
-        $penjualan = Penjualan::findOrFail($request->id_penjualan);
+        $penjualan = Order::findOrFail($request->id_order);
         // $penjualan->id_member = $request->id_member;
         $penjualan->total_price = $request->total;
         // $penjualan->total_item = $request->total_item;
         $penjualan->first_name = $request->first_name;
         $penjualan->last_name = $request->last_name;
+        $penjualan->no_meja = $request->no_meja;
         $penjualan->notes = $request->notes;
         // $penjualan->diskon = $request->diskon;
         $penjualan->diterima = $request->diterima;
+        $penjualan->status = "dibayar";
         $penjualan->dikembalikan = $request->dikembalikan;
         $penjualan->update();
 
-        $detail = PenjualanDetail::where('id_penjualan', $penjualan->id_penjualan)->get();
+        $detail = Order_Produk::where('id_order', $penjualan->id_order)->get();
         foreach ($detail as $item) {
             // $item->diskon = $request->diskon;
             // $item->update();
@@ -114,20 +118,7 @@ class PenjualanController extends Controller
 
     public function show($id)
     {
-        $detail = PenjualanDetail::with('produk')->where('id_penjualan', $id)->get();
-        // $detail = DB::table('penjualan_detail')
-        // ->join('produk',
-        //       'produk.id_produk', '=' ,'penjualan_detail.id_produk')
-        // ->join('penjualan',
-        //       'penjualan.id_penjualan', '=' ,'penjualan_detail.id_penjualan')
-        // ->select('produk.kode_produk','produk.nama_produk','produk.harga_jual','produk.diskon',
-        //               'penjualan.*',
-        //               'penjualan_detail.*'
-        //                 )
-        // ->get();
-        // dd($detail);
-        // $subtotal = 0;
-        // $diskon = 0;
+        $detail = Order_Produk::with('produk')->where('id_order', $id)->get();
         return datatables()
             ->of($detail)
             ->addIndexColumn()
@@ -160,8 +151,8 @@ class PenjualanController extends Controller
 
     public function destroy($id)
     {
-        $penjualan = Penjualan::find($id);
-        $detail    = PenjualanDetail::where('id_penjualan', $penjualan->id_penjualan)->get();
+        $penjualan = Order::find($id);
+        $detail    = Order_Produk::where('id_order', $penjualan->id_order)->get();
         foreach ($detail as $item) {
             $item->delete();
         }
@@ -173,7 +164,7 @@ class PenjualanController extends Controller
 
     public function kasir_destroy($id)
     {
-        $detail = PenjualanDetail::find($id);
+        $detail = Order_Produk::find($id);
         $detail->delete();
 
         return response(null, 204);
@@ -188,12 +179,12 @@ class PenjualanController extends Controller
     public function notaKecil()
     {   $i = 1;
         $setting = Setting::first();
-        $penjualan = Penjualan::find(session('id_penjualan'));
+        $penjualan = Order::find(session('id_order'));
         if (! $penjualan) {
             abort(404);
         }
-        $detail = PenjualanDetail::with('produk')
-            ->where('id_penjualan', session('id_penjualan'))
+        $detail = Order_Produk::with('produk')
+            ->where('id_order', session('id_order'))
             ->get();
 
         return view('admin.penjualan.nota_kecil', compact('setting', 'penjualan','i', 'detail'));
@@ -202,12 +193,12 @@ class PenjualanController extends Controller
     public function notaBesar()
     {
         $setting = Setting::first();
-        $penjualan = Penjualan::find(session('id_penjualan'));
+        $penjualan = Order::find(session('id_order'));
         if (! $penjualan) {
             abort(404);
         }
-        $detail = PenjualanDetail::with('produk')
-            ->where('id_penjualan', session('id_penjualan'))
+        $detail = Order_Produk::with('produk')
+            ->where('id_order', session('id_order'))
             ->get();
 
         $pdf = PDF::loadView('penjualan.nota_besar', compact('setting', 'penjualan', 'detail'));

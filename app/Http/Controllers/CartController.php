@@ -118,11 +118,12 @@ class CartController extends Controller
           $order->customer_email = $request->customer_email;
           $order->no_meja = $no_meja;
           $order->status = "belum bayar";
+          $order->jenis_pembayaran = "online";
           $order->notes = $request->notes;
           // $order->customer_phone = $request->customer_phone;
           // $order->customer_email = $request->customer_email;
           $order->total_price = $total_bayar;
-          $order->order_date = Carbon::now();
+          $order->created_at = Carbon::now();
           // kudu di ubah jadi satu jam
 
           foreach($Produks as $produk){
