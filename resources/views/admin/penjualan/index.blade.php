@@ -22,6 +22,7 @@
                         <th>Code Order</th>
                         <th>Nama Pemesan</th>
                         <th>Jenis Pembayaran</th>
+                        <th>Status Pembayaran</th>
                         <th>Total Harga</th>
                         <th width="15%"><i class="fa fa-cog"></i></th>
                     </thead>
@@ -53,6 +54,7 @@
                 {data: 'code_order'},
                 {data: 'nama_pemesan'},
                 {data: 'jenis_pembayaran'},
+                {data: 'status'},
                 {data: 'total_harga'},
                 {data: 'aksi', searchable: false, sortable: false},
             ]

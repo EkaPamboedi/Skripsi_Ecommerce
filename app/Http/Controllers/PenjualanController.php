@@ -24,7 +24,7 @@ class PenjualanController extends Controller
     //ini untuk data pada table untuk dafar order
     public function data()
     {
-        $penjualan = Order::orderBy('id_order', 'desc')->get();
+        $penjualan = Order::where('total_price' , '>' ,0)->orderBy('id_order', 'desc')->get();
         return datatables()
             ->of($penjualan)
             ->addIndexColumn()
@@ -39,6 +39,9 @@ class PenjualanController extends Controller
             })
             ->addColumn('jenis_pembayaran', function ($penjualan) {
                 return $penjualan->jenis_pembayaran;
+            })
+            ->addColumn('status', function ($penjualan) {
+                return $penjualan->status;
             })
             ->addColumn('total_harga', function ($penjualan) {
                 return 'Rp. '. format_uang($penjualan->total_price);

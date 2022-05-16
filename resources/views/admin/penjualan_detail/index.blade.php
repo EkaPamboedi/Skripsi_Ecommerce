@@ -214,7 +214,7 @@
                 return;
             }
 
-            $.post(`{{ url('/transaksi') }}/${id}`, {
+            $.post(`{{ url('/Admin/transaksi') }}/${id}`, {
                     '_token': $('[name=csrf-token]').attr('content'),
                     '_method': 'put',
                     'jumlah': jumlah
@@ -317,7 +317,7 @@
         $('#total').val($('.total').text());
         $('#total_item').val($('.total_item').text());
 
-        $.get(`{{ url('/transaksi/loadform') }}/${diskon}/${$('.total').text()}/${diterima}`)
+        $.get(`{{ url('/Admin/transaksi/loadform') }}/${diskon}/${$('.total').text()}/${diterima}`)
             .done(response => {
                 $('#totalrp').val('Rp. '+ response.totalrp);
                 // $('#bayarrp').val('Rp. '+ response.bayarrp);

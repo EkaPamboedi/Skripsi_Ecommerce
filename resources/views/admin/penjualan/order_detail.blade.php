@@ -62,7 +62,7 @@
                       <li class="list-group-item">Proses Order <span style="margin-left:25px;">:</span><button class="btn" style=" background-color:#A6CF98; margin-left:15px; color : black; " disabled>{{$order->stat_pemesanan}}</button></li>
                       @endif
 
-                      @if($order->jenis_pembayaran == 'ditempat')
+                      @if($order->jenis_pembayaran == 'ditempat' && $order->status =='dibayar')
                       <li style=" list-style-type:none; margin-top:15px;float:right;"><button class="btn btn-warning btn-flat" onclick="notaKecil('{{ route('penjualan.nota_kecil', $order->id_order) }}', 'Nota Kecil')">Cetak Nota</button></li>
                       @endif
                     </ul>

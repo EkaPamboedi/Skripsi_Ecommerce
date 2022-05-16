@@ -13,8 +13,8 @@ class PenjualanDetailController extends Controller
 {
     public function index()
     {
+      $produks = Produk::orderBy('nama_produk')->get();
 
-        $produks = Produk::orderBy('nama_produk')->get();
         // Cek apakah ada transaksi yang sedang berjalan
         if ($id_order = session('id_order')) {
             $penjualan = Order::find($id_order);
