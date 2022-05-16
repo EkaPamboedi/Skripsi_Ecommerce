@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    Daftar Penjualan
+    Riwayat Order
 @endsection
 
 @section('breadcrumb')

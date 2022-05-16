@@ -32,7 +32,8 @@
                         <br>
                       </span>
                       </li>
-                      @endif  @if($order->status == 'belum bayar')
+                      @endif
+                      @if($order->status == 'belum bayar')
                         <li class="list-group-item">Status<span style="margin-left:70px;">:</span><button style="background-color:grey; color:white; margin-left:15px" class="btn btn-secondary" disabled>{{$order->status}}</button></li>
                         @elseif($order->status == 'menunggu verifikasi')
                         <li class="list-group-item">Status<span style="margin-left:70px;">:</span><button class="btn btn-warning" style="margin-left:15px;" disabled>{{$order->status}}</button></li>

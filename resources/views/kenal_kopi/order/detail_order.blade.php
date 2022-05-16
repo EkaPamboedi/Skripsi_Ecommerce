@@ -53,6 +53,19 @@
                   <li class="list-group-item">Status<span style="margin-left:70px;">:</span><button class="btn btn-danger" style="margin-left:15px;" disabled>{{$order->status}}</button></li>
                   @endif
                   @endforeach
+                  @if($order->status == 'dibayar')
+                  @if($order->stat_pemesanan == 'masuk')
+                  <li class="list-group-item">Proses Order <span style="margin-left:25px;">:</span><button class="btn" style=" background-color:#396EB0; margin-left:15px; color : white; " disabled>{{$order->stat_pemesanan}}</button></li>
+                  @elseif($order->stat_pemesanan == 'process')
+                  <li class="list-group-item">Proses Order <span style="margin-left:25px;">:</span><button class="btn" style=" background-color:#FFBD35; margin-left:15px; color : white; " disabled>{{$order->stat_pemesanan}}</button></li>
+                  @elseif($order->stat_pemesanan == 'ready')
+                  <li class="list-group-item">Proses Order <span style="margin-left:25px;">:</span><button class="btn" style=" background-color:#3FA796; margin-left:15px; color : white; " disabled>{{$order->stat_pemesanan}}</button></li>
+                  @else
+                  <li class="list-group-item">Proses Order <span style="margin-left:25px;">:</span><button class="btn" style=" background-color:#A6CF98; margin-left:15px; color : black; " disabled>{{$order->stat_pemesanan}}</button></li>
+                  @endif
+                  @else
+                  <li class="list-group-item">Proses Order <span style="margin-left:23px;">:</span><span style="margin-left:10px;" > Selesaikan Transaksi agar Order diproseses!</span></li>
+                  @endif
                 </ul>
               </div>
                 <!-- box-header -->

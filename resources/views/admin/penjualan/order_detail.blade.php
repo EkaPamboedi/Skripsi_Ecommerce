@@ -51,6 +51,7 @@
                         <li class="list-group-item">Status<span style="margin-left:65px;">:</span><button class="btn btn-danger" style="margin-left:15px;" disabled>{{$order->status}}</button></li>
                         @endif
                       @endforeach
+
                       @if($order->stat_pemesanan == 'masuk')
                       <li class="list-group-item">Proses Order <span style="margin-left:25px;">:</span><button class="btn" style=" background-color:#396EB0; margin-left:15px; color : white; " disabled>{{$order->stat_pemesanan}}</button></li>
                       @elseif($order->stat_pemesanan == 'process')
