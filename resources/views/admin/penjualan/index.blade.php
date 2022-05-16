@@ -50,9 +50,7 @@
                 {data: 'DT_RowIndex', searchable: false, sortable: false},
                 {data: 'tanggal'},
                 {data: 'nama_pemesan'},
-                // {data: 'jenis_pembayaran'},
                 {data: 'total_harga'},
-                // {data: 'notes'},
                 {data: 'aksi', searchable: false, sortable: false},
             ]
         });

@@ -26,7 +26,7 @@ class BuatOrderTable extends Migration
     				// $table->datetime('order_date');
             $table->integer('diterima')->default(0)->nullable();
             $table->integer('dikembalikan')->default(0)->nullable();
-            $table->enum('stat_pemesanan',['masuk','proses' , 'ready', 'selesai']);
+            $table->enum('stat_pemesanan',['masuk','process' , 'ready', 'selesai']);
             $table->enum('jenis_pembayaran',['ditempat' , 'online']);
             $table->enum('status',['belum bayar','menunggu verifikasi','dibayar','ditolak']);
             $table->timestamps();

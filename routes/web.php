@@ -113,6 +113,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 
       // (LIST) ORDER DARI USER KE ADMIN
+      Route::get('/orders/masuk', [OrderController::class, 'data_order_masuk'])->name('order.data_masuk');
+      Route::get('/orders/process', [OrderController::class, 'data_order_process'])->name('order.data_process');
+      Route::get('/orders/ready', [OrderController::class, 'data_order_ready'])->name('order.data_ready');
+      Route::get('/orders/selesai', [OrderController::class, 'data_order_selesai'])->name('order.data_selesai');
+      Route::post('/orders/process/{id}', [OrderController::class, 'order_process'])->name('order.process');
+      Route::post('/orders/ready/{id}', [OrderController::class, 'order_ready'])->name('order.ready');
+      Route::post('/orders/selesai/{id}', [OrderController::class, 'order_selesai'])->name('order.selesai');
       Route::get('/orders/data', [OrderController::class, 'data'])->name('order.data');
       Route::get('/orders/detail/{id}', [OrderController::class, 'show'])->name('Admin.Orders');
       Route::resource('/order', OrderController::class)->except('create', 'edit');
