@@ -262,9 +262,9 @@ Route::group(['middleware' => 'auth'], function () {
       // Route::get('/payments/unfinish', [ConfirmUserController::class, 'unfinish'])->name('unfinish');
       // Route::get('/payments/failed', [ConfirmUserController::class, 'failed'])->name('failed');
       // ORDER PRODUK AS USER Ends HERE
-  //     Route::group(['middleware' => 'auth'], function () {
-  //       Route::group(['middleware' => 'user'], function () {
-  //
-  // });
-
-});
+//       Route::group(['middleware' => 'auth'], function () {
+//         Route::group(['middleware' => 'user'], function () {
+//
+//   });
+//
+// });
