@@ -19,8 +19,9 @@
                       <!-- Ini buat tabel Order yang sudah ada -->
                         <th width="5%">No</th>
                         <th>Tanggal</th>
+                        <th>Code Order</th>
                         <th>Nama Pemesan</th>
-                        <!-- <th>Jenis Pembayaran</th> -->
+                        <th>Jenis Pembayaran</th>
                         <th>Total Harga</th>
                         <th width="15%"><i class="fa fa-cog"></i></th>
                     </thead>
@@ -49,7 +50,9 @@
             columns: [
                 {data: 'DT_RowIndex', searchable: false, sortable: false},
                 {data: 'tanggal'},
+                {data: 'code_order'},
                 {data: 'nama_pemesan'},
+                {data: 'jenis_pembayaran'},
                 {data: 'total_harga'},
                 {data: 'aksi', searchable: false, sortable: false},
             ]

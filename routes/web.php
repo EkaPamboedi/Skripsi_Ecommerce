@@ -85,121 +85,123 @@ Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout
 Route::group(['middleware' => 'auth'], function () {
   Route::group(['middleware' => 'admin'], function () {
 
-      // Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'attemptLogin'])->name('login');
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// Auth::routes();
-      Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+      Route::get('Admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 // BAGIAN KATEGORI
-      Route::get('/kategori/data', [KategoriController::class, 'data'])->name('kategori.data');
-      Route::resource('/kategori', KategoriController::class);
+      Route::get('Admin/kategori/data', [KategoriController::class, 'data'])->name('kategori.data');
+      Route::resource('Admin/kategori', KategoriController::class);
 
 // BAGIAN PRODUK di ADMIN
-      Route::get('/produk/data', [ProdukController::class, 'data'])->name('produk.data');
-      Route::post('/produk/delete-selected', [ProdukController::class, 'deleteSelected'])->name('produk.delete_selected');
-      Route::get('/produk/aktif/{produk_id}', [ProdukController::class, 'aktif'])->name('produk_aktif');
-      Route::get('/produk/nonaktif/{produk_id}', [ProdukController::class, 'nonaktif'])->name('produk_nonaktif');
-      Route::post('/produk/cetak-barcode', [ProdukController::class, 'cetakBarcode'])->name('produk.cetak_barcode');
-      Route::resource('/produk', ProdukController::class);
+      Route::get('Admin/produk/data', [ProdukController::class, 'data'])->name('produk.data');
+      Route::post('Admin/produk/delete-selected', [ProdukController::class, 'deleteSelected'])->name('produk.delete_selected');
+      Route::get('Admin/produk/aktif/{produk_id}', [ProdukController::class, 'aktif'])->name('produk_aktif');
+      Route::get('Admin/produk/nonaktif/{produk_id}', [ProdukController::class, 'nonaktif'])->name('produk_nonaktif');
+      Route::post('Admin/produk/cetak-barcode', [ProdukController::class, 'cetakBarcode'])->name('produk.cetak_barcode');
+      Route::resource('Admin/produk', ProdukController::class);
 
       //  CETAK MEMBER
-      Route::get('/member/data', [MemberController::class, 'data'])->name('member.data');
-      Route::post('/member/cetak-member', [MemberController::class, 'cetakMember'])->name('member.cetak_member');
-      Route::resource('/member', MemberController::class);
+      Route::get('Admin/member/data', [MemberController::class, 'data'])->name('member.data');
+      Route::post('Admin/member/cetak-member', [MemberController::class, 'cetakMember'])->name('member.cetak_member');
+      Route::resource('Admin/member', MemberController::class);
 
       // DATA SUPPLIER
-      Route::get('/supplier/data', [SupplierController::class, 'data'])->name('supplier.data');
-      Route::resource('/supplier', SupplierController::class);
+      Route::get('Admin/supplier/data', [SupplierController::class, 'data'])->name('supplier.data');
+      Route::resource('Admin/supplier', SupplierController::class);
 
 
       // (LIST) ORDER DARI USER KE ADMIN
-      Route::get('/orders/masuk', [OrderController::class, 'data_order_masuk'])->name('order.data_masuk');
-      Route::get('/orders/process', [OrderController::class, 'data_order_process'])->name('order.data_process');
-      Route::get('/orders/ready', [OrderController::class, 'data_order_ready'])->name('order.data_ready');
-      Route::get('/orders/selesai', [OrderController::class, 'data_order_selesai'])->name('order.data_selesai');
-      Route::post('/orders/process/{id}', [OrderController::class, 'order_process'])->name('order.process');
-      Route::post('/orders/ready/{id}', [OrderController::class, 'order_ready'])->name('order.ready');
-      Route::post('/orders/selesai/{id}', [OrderController::class, 'order_selesai'])->name('order.selesai');
-      Route::get('/orders/data', [OrderController::class, 'data'])->name('order.data');
-      Route::get('/orders/detail/{id}', [OrderController::class, 'show'])->name('Admin.Orders');
-      Route::resource('/order', OrderController::class)->except('create', 'edit');
+      Route::get('Admin/orders/masuk', [OrderController::class, 'data_order_masuk'])->name('order.data_masuk');
+      Route::get('Admin/orders/process', [OrderController::class, 'data_order_process'])->name('order.data_process');
+      Route::get('Admin/orders/ready', [OrderController::class, 'data_order_ready'])->name('order.data_ready');
+      Route::get('Admin/orders/selesai', [OrderController::class, 'data_order_selesai'])->name('order.data_selesai');
+
+      Route::post('Admin/orders/masuk/{id}', [OrderController::class, 'order_masuk'])->name('order.masuk');
+      Route::post('Admin/orders/process/{id}', [OrderController::class, 'order_process'])->name('order.process');
+      Route::post('Admin/orders/ready_back/{id}', [OrderController::class, 'order_ready_back'])->name('order.ready_back');
+      Route::post('Admin/orders/ready/{id}', [OrderController::class, 'order_ready'])->name('order.ready');
+      Route::post('Admin/orders/selesai_back/{id}', [OrderController::class, 'order_selesai_back'])->name('order.selesai_back');
+      Route::post('Admin/orders/selesai/{id}', [OrderController::class, 'order_selesai'])->name('order.selesai');
+      // Route::get('Admin/orders/data', [OrderController::class, 'data'])->name('order.data');
+      // Route::get('Admin/orders/detail/{id}', [OrderController::class, 'show'])->name('Admin.Orders');
+      Route::resource('Admin/order', OrderController::class)->except('create', 'edit');
 
 
       //
       //KONFIRMASI PEMBAYARAN DARI LIST ORDER
-      Route::get('/confirmAdmin/detail/{id}',[ConfirmAdminController::class, 'detail'])->name('confirmAdmin.detail');
-      Route::get('/confirmAdmin/terima/{id_order}',[ConfirmAdminController::class, 'terima'])->name('confirmAdmin.terima');
-      Route::get('/confirmAdmin/tolak/{id_order}',[ConfirmAdminController::class, 'tolak'])->name('confirmAdmin.tolak');
-      Route::get('/confirms_order',[ConfirmAdminController::class, 'index'])->name('confirmAdmin');
+      Route::get('Admin/confirmAdmin/detail/{id}',[ConfirmAdminController::class, 'detail'])->name('confirmAdmin.detail');
+      Route::get('Admin/confirmAdmin/terima/{id_order}',[ConfirmAdminController::class, 'terima'])->name('confirmAdmin.terima');
+      Route::get('Admin/confirmAdmin/tolak/{id_order}',[ConfirmAdminController::class, 'tolak'])->name('confirmAdmin.tolak');
+      Route::get('Admin/confirms_order',[ConfirmAdminController::class, 'index'])->name('confirmAdmin');
 
       // Daftar dan Belanja PENGELUARAN
-      Route::get('/pengeluaran/data', [PengeluaranController::class, 'data'])->name('pengeluaran.data');
-      Route::resource('/pengeluaran', PengeluaranController::class);
+      Route::get('Admin/pengeluaran/data', [PengeluaranController::class, 'data'])->name('pengeluaran.data');
+      Route::resource('Admin/pengeluaran', PengeluaranController::class);
 
       // Daftar dan Belanja Bahan
-      Route::get('/pembelian/data', [PembelianController::class, 'data'])->name('pembelian.data');
-      Route::get('/pembelian/{id}/create', [PembelianController::class, 'create'])->name('pembelian.create');
-      Route::resource('/pembelian', PembelianController::class)
+      Route::get('Admin/pembelian/data', [PembelianController::class, 'data'])->name('pembelian.data');
+      Route::get('Admin/pembelian/{id}/create', [PembelianController::class, 'create'])->name('pembelian.create');
+      Route::resource('Admin/pembelian', PembelianController::class)
           ->except('create');
 
-      Route::get('/pembelian_detail/{id}/data', [PembelianDetailController::class, 'data'])->name('pembelian_detail.data');
-      Route::get('/pembelian_detail/loadform/{diskon}/{total}', [PembelianDetailController::class, 'loadForm'])->name('pembelian_detail.load_form');
-      Route::resource('/pembelian_detail', PembelianDetailController::class)
+      Route::get('Admin/pembelian_detail/{id}/data', [PembelianDetailController::class, 'data'])->name('pembelian_detail.data');
+      Route::get('Admin/pembelian_detail/loadform/{diskon}/{total}', [PembelianDetailController::class, 'loadForm'])->name('pembelian_detail.load_form');
+      Route::resource('Admin/pembelian_detail', PembelianDetailController::class)
           ->except('create', 'show', 'edit');
 
       // Daftar  PENJUALAN
       // Dafrat Order Manual
       // ini root nya
-      Route::get('/penjualan', [PenjualanController::class, 'index'])->name('penjualan.index');
+      Route::get('Admin/penjualan', [PenjualanController::class, 'index'])->name('penjualan.index');
       // ini datanya
-      Route::get('/penjualan/data', [PenjualanController::class, 'data'])->name('penjualan.data');
+      Route::get('Admin/penjualan/data', [PenjualanController::class, 'data'])->name('penjualan.data');
       // melihat detail
-      Route::get('/penjualan/{id}', [PenjualanController::class, 'show'])->name('penjualan.show');
-      Route::delete('/penjualan/{id}', [PenjualanController::class, 'destroy'])->name('penjualan.destroy');
+      Route::get('Admin/penjualan/detail/{id}', [PenjualanController::class, 'detail'])->name('penjualan.detail');
+      Route::get('Admin/penjualan/{id}', [PenjualanController::class, 'show'])->name('penjualan.show');
+      Route::get('Admin/penjualan/nota-kecil/{id}', [PenjualanController::class, 'penjualan_notaKecil'])->name('penjualan.nota_kecil');
+      Route::delete('Admin/penjualan/{id}', [PenjualanController::class, 'destroy'])->name('penjualan.destroy');
   // });
 
   // Route::group(['middleware' => 'level:1,2'], function () {
       // TRANSAKSI Baru untuk PENJUALAN
-      Route::get('/transaksi/baru', [PenjualanController::class, 'create'])->name('transaksi.baru');
-      Route::post('/transaksi/simpan', [PenjualanController::class, 'store'])->name('transaksi.simpan');
-      Route::get('/transaksi/selesai', [PenjualanController::class, 'selesai'])->name('transaksi.selesai');
-      Route::get('/transaksi/nota-kecil', [PenjualanController::class, 'notaKecil'])->name('transaksi.nota_kecil');
-      Route::get('/transaksi/nota-besar', [PenjualanController::class, 'notaBesar'])->name('transaksi.nota_besar');
+      Route::get('Admin/transaksi/baru', [PenjualanController::class, 'create'])->name('transaksi.baru');
+      Route::post('Admin/transaksi/simpan', [PenjualanController::class, 'store'])->name('transaksi.simpan');
+      Route::get('Admin/transaksi/selesai', [PenjualanController::class, 'selesai'])->name('transaksi.selesai');
+      Route::get('Admin/transaksi/nota-kecil', [PenjualanController::class, 'notaKecil'])->name('transaksi.nota_kecil');
+      Route::get('Admin/transaksi/nota-besar', [PenjualanController::class, 'notaBesar'])->name('transaksi.nota_besar');
 
       // Route buat kasir tapi nge load transaksi terakhir dan harus ada memeber
       // Mengedit transaksi sebelumnya
 
       // Load diskon, karna perhitungan diskon nya per Order. bukan peritem
-      Route::get('/transaksi/{id}/data', [PenjualanDetailController::class, 'data'])->name('transaksi.data');
-      Route::get('/transaksi/loadform/{diskon}/{total}/{diterima}', [PenjualanDetailController::class, 'loadForm'])->name('transaksi.load_form');
+      Route::get('Admin/transaksi/{id}/data', [PenjualanDetailController::class, 'data'])->name('transaksi.data');
+      Route::get('Admin/transaksi/loadform/{diskon}/{total}/{diterima}', [PenjualanDetailController::class, 'loadForm'])->name('transaksi.load_form');
       // Ini transaksi.index buat route daftar Order Manual
-      Route::resource('/transaksi', PenjualanDetailController::class)
+      Route::resource('Admin/transaksi', PenjualanDetailController::class)
           ->except('create', 'show', 'edit');
   // });
 
   // Route::group(['middleware' => 'level:1'], function () {
-      Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
-      Route::get('/laporan/data/{awal}/{akhir}', [LaporanController::class, 'data'])->name('laporan.data');
-      Route::get('/laporan/pdf/{awal}/{akhir}', [LaporanController::class, 'exportPDF'])->name('laporan.export_pdf');
+      Route::get('Admin/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+      Route::get('Admin/laporan/data/{awal}/{akhir}', [LaporanController::class, 'data'])->name('laporan.data');
+      Route::get('Admin/laporan/pdf/{awal}/{akhir}', [LaporanController::class, 'exportPDF'])->name('laporan.export_pdf');
 
-      Route::get('/user/data', [UserController::class, 'data'])->name('user.data');
-      Route::resource('/user', UserController::class);
+      Route::get('Admin/user/data', [UserController::class, 'data'])->name('user.data');
+      Route::resource('Admin/user', UserController::class);
 
-      Route::get('/meja/store', [MejaController::class, 'store'])->name('tables.store');
-      Route::get('/admin/Meja/PrintQr/{id}', [MejaController::class, 'printQR'])->name('print.Qr');
+      Route::get('Admin/meja/store', [MejaController::class, 'store'])->name('tables.store');
+      Route::get('Admin/admin/Meja/PrintQr/{id}', [MejaController::class, 'printQR'])->name('print.Qr');
       // Route::get('qrcode/{id}', [MejaController::class, 'generate'])->name('tables.generate');
-      Route::resource('/meja', MejaController::class);
+      Route::resource('Admin/meja', MejaController::class);
 
-      Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
-      Route::get('/setting/first', [SettingController::class, 'show'])->name('setting.show');
-      Route::post('/setting', [SettingController::class, 'update'])->name('setting.update');
+      Route::get('Admin/setting', [SettingController::class, 'index'])->name('setting.index');
+      Route::get('Admin/setting/first', [SettingController::class, 'show'])->name('setting.show');
+      Route::post('Admin/setting', [SettingController::class, 'update'])->name('setting.update');
   // });
 
   // Route::group(['middleware' => 'level:1,2'], function () {
-      // Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
-      Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+      // Route::get('Admin/profile', [UserController::class, 'profile'])->name('user.profile');
+      Route::get('Admin/profile', [UserController::class, 'profile'])->name('user.profile');
       // Route::get('/print/Qr/{id}', [UserController::class, 'printQR'])->name('print.Qr');
-      Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('user.update_profile');
+      Route::post('Admin/profile/update', [UserController::class, 'updateProfile'])->name('user.update_profile');
       // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     });
 });
@@ -260,9 +262,9 @@ Route::group(['middleware' => 'auth'], function () {
       // Route::get('/payments/unfinish', [ConfirmUserController::class, 'unfinish'])->name('unfinish');
       // Route::get('/payments/failed', [ConfirmUserController::class, 'failed'])->name('failed');
       // ORDER PRODUK AS USER Ends HERE
-      Route::group(['middleware' => 'auth'], function () {
-        Route::group(['middleware' => 'user'], function () {
-
-  });
+  //     Route::group(['middleware' => 'auth'], function () {
+  //       Route::group(['middleware' => 'user'], function () {
+  //
+  // });
 
 });

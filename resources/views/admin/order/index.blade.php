@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    Daftar Order
+    Process Order
 @endsection
 
 @section('breadcrumb')
@@ -195,9 +195,24 @@ $(function () {
         ]
     });
   });
-
+  function updateMasuk(url) {
+    if (confirm('Ubah prodes order kembali ke awal?')) {
+        $.post(url, {
+                '_token': $('[name=csrf-token]').attr('content'),
+                '_method': 'post'
+            })
+            .done((response) => {
+                table1.ajax.reload();
+                table.ajax.reload();
+            })
+            .fail((errors) => {
+                alert('Gagal memproses data kembali ke awal');
+                return;
+            });
+    }
+  }
   function updateProcess(url) {
-    if (confirm('Process order?')) {
+    if (confirm('Ubah proses order ke tahap Proses?')) {
         $.post(url, {
                 '_token': $('[name=csrf-token]').attr('content'),
                 '_method': 'post'
@@ -207,13 +222,30 @@ $(function () {
                 table1.ajax.reload();
             })
             .fail((errors) => {
-                alert('Gagal memproses data');
+                alert('Gagal memproses ketahap Proses');
                 return;
             });
     }
   }
+  function updateReadyBack(url) {
+    if (confirm('Ubah proses order ke tahap Proses?')) {
+        $.post(url, {
+                '_token': $('[name=csrf-token]').attr('content'),
+                '_method': 'post'
+            })
+            .done((response) => {
+                table1.ajax.reload();
+                table2.ajax.reload();
+            })
+            .fail((errors) => {
+                alert('Gagal memproses data ketahap Proses');
+                return;
+            });
+    }
+
+}
     function updateReady(url) {
-      if (confirm('Ready order?')) {
+      if (confirm('Ubah proses order ke tahap Ready?')) {
           $.post(url, {
                   '_token': $('[name=csrf-token]').attr('content'),
                   '_method': 'post'
@@ -223,15 +255,14 @@ $(function () {
                   table2.ajax.reload();
               })
               .fail((errors) => {
-                  alert('Gagal memproses data ke ready');
+                  alert('Gagal memproses data ketahap Ready');
                   return;
               });
       }
 
   }
-
-  function updateSelesai(url) {
-    if (confirm('Selesai order?')) {
+  function updateSelesaiBack(url) {
+    if (confirm('Ubah proses order ke tahap Ready??')) {
         $.post(url, {
                 '_token': $('[name=csrf-token]').attr('content'),
                 '_method': 'post'
@@ -241,7 +272,24 @@ $(function () {
                 table3.ajax.reload();
             })
             .fail((errors) => {
-                alert('Gagal memproses data ke selesai');
+                alert('Gagal memproses data ketahap Ready');
+                return;
+            });
+    }
+
+}
+  function updateSelesai(url) {
+    if (confirm('Ubah proses order ke tahap Selesai??')) {
+        $.post(url, {
+                '_token': $('[name=csrf-token]').attr('content'),
+                '_method': 'post'
+            })
+            .done((response) => {
+                table2.ajax.reload();
+                table3.ajax.reload();
+            })
+            .fail((errors) => {
+                alert('Gagal memproses data ketahap Selesai');
                 return;
             });
           }

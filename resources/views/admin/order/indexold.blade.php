@@ -76,7 +76,7 @@
                     @else
                     <tr>
                     <td colspan="7" class="text-center">
-                      <span>Anda Belum memesan barang</span>
+                      <span> Belum ada order yang masuk </span>
                     </td>
                     </tr>
                     @endif

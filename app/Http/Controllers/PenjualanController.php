@@ -16,7 +16,7 @@ class PenjualanController extends Controller
 {
     public function index()
     {
-      $penjualan = Order::select('id_order','notes')->get();
+      $penjualan = Order::select('id_order')->get();
       // ini buat nampilin daftar order
         return view('admin.penjualan.index', compact('penjualan'));
     }
@@ -31,6 +31,9 @@ class PenjualanController extends Controller
             ->addColumn('tanggal', function ($penjualan) {
               return tanggal_indonesia($penjualan->created_at, false);
             })
+            ->addColumn('code_order', function ($penjualan) {
+              return ($penjualan->code_order);
+            })
             ->addColumn('nama_pemesan', function ($penjualan) {
                 return $penjualan->first_name." ".$penjualan->last_name;
             })
@@ -41,24 +44,14 @@ class PenjualanController extends Controller
                 return 'Rp. '. format_uang($penjualan->total_price);
             })
             ->addColumn('aksi', function ($penjualan) {
-              if (!$penjualan->notes) {
                 return '
                 <div class="btn-group">
+                    <a type="button" style="margin-right: 5px;" data-placement="top" title="Lihat Notes" class="btn btn-xs btn-info btn-flat" href="'.route('penjualan.detail', $penjualan->id_order) .'">
+                    <svg style="margin-top:5px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16"><path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/></svg></a>
                     <button style="margin-right: 5px; padding:5px;" data-toggle="tooltip" data-placement="top" title="Detail Order" onclick="showDetail(`'. route('penjualan.show', $penjualan->id_order) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
                     <button style="margin-right: 5px; padding:5px;" data-toggle="tooltip" data-placement="top" title="Hapus!" onclick="deleteData(`'. route('penjualan.destroy', $penjualan->id_order) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
                 </div>
                 ';
-              }else {
-                return '
-                <div class="btn-group">
-                    <button style="margin-right: 5px;" data-placement="top" title="Lihat Notes" data-toggle="modal"
-                    data-target="#modal-notes'.$penjualan->id_order.'" class="btn btn-xs btn-info btn-flat">
-                    <svg style="margin-top:5px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16"><path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/><path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/></svg></button>
-                    <button style="margin-right: 5px; padding:5px;" data-toggle="tooltip" data-placement="top" title="Detail Order" onclick="showDetail(`'. route('penjualan.show', $penjualan->id_order) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
-                    <button style="margin-right: 5px; padding:5px;" data-toggle="tooltip" data-placement="top" title="Hapus!" onclick="deleteData(`'. route('penjualan.destroy', $penjualan->id_order) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
-                </div>
-                ';
-              }
             })
             ->rawColumns(['aksi', 'kode_member'])
             ->make(true);
@@ -115,7 +108,17 @@ class PenjualanController extends Controller
 
         return redirect()->route('transaksi.selesai');
     }
+    public function detail($id)
+    {
+      $Details = Order_Produk::leftJoin('produk', 'produk.id_produk', 'order_produk.id_produk')
+      ->select('order_produk.*', 'produk.*')
+      ->where('id_order',$id)->get();
+      $Orders = Order::where('id_order',$id)->get();
+      // dd($Order);
+        // $Details = Order_Produk::where('id_order',$id)->get();
 
+        return view('admin.penjualan.order_detail',compact('Details','Orders'));
+    }
     public function show($id)
     {
         $detail = Order_Produk::with('produk')->where('id_order', $id)->get();
@@ -140,11 +143,11 @@ class PenjualanController extends Controller
             ->addColumn('subtotal', function ($detail) {
                 return 'Rp. '. format_uang($detail->subtotal);
             })
-            // ->addColumn('bayar', function ($detail) {
-            //     return 'Rp. '. format_uang($detail->bayar);
-            // })
-            // ->addColumn('diterima', function ($detail) {
-            // })
+            ->addColumn('bayar', function ($detail) {
+                return 'Rp. '. format_uang($detail->bayar);
+            })
+            ->addColumn('diterima', function ($detail) {
+            })
             ->rawColumns(['kode_produk'])
             ->make(true);
     }
@@ -176,6 +179,19 @@ class PenjualanController extends Controller
         return view('admin.penjualan.selesai', compact('setting'));
     }
 
+    public function penjualan_notaKecil($id)
+    {   $i = 1;
+        $setting = Setting::first();
+        $penjualan = Order::find($id);
+        if (! $penjualan) {
+            abort(404);
+        }
+        $detail = Order_Produk::with('produk')
+            ->where('id_order', $id)
+            ->get();
+
+        return view('admin.penjualan.nota_kecil', compact('setting', 'penjualan','i', 'detail'));
+    }
     public function notaKecil()
     {   $i = 1;
         $setting = Setting::first();

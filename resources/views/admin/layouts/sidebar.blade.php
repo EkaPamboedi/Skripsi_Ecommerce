@@ -78,7 +78,7 @@
                     <i class="fa fa-cart-arrow-down"></i> <span>Transaksi Baru</span>
                 </a>
             </li> -->
-            <li class="header">Order Masuk</li>
+            <li class="header">List Order</li>
             <li>
               <a href="{{ route('order.index') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ui-checks" viewBox="0 0 16 16">

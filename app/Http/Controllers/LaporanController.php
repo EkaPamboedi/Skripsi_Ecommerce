@@ -35,18 +35,18 @@ class LaporanController extends Controller
             $tanggal = $awal;
             $awal = date('Y-m-d', strtotime("+1 day", strtotime($awal)));
 
-            $total_penjualan_2 = Order::where('created_at', 'LIKE', "%$tanggal%")->sum('total_price');
-            $total_penjualan = Penjualan::where('created_at', 'LIKE', "%$tanggal%")->sum('diterima');
+            $total_penjualan_Online = Order::where('jenis_pembayaran', '=' ,'online' )->where('created_at', 'LIKE', "%$tanggal%")->sum('total_price');
+            $total_penjualan = Order::where('jenis_pembayaran', '=' ,'ditempat' )->where('created_at', 'LIKE', "%$tanggal%")->sum('diterima');
             $total_pembelian = Pembelian::where('created_at', 'LIKE', "%$tanggal%")->sum('bayar');
             $total_pengeluaran = Pengeluaran::where('created_at', 'LIKE', "%$tanggal%")->sum('nominal');
 
-            $pendapatan = $total_penjualan + $total_penjualan_2 - $total_pembelian - $total_pengeluaran;
+            $pendapatan = $total_penjualan + $total_penjualan_Online - $total_pembelian - $total_pengeluaran;
             $total_pendapatan += $pendapatan;
 
             $row = array();
             $row['DT_RowIndex'] = $no++;
             $row['tanggal'] = tanggal_indonesia($tanggal, false);
-            $row['online'] = 'Rp. '. format_uang($total_penjualan_2);
+            $row['online'] = 'Rp. '. format_uang($total_penjualan_Online);
             $row['penjualan'] = 'Rp. '. format_uang($total_penjualan);
             $row['pembelian'] = 'Rp. '. format_uang($total_pembelian);
             $row['pengeluaran'] = 'Rp. '. format_uang($total_pengeluaran);
@@ -82,6 +82,7 @@ class LaporanController extends Controller
         $pdf  = PDF::loadView('admin.laporan.pdf', compact('awal', 'akhir', 'data'));
         $pdf->setPaper('a4', 'potrait');
 
+        // return $data;
         return $pdf->stream('Laporan-pendapatan-'. date('Y-m-d-his') .'.pdf');
     }
 }
