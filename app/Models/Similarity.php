@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Similarity
 {
-  
+
     public static function euclidean(array $array1, array $array2, bool $returnDistance = false): float
     {
         $a   = $array1;
@@ -33,7 +33,7 @@ class Similarity
         return 1 - $distance;
     }
 
-    public static function jaccard(string $string1, string $string2, string $separator = ','): float
+    public static function jaccard(string $string1, string $string2, string $separator = ' '): float
     {
         $a            = explode($separator, $string1);
         $b            = explode($separator, $string2);

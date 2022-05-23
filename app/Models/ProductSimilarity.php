@@ -10,8 +10,8 @@ use Exception;
 class ProductSimilarity
 {
     protected $products       = [];
-    protected $product_nameWeight = 3;
-    protected $categoryWeight = 2;
+    protected $product_nameWeight = 1;
+    protected $categoryWeight = 1;
     protected $priceWeight    = 1;
     protected $discountWeight  = 1;
     protected $priceHighRange = 20000;

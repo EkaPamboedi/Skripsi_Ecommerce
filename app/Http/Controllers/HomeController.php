@@ -85,6 +85,7 @@ class HomeController extends Controller
             $products          = $productSimilarity->getProductsSortedBySimilarity($selectedId, $similarityMatrix);
 
         //Kemiripan perproduk dengan semua produk
+        // dd($productSimilarity);
         // dd($similarityMatrix);
         // dd($productSimilarity);
         // dd($products);
