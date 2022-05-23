@@ -10,9 +10,10 @@ use Exception;
 class ProductSimilarity
 {
     protected $products       = [];
-    protected $discountWeight  = 1;
+    protected $product_nameWeight = 3;
+    protected $categoryWeight = 2;
     protected $priceWeight    = 1;
-    protected $categoryWeight = 1;
+    protected $discountWeight  = 1;
     protected $priceHighRange = 20000;
     protected $discountHinghRange = 100;
 
@@ -38,6 +39,12 @@ class ProductSimilarity
     {
         $this->categoryWeight = $weight;
     }
+
+
+        public function setProdcut_NameWeight(float $weight): void
+        {
+            $this->product_nameWeight = $weight;
+        }
 
 
     public function calculateSimilarityMatrix(): array
@@ -101,7 +108,7 @@ class ProductSimilarity
     {
 
         // $productAFeatures = ($productA->nama_kategori);
-        // // dd($productA);
+        // dd($productA);
         // $productBFeatures = ($productB->nama_kategori);
         // dd($productB);
         // dd($productBFeatures);
@@ -128,9 +135,9 @@ class ProductSimilarity
                 Similarity::minMaxNorm([$productA->diskon], 0, $this->discountHinghRange),
                 Similarity::minMaxNorm([$productB->diskon], 0, $this->discountHinghRange)) * $this->discountWeight),
 
-
+            (Similarity::jaccard($productA->nama_produk, $productB->nama_produk) * $this->product_nameWeight),
             (Similarity::jaccard($productA->nama_kategori, $productB->nama_kategori) * $this->categoryWeight)
-        ]) / ($this->discountWeight + $this->priceWeight + $this->categoryWeight);
+        ]) / ($this->discountWeight + $this->priceWeight + $this->categoryWeight + $this->product_nameWeight);
 
 
 

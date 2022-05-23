@@ -1,11 +1,11 @@
 Rapihin Tampilan.
 
 Admin (V)
-Ngubah Barcode buat meja.(gk nampilin user). udah.
-Ngubah Barcode buat meja.(pake barcode doang), udah.
-Penulisan Rupiah.udah.
-Tambah Kalkulator. udah.
-Edit button buat profile dan logout. Udah.
+(DONE) Ngubah Barcode buat meja.(gk nampilin user). udah.
+(DONE) Ngubah Barcode buat meja.(pake barcode doang), udah.
+(DONE) Penulisan Rupiah.udah.
+(DONE) Tambah Kalkulator. udah.
+(DONE) Edit button buat profile dan logout. Udah.
 
 User
 
@@ -15,22 +15,23 @@ timer batas transaksi. udah.
 
 DONE LAH Rapihin invoice admin sama user, make it cooler. udah.
 
-DONEngerubah sistem barcode:
+DONE ngerubah sistem barcode:
 //jadi nanti get data dari scanning barcode cuma buat ngirim
 //data meja yg dipilih dan gk perlu login pake session.
 //berarti ngerubah function attemptarlogin di login controller.
-
+(DONE)
 wawancara perhitungan , pembukuan untuk kasir. udah(cek lagi).
 URL Admin jadi ke /Admin/
 
 14 may
+(DONE)
 - continue shoping : benerin fungsi back ke shopping di cart. (DONE).
-
+(DONE)
 - Tampilan daftar order manual pada admin (DONE):
 tampilan tidak sesuai fungsi karna terlalu minimalis sehingga admin tidak dapat melihat dengan jelas
 atau buat print nota lagi pada setiap orderan.
 opsi lainnya membuat tampilan bisa melihat detail dan print nota jika dibutuhkan.
-
+(DONE)
 buat 3 tabel step pada tampilan order yang masuk dengan kriteria wajib sudah DIBAYAR.
 kemudian tampilan di bedakan dari :
 1. Masuk
@@ -38,9 +39,24 @@ kemudian tampilan di bedakan dari :
 3. Ready
 4. Selesai
 --> Catatan :
-order manual perlu pake meja gk?
-
-- status proses pada order baik manual maupun online:
+(DONE) order manual perlu pake meja gk?
+(DONE)
+- status proses pada order baik manual maupun online (DONE):
 buat status ongoin dan ready pada proses orderan manual dan online.
 
-- Laporan masih berantakana datanya.
+(DONE)
+- Laporan masih berantakana datanya (DONE).
+
+16 may
+
+rapihin abstrak.
+rapihin bab 3, kalo perlu pake table yang dihitung.
+siapin 3 minimal per metode jurnal buat rekomendasi.
+
+Kenapa pakai metode ini supervised dan item based?
+
+karna bisnis model nya tidak membutuh kan login user shingga tidak dapat mengoleksi data dari perilaku user.
+
+supervised item based hanya memerlukan perilaku order terakhir dari user dan tidak perludata yg kompleks dari login.
+
+kenapa tidak membuat akun untuk user, penggunaan akun untuk sekedar meminum kopi terlalu overkill. 

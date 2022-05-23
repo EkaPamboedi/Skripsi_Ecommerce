@@ -54,32 +54,16 @@ Route::get('/kenalkopi', function () {
 
 
 
-// Route::get('/kenalkopi',function(){
 Auth::routes();
-//   return view('auth.qr-login');
-// })->name('qr_login');
 
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('welcome');
-
-
-// Route::group(['middleware' => 'auth'], function () {
-// });
 
 Route::get('/kenalkopi/home', [App\Http\Controllers\Auth\LoginController::class, 'index'])->name('welcome');
 Route::get('/kenalkopi/login', [App\Http\Controllers\Auth\LoginController::class, 'qrCodeLogin'])->name('kenalkopi.index');
 Route::post('/kenalkopi/qrlogin', [App\Http\Controllers\Auth\LoginController::class, 'attemptQrLogin'])->name('qrlogin');
-// Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'attemptQrLogin'])->name('login');
-// Route::get('/welcome', [App\Http\Controllers\Auth\LoginController::class, 'index'])->name('welcome');
-// Route::get('/qr_login', [App\Http\Controllers\Auth\LoginController::class, 'qrCodeLogin'])->name('qr_login');
-// Route::post('/qrlogin', [App\Http\Controllers\Auth\LoginController::class, 'attemptQrLogin'])->name('qrlogin');
 
 
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'attemptLogin'])->name('login');
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
-// Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'attemptLogin'])->name('login');
-// Auth::routes();
 
 
 Route::group(['middleware' => 'auth'], function () {

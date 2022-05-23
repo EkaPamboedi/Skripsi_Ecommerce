@@ -4,18 +4,7 @@ namespace App\Models;
 
 class Similarity
 {
-    // public static function hamming(string $string1, string $string2, bool $returnDistance = false): float
-    // {
-    //     $a        = str_pad($string1, strlen($string2) - strlen($string1), ' ');
-    //     $b        = str_pad($string2, strlen($string1) - strlen($string2), ' ');
-    //     $distance = count(array_diff_assoc(str_split($a), str_split($b)));
-    //
-    //     if ($returnDistance) {
-    //         return $distance;
-    //     }
-    //     return (strlen($a) - $distance) / strlen($a);
-    // }
-
+  
     public static function euclidean(array $array1, array $array2, bool $returnDistance = false): float
     {
         $a   = $array1;

@@ -178,7 +178,7 @@
                 return;
             }
 
-            $.post(`{{ url('/pembelian_detail') }}/${id}`, {
+            $.post(`{{ url('Admin/pembelian_detail') }}/${id}`, {
                     '_token': $('[name=csrf-token]').attr('content'),
                     '_method': 'put',
                     'jumlah': jumlah
@@ -254,7 +254,7 @@
         $('#total').val($('.total').text());
         $('#total_item').val($('.total_item').text());
 
-        $.get(`{{ url('/pembelian_detail/loadform') }}/${diskon}/${$('.total').text()}`)
+        $.get(`{{ url('Admin/pembelian_detail/loadform') }}/${diskon}/${$('.total').text()}`)
             .done(response => {
                 $('#totalrp').val('Rp. '+ response.totalrp);
                 $('#bayarrp').val('Rp. '+ response.bayarrp);

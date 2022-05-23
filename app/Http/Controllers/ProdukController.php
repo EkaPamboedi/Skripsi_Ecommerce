@@ -105,9 +105,9 @@ class ProdukController extends Controller
       if ($request->hasFile('gambar_produk')) {
           $file = $request->file('gambar_produk');
           $nama = 'produk-' . date('YmdHis') . '.' . $file->getClientOriginalExtension();
-          $file->move(public_path('/kenalkopi/produk_img'), $nama);
+          $file->move(public_path('/kenal_kopi/produk_img'), $nama);
 
-          $saveData['gambar_produk'] = "/kenalkopi/produk_img/$nama";
+          $saveData['gambar_produk'] = "/kenal_kopi/produk_img/$nama";
       }
 
       $produk = Produk::create($saveData);
@@ -157,15 +157,15 @@ class ProdukController extends Controller
                   $request->file('gambar_produk')->isValid()) {
                     $file = $request->file('gambar_produk');
                     $nama = 'produk-' . date('YmdHis') . '.' . $file->getClientOriginalExtension();
-                    $file->move(public_path('/kenalkopi/produk_img/'), $nama);
+                    $file->move(public_path('/kenal_kopi/produk_img/'), $nama);
 
                     unlink(public_path($produk->gambar_produk));
                     $editData = $request->except('gambar_produk');
-                    $editData['gambar_produk'] = "/kenalkopi/produk_img/$nama";
+                    $editData['gambar_produk'] = "/kenal_kopi/produk_img/$nama";
                     $produk->update($editData);
                   }
                   return response()->json('Data berhasil disimpan', 200);
-            // $saveData['gambar_produk']= "/kenalkopi/produk_img/$nama";
+            // $saveData['gambar_produk']= "/kenal_kopi/produk_img/$nama";
       }
 
         // $produk = Produk::find($id);
