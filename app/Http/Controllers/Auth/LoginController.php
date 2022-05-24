@@ -87,7 +87,7 @@ class LoginController extends Controller
         if ($checking){
             if(Auth::attempt($creadential)) {
 
-              return redirect('/dashboard');
+              return redirect('Admin/dashboard');
 
             } else {
                 return response()->json([
