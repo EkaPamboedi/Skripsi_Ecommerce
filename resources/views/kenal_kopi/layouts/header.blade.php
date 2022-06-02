@@ -8,7 +8,7 @@
 			<div class="w3ls_logo_products_left">
 				<h1><a href="index.php">KENAL KOPI</a></h1>
 			</div>
-		<div class="w3l_search">
+		<!-- <div class="w3l_search">
 			<form action="search.php" method="post">
 				<input type="search" name="Search" placeholder="Cari produk...">
 				<button type="submit" class="btn btn-default search" aria-label="Left Align">
@@ -16,7 +16,7 @@
 				</button>
 				<div class="clearfix"></div>
 			</form>
-		</div>
+		</div> -->
 
 			<div class="clearfix"> </div>
 		</div>

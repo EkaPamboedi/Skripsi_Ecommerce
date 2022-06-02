@@ -134,8 +134,10 @@ class ProductSimilarity
               // Diskon
                 Similarity::minMaxNorm([$productA->diskon], 0, $this->discountHinghRange),
                 Similarity::minMaxNorm([$productB->diskon], 0, $this->discountHinghRange)) * $this->discountWeight),
-
+                // Nama Produk
             (Similarity::jaccard($productA->nama_produk, $productB->nama_produk) * $this->product_nameWeight),
+
+              // Kategori
             (Similarity::jaccard($productA->nama_kategori, $productB->nama_kategori) * $this->categoryWeight)
         ]) / ($this->discountWeight + $this->priceWeight + $this->categoryWeight + $this->product_nameWeight);
 

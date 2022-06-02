@@ -176,17 +176,16 @@ Route::group(['middleware' => 'auth'], function () {
       // Route::get('qrcode/{id}', [MejaController::class, 'generate'])->name('tables.generate');
       Route::resource('Admin/meja', MejaController::class);
 
-      Route::get('Admin/setting', [SettingController::class, 'index'])->name('setting.index');
-      Route::get('Admin/setting/first', [SettingController::class, 'show'])->name('setting.show');
-      Route::post('Admin/setting', [SettingController::class, 'update'])->name('setting.update');
+      // Route::get('Admin/setting', [SettingController::class, 'index'])->name('setting.index');
+      // Route::get('Admin/setting/master', [SettingController::class, 'master'])->name('setting.master');
+      // Route::get('Admin/setting/first', [SettingController::class, 'show'])->name('setting.show');
+      // Route::post('Admin/setting', [SettingController::class, 'update'])->name('setting.update');
   // });
 
   // Route::group(['middleware' => 'level:1,2'], function () {
-      // Route::get('Admin/profile', [UserController::class, 'profile'])->name('user.profile');
+  // Route::get('Admin', [UserController::class, 'index'])->name('user.index');
       Route::get('Admin/profile', [UserController::class, 'profile'])->name('user.profile');
-      // Route::get('/print/Qr/{id}', [UserController::class, 'printQR'])->name('print.Qr');
       Route::post('Admin/profile/update', [UserController::class, 'updateProfile'])->name('user.update_profile');
-      // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     });
 });
 

@@ -12,6 +12,12 @@ class SettingController extends Controller
         return view('admin.setting.index');
     }
 
+    public function master()
+    {
+        return view('master.setting.index');
+    }
+
+
     public function show()
     {
         return Setting::first();

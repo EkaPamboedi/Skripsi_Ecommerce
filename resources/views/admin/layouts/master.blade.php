@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{-- $setting->nama_perusahaan --}} | @yield('title')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- tulisan buat podjok kiri aatas halaman admin  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

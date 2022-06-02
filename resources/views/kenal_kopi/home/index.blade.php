@@ -14,7 +14,8 @@ Kenal Kopi
 					<div id="myTabContent" class="tab-content">
 						<div role="tabpanel" class="tab-pane fade in active" id="expeditions" aria-labelledby="expeditions-tab">
 							<div class="agile-tp">
-								<h5>Penawaran Terbaik Minggu Ini</h5>
+								<h4>Rekomendasi Produk</h4>
+								<span>Rekomendasi ini berdasarkan Order terbanyak yang terakhir dilakukan </span>
 								</div>
 								<div class="agile_top_brands_grids">
 

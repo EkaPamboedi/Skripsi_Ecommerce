@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             // SettingTableSeeder::class,
             UserTableSeeder::class,
             KategoriSeeder::class,
-            // ProdukSeeder::class,
+            ProdukSeeder::class,
         ]);
     }
 }

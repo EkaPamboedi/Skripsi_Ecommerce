@@ -17,11 +17,19 @@ class KategoriSeeder extends Seeder
         $kategoris = array(
             [
                 'id_kategori' => 1,
-                'nama_kategori' => 'makanan ringan'
+                'nama_kategori' => 'Espresso Based'
             ],
             [
-                'id_kategori' => 2,
-                'nama_kategori' => 'minuman'
+              'id_kategori' => 2,
+                'nama_kategori' => 'Non Coffe'
+            ],
+            [
+              'id_kategori' => 3,
+                'nama_kategori' => 'Manual Brew'
+            ],
+            [
+              'id_kategori' => 4,
+                'nama_kategori' => 'Food'
             ],
         );
           array_map(function (array $kategori) {
