@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Order;
 use Carbon\Carbon;
 use Auth;
+use Redirect;
 
 
 class LoginController extends Controller
@@ -48,10 +49,6 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
       return view('admin.home.dashboard');
-      // return response()->json([
-      //     'success' => true,
-      //     'redirect' => route($this->redirectTo)
-      // ]);
     }
 
     public function index()
@@ -78,7 +75,6 @@ class LoginController extends Controller
             $creadential = [
                 'email' => $request->email,
                 'password' => $request->password
-                // 'no_meja' => $request->no_meja
             ];
             $checking = User::where('email',$request->email)->first();
         }
@@ -86,19 +82,25 @@ class LoginController extends Controller
         /* checking email */
         if ($checking){
             if(Auth::attempt($creadential)) {
-
+                // $request->session()->regenerate();
               return redirect('Admin/dashboard');
 
-            } else {
-                return response()->json([
-                    'message' => 'Your email or password wrong'
-                ],404);
             }
-        } else {
-            return response()->json([
-                'message' => 'your account not found'
-            ],404);
-        }
+            else {
+              return Redirect::back()->with(
+                [
+                    'wrong' => 'Your Email or Password wrong!'
+                ]
+              );
+            }
+          }
+        // else {
+        //   return Redirect::back()->with(
+        //     [
+        //         'not_registered' => 'Your Account not registered'
+        //     ]
+        //   );
+        // }
     }
 
     public function qrCodeLogin()
@@ -236,6 +238,6 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/login');
+        return redirect('/kenalkopi');
     }
 }

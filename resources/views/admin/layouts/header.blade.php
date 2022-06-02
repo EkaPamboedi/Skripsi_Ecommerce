@@ -31,7 +31,7 @@
                           <a  href="{{ route('user.profile') }}" class="btn btn-outline-secondary">{{ auth()->user()->name }}</a>
                         </li>
                         <li class="list-group-item list-group-item-action">
-                          <a  href="#" class="btn btn-outline-secondary"
+                          <a  class="btn btn-outline-secondary"
                               onclick="$('#logout-form').submit()">Keluar</a>
                         </li>
                     </ul>

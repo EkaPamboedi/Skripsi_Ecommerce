@@ -57,7 +57,7 @@ Route::get('/kenalkopi', function () {
 Auth::routes();
 
 
-Route::get('/kenalkopi/home', [App\Http\Controllers\Auth\LoginController::class, 'index'])->name('welcome');
+// Route::get('/kenalkopi/home', [App\Http\Controllers\Auth\LoginController::class, 'index'])->name('welcome');
 Route::get('/kenalkopi/login', [App\Http\Controllers\Auth\LoginController::class, 'qrCodeLogin'])->name('kenalkopi.index');
 Route::post('/kenalkopi/qrlogin', [App\Http\Controllers\Auth\LoginController::class, 'attemptQrLogin'])->name('qrlogin');
 
