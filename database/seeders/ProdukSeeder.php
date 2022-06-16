@@ -26,7 +26,7 @@ class ProdukSeeder extends Seeder
               'diskon' => '0',
               'harga_jual' => '20000',
               'stok' => '50',
-              // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+              'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 2,
@@ -38,7 +38,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '20000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 3,
@@ -50,7 +50,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '20000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 4,
@@ -62,7 +62,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '18000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 5,
@@ -74,7 +74,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '18000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 6,
@@ -86,7 +86,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '18000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
 
           [
@@ -99,7 +99,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '18000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
 
           [
@@ -112,7 +112,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '18000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
 
           [
@@ -125,7 +125,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '18000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 10,
@@ -137,7 +137,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '15000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
 
           [
@@ -150,7 +150,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '18000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
 
           [
@@ -163,7 +163,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '15000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
 
           [
@@ -176,7 +176,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '13000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
 
           [
@@ -189,7 +189,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '10000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
 
           // Non Cofee
@@ -203,7 +203,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '17000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
 
           [
@@ -216,7 +216,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '15000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
 
           [
@@ -229,7 +229,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '15000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
 
           [
@@ -242,7 +242,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '15000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 19,
@@ -254,7 +254,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '15000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 20,
@@ -266,7 +266,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '13000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 21,
@@ -278,7 +278,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '13000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 22,
@@ -290,7 +290,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '10000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 23,
@@ -302,7 +302,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '10000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 24,
@@ -314,7 +314,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '10000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 25,
@@ -326,7 +326,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '7000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 26,
@@ -338,7 +338,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '7000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 27,
@@ -350,7 +350,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '15000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 28,
@@ -362,7 +362,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '15000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 29,
@@ -374,7 +374,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '13000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 30,
@@ -386,7 +386,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '13000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 31,
@@ -398,7 +398,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '13000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 32,
@@ -410,7 +410,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '15000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 33,
@@ -422,7 +422,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '10000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 35,
@@ -434,7 +434,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '10000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 36,
@@ -446,7 +446,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '10000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 37,
@@ -458,7 +458,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '7000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
           [
                 'id_produk' => 38,
@@ -470,7 +470,7 @@ class ProdukSeeder extends Seeder
                 'diskon' => '0',
                 'harga_jual' => '7000',
                 'stok' => '50',
-                 // 'gambar_produk' =>$this->faker->image('public/storage/images',640,480, null, false)
+                 'gambar_produk' =>'/kenal_kopi/produk_img/dummy.jpg'
           ],
 
       );

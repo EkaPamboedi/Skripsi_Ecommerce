@@ -159,7 +159,7 @@ class ProdukController extends Controller
                     $nama = 'produk-' . date('YmdHis') . '.' . $file->getClientOriginalExtension();
                     $file->move(public_path('/kenal_kopi/produk_img/'), $nama);
 
-                    unlink(public_path($produk->gambar_produk));
+                    // unlink(public_path($produk->gambar_produk));
                     $editData = $request->except('gambar_produk');
                     $editData['gambar_produk'] = "/kenal_kopi/produk_img/$nama";
                     $produk->update($editData);
