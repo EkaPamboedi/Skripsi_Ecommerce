@@ -10,8 +10,6 @@ use DB;
 use Illuminate\Http\Request;
 use App\Models\Ratings;
 use App\Models\ProductSimilarity;
-// use App\Models\Order;
-// use App\Models\Kategori;
 use App\Models\Produk;
 use App\Models\Order_Produk;
 use App\Models\Order;
