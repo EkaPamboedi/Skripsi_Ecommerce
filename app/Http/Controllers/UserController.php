@@ -11,13 +11,32 @@ use DB;
 
 class UserController extends Controller
 {
-    // public function index()
-    // {
-      // $Users = User::
-      // where('id','=' ,'1')->get();
-      // dd($Users);
+    public function index()
+    {
+    //   $Users = User::
+    //   where('id','=' ,'1')->get();
+    //   dd($Users);
+       $Users = User::get()->toJson(JSON_PRETTY_PRINT);
+        return response($Users, 200);
         // return view('admin.layouts.master',compact('Users'));
-    // }
+    }
+    
+    public function testShow($id)
+    {
+        $Users = User::where('id', $id)->first();
+        //You can also use
+        /*
+        $Users = Users::find($id);*/
+        if($Users){
+         $Users = $Users->toJson(JSON_PRETTY_PRINT);
+         return response($Users, 200);
+        }
+        else{
+            return response()->json([
+                "message" => "Users not found",
+              ], 404);
+        }
+    }
 
     // public function data()
     // {
