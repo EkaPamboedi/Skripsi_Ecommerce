@@ -183,11 +183,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = Tables::find($id);
-        $user->delete();
+        // $user = Tables::find($id);
+        // $user->delete();
 
 
-        return response(null, 204);
+        // return response(null, 204);
     }
 
     public function profile()
